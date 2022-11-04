@@ -118,6 +118,30 @@
                 Cupos
               </q-item-section>
             </q-item>
+            <q-item clickable exact to="credencial" active-class="bg-blue-grey-6 text-white">
+              <q-item-section avatar>
+                <q-icon name="o_credit_card" />
+              </q-item-section>
+              <q-item-section>
+                Credencial
+              </q-item-section>
+            </q-item>
+            <q-item clickable exact to="certificado" active-class="bg-blue-grey-6 text-white">
+              <q-item-section avatar>
+                <q-icon name="o_verified_user" />
+              </q-item-section>
+              <q-item-section>
+                Certificado
+              </q-item-section>
+            </q-item>
+            <q-item clickable exact to="material" active-class="bg-blue-grey-6 text-white">
+              <q-item-section avatar>
+                <q-icon name="o_category" />
+              </q-item-section>
+              <q-item-section>
+                Entrega material
+              </q-item-section>
+            </q-item>
           </q-list>
           <q-separator />
         </q-list>
