@@ -44,7 +44,7 @@ class CupoController extends Controller
         $img = Image::make('imagenes/'.$request->foto);
 
 // rotate image 45 degrees clockwise
-        $img->rotate(90);
+        $img->rotate(90)->save('imagenes/a'.$request->foto);
 //        $file = public_path('/imagenes/'.$request->foto);
 //        $img = Image::make($file);
 //        $image = $request->file('foto');
