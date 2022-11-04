@@ -83,7 +83,7 @@
                   max-files="1"
                   label="Subir foto"
                   flat
-                  max-file-size="2000000"
+                  max-file-size="5000000"
                   @rejected="onRejected"
                   bordered
                 />
