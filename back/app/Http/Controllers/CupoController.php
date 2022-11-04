@@ -43,9 +43,9 @@ class CupoController extends Controller
         $this->validate($request, [
             'foto'=>'required',
         ]);
-        $image = $request->file('foto');
-        return $request;
-        $file    = $request->file('file');
+        $image = "imagenes/".$request->file('foto');
+//        return $request;
+//        $file    = $request->file('file');
 //        $nombre     = time().".".$file->getClientOriginalExtension();
         $file_name = time().'_.'.$image->getClientOriginalExtension();
         $file_out = time().'.'.$image->getClientOriginalExtension();
