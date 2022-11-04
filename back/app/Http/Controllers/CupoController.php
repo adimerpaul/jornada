@@ -8,9 +8,8 @@ use App\Http\Requests\UpdateCupoRequest;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Intervention\Image\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-
+use Intervention\Image\ImageManagerStatic as Image;
 class CupoController extends Controller
 {
     public function index(){return Cupo::all();}
