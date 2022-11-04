@@ -77,7 +77,6 @@ export default {
           this.$q.dialog({
             title: 'Código QR',
             message: `<a href="${url}" target="_blank"><div style="text-align: center"><img src="${url}" /></div></a>`,
-            clickOutsideDismiss: true,
             html: true,
             ok: false,
             // persistent: true,
@@ -106,19 +105,6 @@ export default {
           color: 'primary',
           flat: true,
           noDismiss: true,
-          handler: () => {
-            this.$q.loading.show()
-            this.$api.post(this.url+'rotateFoto',row)
-              .then(response => {
-                console.log(response.data)
-                this.$q.loading.hide()
-                this.cupoGet()
-              })
-              .catch(error => {
-                this.$q.loading.hide()
-                console.log(error)
-              })
-          }
         },
         cancel: {
           label: 'Cancelar',
@@ -126,6 +112,18 @@ export default {
           flat: true,
           noDismiss: true
         }
+      }).onOk(() => {
+        this.$q.loading.show()
+        this.$api.post(this.url+'rotateFoto',row)
+          .then(response => {
+            console.log(response.data)
+            this.$q.loading.hide()
+            this.cupoGet()
+          })
+          .catch(error => {
+            this.$q.loading.hide()
+            console.log(error)
+          })
       })
 
 
