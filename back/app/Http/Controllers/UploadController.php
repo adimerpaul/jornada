@@ -18,9 +18,9 @@ class UploadController extends Controller
             $ruta=public_path('/imagenes/'.$nombre);
             Image::make($file->getRealPath())
                 ->resize(300,200
-//                    ,function ($constraint){
-//                        $constraint->aspectRatio();
-//                    }
+                    ,function ($constraint){
+                        $constraint->aspectRatio();
+                    }
                 )
                 ->save($ruta,72);
         }

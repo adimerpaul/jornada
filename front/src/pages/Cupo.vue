@@ -126,7 +126,7 @@ export default {
           barbijo: false,
           certificado: false,
         }).then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
           this.$q.notify({
             message: 'Cupo reseteado',
             color: 'green-4',
@@ -170,15 +170,15 @@ export default {
             message: 'PDF generado'
           });
       })
-      //   .catch(error => {
-      //   this.$q.notify({
-      //     color: 'red-4',
-      //     textColor: 'white',
-      //     icon: 'report_problem',
-      //     position: 'top',
-      //     message: 'Error al generar PDF'
-      //   });
-      // })
+        .catch(error => {
+        this.$q.notify({
+          color: 'red-4',
+          textColor: 'white',
+          icon: 'report_problem',
+          position: 'top',
+          message: 'Error al generar PDF'
+        });
+      })
         .finally(() => {
         this.$q.loading.hide()
       })
