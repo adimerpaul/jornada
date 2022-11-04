@@ -142,6 +142,14 @@
                 Entrega material
               </q-item-section>
             </q-item>
+            <q-item clickable exact to="refrigerio" active-class="bg-blue-grey-6 text-white">
+              <q-item-section avatar>
+                <q-icon name="o_brunch_dining" />
+              </q-item-section>
+              <q-item-section>
+                Refrigerio
+              </q-item-section>
+            </q-item>
           </q-list>
           <q-separator />
         </q-list>
