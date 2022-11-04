@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Intervention\Image\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Intervention\Image\ImageManager;
 
 class CupoController extends Controller
 {
@@ -43,7 +42,6 @@ class CupoController extends Controller
     public function rotateFoto(Request $request){
         $manager = new ImageManager(['driver' => 'imagick']);
         // create Image from file
-        $image = $manager->make('public/foo.jpg')->resize(300, 200);
 // create Image from file
         $img = Image::make('public/foo.jpg');
 
