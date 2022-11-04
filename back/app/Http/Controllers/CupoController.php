@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateCupoRequest;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Intervention\Image\ImageManagerStatic as Image;
+use Intervention\Image\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CupoController extends Controller
