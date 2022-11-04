@@ -40,7 +40,6 @@ class CupoController extends Controller
         return response()->file('cupos.pdf');
     }
     public function rotateFoto(Request $request){
-        $manager = new ImageManager(['driver' => 'imagick']);
         // create Image from file
 // create Image from file
         $img = Image::make('public/foo.jpg');
