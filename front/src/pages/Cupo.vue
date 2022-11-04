@@ -169,15 +169,17 @@ export default {
             position: 'top',
             message: 'PDF generado'
           });
-      }).catch(error => {
-        this.$q.notify({
-          color: 'red-4',
-          textColor: 'white',
-          icon: 'report_problem',
-          position: 'top',
-          message: 'Error al generar PDF'
-        });
-      }).finally(() => {
+      })
+      //   .catch(error => {
+      //   this.$q.notify({
+      //     color: 'red-4',
+      //     textColor: 'white',
+      //     icon: 'report_problem',
+      //     position: 'top',
+      //     message: 'Error al generar PDF'
+      //   });
+      // })
+        .finally(() => {
         this.$q.loading.hide()
       })
 
