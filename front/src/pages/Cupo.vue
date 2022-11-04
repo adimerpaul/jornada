@@ -1,0 +1,202 @@
+<template>
+<q-page>
+  <q-table
+    virtual-scroll
+    :virtual-scroll-item-size="48"
+    :selected-rows-label="getSelectedString" v-model:selected="selected" selection="multiple" dense :rows-per-page-options="[15,100,150,500]" :rows="store.cupos" :columns="cupoColumns" :filter="cupoSearch">
+    <template v-slot:top-right>
+      <q-btn flat round dense icon="o_print" @click="cupoPrint" />
+      <q-btn flat round dense icon="refresh" @click="cupoGet();cupoSearch=''" />
+      <q-input dense outlined placeholder="Buscar..." v-model="cupoSearch">
+        <template v-slot:prepend>
+          <q-icon name="search" />
+        </template>
+      </q-input>
+    </template>
+    <template v-slot:body-cell-estado="props">
+      <q-td :props="props">
+        <q-chip :color="props.row.estado=='Libre'?'green':'red'" text-color="white" dense>{{props.row.estado}}</q-chip>
+      </q-td>
+    </template>
+    <template v-slot:body-cell-action="props">
+      <q-td :props="props">
+        <q-btn flat round dense icon="qr_code" @click="qrPrint(props.row)" />
+        <q-btn flat round dense icon="public" @click="cupoRegister(props.row)" />
+      </q-td>
+    </template>
+    <template v-slot:body-cell-foto="props">
+      <q-td :props="props">
+        <q-img @click="fotoShow(props.row)" :src="url+'../imagenes/'+props.row.foto" width="30px" height="30px" />
+      </q-td>
+    </template>
+  </q-table>
+</q-page>
+</template>
+
+<script>
+import {useCounterStore} from "stores/example-store";
+import {jsPDF} from "jspdf";
+import QRCode from 'qrcode'
+import download from 'downloadjs'
+
+export default {
+  name: `Cupo`,
+  data() {
+    return {
+      selected: [],
+      url: process.env.API,
+      cupoSearch: '',
+      store:useCounterStore(),
+      cupoColumns:[
+        {name:'action', label:'Acción', field:'action', align:'left', sortable:true},
+        {name:'id', label:'ID', field:'id', align:'left', sortable:true},
+        {name:'estado', label:'Estado', field:'estado', align:'left', sortable:true},
+        {name:'nombre', label:'Nombre', field:'nombre', align:'left', sortable:true},
+        {name:'carrera', label:'Carrera', field:'carrera', align:'left', sortable:true},
+        {name:'celular', label:'Celular', field:'celular', align:'left', sortable:true},
+        {name:'correo', label:'Correo', field:'correo', align:'left', sortable:true},
+        {name:'foto', label:'Foto', field:'foto', align:'left', sortable:true},
+      ]
+    }
+  },
+  created() {
+    if (this.store.cupos.length === 0) {
+      this.cupoGet();
+    }
+  },
+  computed: {
+  },
+  methods: {
+    qrPrint(row){
+      // console.log(row)
+      QRCode.toDataURL(process.env.API_FRONT+'registro/'+row.codigo)
+        .then(url => {
+          this.$q.dialog({
+            title: 'Código QR',
+            message: `<div style="text-align: center"><img src="${url}" /></div>`,
+            html: true,
+            ok: false,
+            // persistent: true,
+            cancel: {
+              label: 'Cerrar',
+              color: 'primary',
+              flat: true,
+              noDismiss: true
+            }
+          })
+          // console.log(url)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    cupoRegister(cupo){
+      window.open(process.env.API_FRONT+'registro/'+cupo.codigo,'_blank')
+    },
+    cupoPrint: function () {
+      if (this.selected.length <= 0) {
+        this.$q.notify({
+          color: 'red-4',
+          textColor: 'white',
+          icon: 'report_problem',
+          position: 'top',
+          message: 'No hay registros seleccionados'
+        });
+        return false;
+      }
+
+      this.$q.loading.show()
+      this.$api.post('cupoPdf',this.selected).then(response => {
+        console.log(response.data);
+        window.open(this.url+'cupoFile', '_blank');
+          this.$q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'check_circle',
+            position: 'top',
+            message: 'PDF generado'
+          });
+      }).catch(error => {
+        this.$q.notify({
+          color: 'red-4',
+          textColor: 'white',
+          icon: 'report_problem',
+          position: 'top',
+          message: 'Error al generar PDF'
+        });
+      }).finally(() => {
+        this.$q.loading.hide()
+      })
+
+      // const doc = new jsPDF('landscape', null, 'letter');
+      // let img = new Image()
+      // img.src = "folleto.jpg"
+      // this.selected.forEach((item, index) => {
+      //   if (index % 2 === 0) {
+      //     doc.addImage(img, 'JPEG', 4, 5, 135, 205)
+      //     doc.setFont("helvetica", "bold");
+      //     doc.setFontSize(10);
+      //     doc.setTextColor(125, 125, 125);
+      //     doc.text(item.id + '', 135, 200, 'center')
+      //     doc.addImage(item.qr, 'JPEG', 10, 10, 10, 10)
+      //   } else if (index % 2 === 1) {
+      //     doc.addImage(img, 'JPEG', 140, 5, 135, 205)
+      //     doc.setFont("helvetica", "bold");
+      //     doc.setFontSize(10);
+      //     doc.setTextColor(125, 125, 125);
+      //     doc.text(item.id + '', 270, 200, 'center')
+      //     doc.addPage();
+      //   }
+      // });
+      //
+      //
+      // // $( '#docpdf' ).attr('src', doc.output('datauristring'));
+      // // doc.save("Certificado "+date.formatDate(Date.now(),'DD-MM-YYYY')+".pdf");
+      // window.open(doc.output('bloburl'), '_blank');
+
+    },
+    getSelectedString () {
+      return this.selected.length === 0 ? '' : `${this.selected.length} registro${this.selected.length > 1 ? 's' : ''} seleccionados de ${this.store.cupos.length}`
+    },
+    fotoShow(row) {
+      this.$q.dialog({
+        title: 'Foto',
+        message: '<img src="'+this.url+'../imagenes/'+row.foto+'" width="100%" />',
+        html: true,
+        persistent: true,
+        ok: {
+          label: 'Cerrar',
+          color: 'primary'
+        }
+      })
+    },
+    cupoGet() {
+      this.$q.loading.show();
+      this.store.cupos=[];
+      this.$api.get(`cupo`).then((res) => {
+        res.data.forEach((item) => {
+          item.estado=item.nombres==''?'Libre':'Ocupado';
+          item.nombre=item.nombres+' '+(item.apellidos==null?'':item.apellidos)
+          // QRCode.toDataURL(process.env.API_FRONT+'registro/'+item.codigo)
+          //   .then(url => {
+          //     item.qr = url;
+          //   })
+          //   .catch(err => {
+          //     console.error(err)
+          //   })
+          this.store.cupos.push(item);
+        });
+      }).catch((error) => {
+          console.log(error);
+      }).finally(() => {
+        this.$q.loading.hide();
+      });
+    },
+  },
+
+}
+</script>
+
+<style scoped>
+
+</style>
