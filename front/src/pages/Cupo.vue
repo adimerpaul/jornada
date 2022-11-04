@@ -75,7 +75,7 @@ export default {
         .then(url => {
           this.$q.dialog({
             title: 'Código QR',
-            message: `<div style="text-align: center"><img src="${url}" /></div>`,
+            message: `<a href="${url}" target="_blank"><div style="text-align: center"><img src="${url}" /></div></a>`,
             html: true,
             ok: false,
             // persistent: true,
