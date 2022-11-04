@@ -43,9 +43,9 @@ class CupoController extends Controller
     public function rotateFoto(Request $request){
         $manager = new ImageManager(['driver' => 'imagick']);
         // create Image from file
-//        $image = $manager->make('public/foo.jpg')->resize(300, 200);
+        $image = $manager->make('public/foo.jpg')->resize(300, 200);
 // create Image from file
-        $img = $manager::make('public/foo.jpg');
+        $img = Image::make('public/foo.jpg');
 
 // rotate image 45 degrees clockwise
         $img->rotate(-45);
