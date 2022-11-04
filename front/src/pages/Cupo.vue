@@ -77,6 +77,7 @@ export default {
           this.$q.dialog({
             title: 'Código QR',
             message: `<a href="${url}" target="_blank"><div style="text-align: center"><img src="${url}" /></div></a>`,
+            clickOutsideDismiss: true,
             html: true,
             ok: false,
             // persistent: true,
@@ -97,17 +98,37 @@ export default {
       window.open(process.env.API_FRONT+'registro/'+cupo.codigo,'_blank')
     },
     rotateFoto(row){
-      this.$q.loading.show()
-      this.$api.post(this.url+'rotateFoto',row)
-        .then(response => {
-          console.log(response.data)
-          this.$q.loading.hide()
-          this.cupoGet()
-        })
-        .catch(error => {
-          this.$q.loading.hide()
-          console.log(error)
-        })
+      this.$q.dialog({
+        title: 'Rotar Foto',
+        message: '¿Desea rotar la foto?',
+        ok: {
+          label: 'Rotar',
+          color: 'primary',
+          flat: true,
+          noDismiss: true,
+          handler: () => {
+            this.$q.loading.show()
+            this.$api.post(this.url+'rotateFoto',row)
+              .then(response => {
+                console.log(response.data)
+                this.$q.loading.hide()
+                this.cupoGet()
+              })
+              .catch(error => {
+                this.$q.loading.hide()
+                console.log(error)
+              })
+          }
+        },
+        cancel: {
+          label: 'Cancelar',
+          color: 'primary',
+          flat: true,
+          noDismiss: true
+        }
+      })
+
+
     },
     cupoReset(cupo){
       this.$q.dialog({
