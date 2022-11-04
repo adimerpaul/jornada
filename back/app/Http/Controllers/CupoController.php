@@ -40,6 +40,9 @@ class CupoController extends Controller
         return response()->file('cupos.pdf');
     }
     public function rotateFoto(Request $request){
+        $this->validate($request, [
+            'foto'=>'required',
+        ]);
         $image = $request->file('foto');
 
         $file_name = time().'_.'.$image->getClientOriginalExtension();
