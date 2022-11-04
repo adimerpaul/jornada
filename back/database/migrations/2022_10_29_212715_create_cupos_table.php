@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('ci')->nullable();
             $table->string('nombres')->nullable();
-            $table->string('apellidos')->nullable();
             $table->string('carrera')->nullable();
             $table->string('foto')->nullable()->default("avatar.png");
             $table->string('celular')->nullable();

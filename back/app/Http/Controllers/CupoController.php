@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCupoRequest;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\ImageManagerStatic as Image;
 class CupoController extends Controller
@@ -21,6 +22,14 @@ class CupoController extends Controller
         $cupo->update($request->all());
         return $cupo;
     }
+
+    public function updateMaterial(UpdateCupoRequest $request, $ci){
+        $cupo= Cupo::where('ci', $ci)->first();
+        $cupo=Cupo::find($cupo->id);
+        $cupo->update($request->all());
+        return $cupo;
+    }
+
     public function destroy(Cupo $cupo){$cupo->delete();return $cupo;}
     public function cupoPdf(Request $request){
         $data=[];
@@ -35,8 +44,41 @@ class CupoController extends Controller
         $pdf->setPaper('letter', 'landscape');
         $pdf->save('cupos.pdf')->stream();
     }
+    public function certificadoPdf(Request $request){
+        $data=[];
+        foreach ($request->all() as $value) {
+            $png = QrCode::format('png')->size(250)->generate($value['nombres'].' '.$value['ci']);
+            $png = base64_encode($png);
+            $value['qr']=$png;
+            $data[]=$value;
+        }
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('certificadoPdf', ['certificados' => $data]);
+        $pdf->setPaper('letter', 'landscape');
+        $pdf->save('certificados.pdf')->stream();
+    }
+    public function credencialPdf(Request $request){
+        $data=[];
+        $generator = new BarcodeGeneratorPNG();
+        foreach ($request->all() as $value) {
+//            $png = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($value['ci'], $generator::TYPE_CODE_128)) . '">';
+            $value['qr']=base64_encode($generator->getBarcode($value['ci']==null?'123':$value['ci'], $generator::TYPE_CODE_128));
+            $data[]=$value;
+        }
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('credencialPdf', ['credencials' => $data]);
+        $pdf->setPaper('letter', 'landscape');
+        $pdf->save('credencials.pdf')->stream();
+    }
+
     public function cupoFile(){
         return response()->file('cupos.pdf');
+    }
+    public function certificadoFile(){
+        return response()->file('certificados.pdf');
+    }
+    public function credencialFile(){
+        return response()->file('credencials.pdf');
     }
     public function rotateFoto(Request $request){
         // create Image from file

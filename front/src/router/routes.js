@@ -2,6 +2,10 @@ import indexPage from "pages/IndexPage";
 import Login from "pages/Login";
 import Cupo from "pages/Cupo";
 import Registro from "pages/Registro";
+import Credencial from "pages/Credencial";
+import Certificado from "pages/Certificado";
+import Material from "pages/Material";
+import Refrigerio from "pages/Refrigerio";
 
 const routes = [
   {
@@ -10,6 +14,10 @@ const routes = [
     children: [
       { path: '', component: indexPage ,meta: {requiresAuth: true}},
       { path: 'cupo', component: Cupo ,meta: {requiresAuth: true}},
+      { path: 'credencial', component: Credencial ,meta: {requiresAuth: true}},
+      { path: 'certificado', component: Certificado,meta: {requiresAuth: true}},
+      { path: 'material', component: Material,meta: {requiresAuth: true}},
+      { path: 'refrigerio', component: Refrigerio,meta: {requiresAuth: true}},
     ]
   },
   {

@@ -92,7 +92,7 @@
             </div>
             <div class="col-9">
               <div class="text-h6 text-bold " >Jornadas</div>
-              <div class="text-caption">1.2</div>
+              <div class="text-caption">1.4.8</div>
             </div>
           </div>
         </q-item-label>
@@ -144,7 +144,7 @@
             </q-item>
             <q-item clickable exact to="refrigerio" active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
-                <q-icon name="o_brunch_dining" />
+                <q-icon name="o_restaurant_menu" />
               </q-item-section>
               <q-item-section>
                 Refrigerio

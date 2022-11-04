@@ -3,7 +3,7 @@
   <q-table
     virtual-scroll
     :virtual-scroll-item-size="48"
-    :selected-rows-label="getSelectedString" v-model:selected="selected" selection="multiple" dense :rows-per-page-options="[15,100,150,500]" :rows="store.cupos" :columns="cupoColumns" :filter="cupoSearch">
+    :selected-rows-label="getSelectedString" v-model:selected="selected" selection="multiple" dense :rows-per-page-options="[15,100,150,500]" :rows="cupos" :columns="cupoColumns" :filter="cupoSearch">
     <template v-slot:top-right>
       <q-btn flat round dense icon="o_print" @click="cupoPrint" />
       <q-btn flat round dense icon="refresh" @click="cupoGet();cupoSearch=''" />
@@ -50,10 +50,12 @@ export default {
       url: process.env.API,
       cupoSearch: '',
       store:useCounterStore(),
+      cupos: [],
       cupoColumns:[
         {name:'action', label:'Acción', field:'action', align:'left', sortable:true},
-        {name:'id', label:'ID', field:'id', align:'left', sortable:true},
+        {name:'ci', label:'C.I.', field:'ci', align:'left', sortable:true},
         {name:'estado', label:'Estado', field:'estado', align:'left', sortable:true},
+        {name:'id', label:'ID', field:'id', align:'left', sortable:true},
         {name:'nombre', label:'Nombre', field:'nombre', align:'left', sortable:true},
         {name:'carrera', label:'Carrera', field:'carrera', align:'left', sortable:true},
         {name:'celular', label:'Celular', field:'celular', align:'left', sortable:true},
@@ -63,9 +65,9 @@ export default {
     }
   },
   created() {
-    if (this.store.cupos.length === 0) {
+    // if (this.store.cupos.length === 0) {
       this.cupoGet();
-    }
+    // }
   },
   computed: {
   },
@@ -272,7 +274,7 @@ export default {
           //   .catch(err => {
           //     console.error(err)
           //   })
-          this.store.cupos.push(item);
+          this.cupos.push(item);
         });
       }).catch((error) => {
           console.log(error);

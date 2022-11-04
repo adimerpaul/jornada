@@ -17,6 +17,7 @@
             <div class="row">
               <div class="col-12 col-sm-6 q-px-xs"  >
                 <q-input
+                  @keyup="studentSearch(cupo)"
                   v-model="cupo.ci"
                   label="Carnet de identidad"
                   outlined
@@ -28,25 +29,27 @@
                 <q-input
                   required
                   v-model="cupo.nombres"
-                  label="Nombre"
+                  label="Nombre completo"
+                  style="text-transform: uppercase"
+                  hint="comenzando por el apellido paterno"
                   outlined
                   class="q-mb-md"
                 />
               </div>
-              <div class="col-12 col-sm-6 q-px-xs" >
-                <q-input
-                  v-model="cupo.apellidos"
-                  label="Apellido"
-                  outlined
-                  class="q-mb-md"
-                />
-              </div>
+<!--              <div class="col-12 col-sm-6 q-px-xs" >-->
+<!--                <q-input-->
+<!--                  v-model="cupo.apellidos"-->
+<!--                  label="Apellido"-->
+<!--                  outlined-->
+<!--                  class="q-mb-md"-->
+<!--                />-->
+<!--              </div>-->
               <div class="col-12 col-sm-6 q-px-xs" >
                 <q-select
                   v-model="cupo.carrera"
                   label="Carrera"
                   outlined
-                  :options="['SISTEMAS','INFORMATICA','CISCO','OTROS']"
+                  :options="carreas"
                   class="q-mb-md"
                 />
               </div>
@@ -90,6 +93,7 @@
               </div>
               <div class="col-12 col-sm-12 q-px-xs" >
                 <q-btn
+                  :loading="loading"
                   color="primary"
                   label="Registrar"
                   no-caps
@@ -114,6 +118,26 @@ export default {
   name: `Registro`,
   data() {
     return {
+      carreas:[
+    'INGENIERIA CIVIL (MENCION ESTRUCTURAS)',
+    'INGENIERIA CIVIL (MENCION HIDRAULICA)',
+    'INGENIERIA CIVIL (MENCION SANITARIA Y AMBIENTAL)',
+    'INGENIERIA CIVIL (MENCION VIAS DE COMUNICACION)',
+    'INGENIERIA CIVIL (TECNICO ESTRUCTURAS)',
+    'INGENIERIA DE SISTEMAS (MENCION DIR. Y GES. EMPRESARIAL)',
+    'INGENIERIA DE SISTEMAS (MENCION GESTION DE LA INFORMACION)',
+    'INGENIERIA DE SISTEMAS (MENCION MODELAMIENTO Y OPT. DE R-P)',
+    'INGENIERIA ELECTRICA (MENCION SIS. ELECTRICOS INDUSTRIALES)',
+    'INGENIERIA ELECTRICA (TECNICA)',
+    'INGENIERIA ELECTRONICA (MENCION AUTOMATICA)',
+    'INGENIERIA ELECTRONICA (MENCION TELECOMUNICACION)',
+    'INGENIERIA INDUSTRIAL',
+    'INGENIERIA INFORMATICA (MENCION DESARROLLO DE SOFTWARE)',
+    'INGENIERIA INFORMATICA (MENCION TELEMATICA)',
+    'INGENIERIA MECATRONICA',
+        'CISCO',
+        'OTROS'
+      ],
       cupoBool: true,
       cupo: {
         ci: ``,
@@ -126,8 +150,15 @@ export default {
         foto: ``,
       },
       foto: '',
+      loading:false,
       codigo:this.$route.params.id,
+      students: [],
     }
+  },
+  created() {
+    this.$api.get(`student`).then((response) => {
+      this.students = response.data
+    })
   },
   mounted() {
     this.$q.loading.show()
@@ -148,6 +179,7 @@ export default {
       })
     },
     uploadFile (file) {
+      this.loading=true
       let dialog = this.$q.dialog({
         message: 'Subiendo... 0%',
       })
@@ -171,9 +203,30 @@ export default {
           })
           .then(res => {
             this.foto=res.data
+            this.loading=false
             resolve(file)
           })
           .catch(err => reject(err))
+      })
+    },
+    studentSearch(cupo){
+      console.log(cupo)
+      this.cupo.nombres=``
+      this.cupo.apellidos=``
+      this.cupo.carrera=``
+      this.cupo.celular=``
+      this.cupo.direccion=``
+      this.cupo.correo=``
+      this.students.forEach((student) => {
+        if (student.ci==cupo.ci){
+          this.cupo.nombres=student.nombres
+          this.cupo.apellidos=student.apellidos
+          this.cupo.carrera=student.carrera
+          this.cupo.celular=student.celular
+          this.cupo.direccion=student.direccion
+          this.cupo.correo=student.correo
+          return false
+        }
       })
     },
     cupoUpdate() {
@@ -194,6 +247,7 @@ export default {
       }).onOk(() => {
         this.$q.loading.show()
         this.cupo.foto=this.foto
+        this.cupo.nombres= this.cupo.nombres.toUpperCase()
         this.$api.put(`cupo/${this.cupo.id}`, this.cupo).then((response) => {
           console.log(response.data)
           this.$q.notify({
