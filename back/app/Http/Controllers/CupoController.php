@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCupoRequest;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Intervention\Image\Image;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CupoController extends Controller
@@ -37,5 +38,9 @@ class CupoController extends Controller
     }
     public function cupoFile(){
         return response()->file('cupos.pdf');
+    }
+    public function rotateFoto(Request $request){
+        $img = Image::make('imagenes/'.$request->foto);
+        $img->rotate(90);
     }
 }

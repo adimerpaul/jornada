@@ -27,6 +27,7 @@
     </template>
     <template v-slot:body-cell-foto="props">
       <q-td :props="props">
+        <q-btn flat round dense icon="o_rotate_90_degrees_cw" @click="rotateFoto(props.row)" />
         <q-img @click="fotoShow(props.row)" :src="url+'../imagenes/'+props.row.foto" width="30px" height="30px" />
       </q-td>
     </template>
@@ -94,6 +95,18 @@ export default {
     },
     cupoRegister(cupo){
       window.open(process.env.API_FRONT+'registro/'+cupo.codigo,'_blank')
+    },
+    rotateFoto(row){
+      this.$q.loading.show()
+      this.$axios.post(this.url+'cupo/rotateFoto',{foto:row.foto})
+        .then(response => {
+          this.$q.loading.hide()
+          this.cupoGet()
+        })
+        .catch(error => {
+          this.$q.loading.hide()
+          console.log(error)
+        })
     },
     cupoReset(cupo){
       this.$q.dialog({

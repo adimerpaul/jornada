@@ -26,5 +26,6 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::post('logout', [\App\Http\Controllers\UserController::class, 'logout']);
     Route::apiResource('user', \App\Http\Controllers\UserController::class);
     Route::post('cupoPdf', [\App\Http\Controllers\CupoController::class, 'cupoPdf']);
+    Route::post('rotateFoto', [\App\Http\Controllers\CupoController::class, 'rotateFoto']);
 
 });

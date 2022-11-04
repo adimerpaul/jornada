@@ -44,7 +44,7 @@ export default {
           this.libres = 0
           this.ocupados = 0
           response.data.forEach(cupo => {
-            if (cupo.nombres != '') {
+            if (cupo.nombres != null) {
               this.ocupados++
             } else {
               this.libres++
