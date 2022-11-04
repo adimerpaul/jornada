@@ -42,8 +42,8 @@ class CupoController extends Controller
     public function rotateFoto(Request $request){
         $image = $request->file('foto');
 
-        $file_name = time().'_'.$image->getClientOriginalName();
-        $file_out = time().$image->getClientOriginalName();
+        $file_name = time().'_.'.$image->getClientOriginalExtension();
+        $file_out = time().'.'.$image->getClientOriginalExtension();
 
         $parts = pathinfo($file_name);
 
