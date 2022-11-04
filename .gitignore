@@ -32,3 +32,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 /back/public/imagenes/
+/back/public/cupos.pdf
+/back/public/credencials.pdf
+/back/public/certificados.pdf
