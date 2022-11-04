@@ -10,14 +10,13 @@ const routes = [
     children: [
       { path: '', component: indexPage ,meta: {requiresAuth: true}},
       { path: 'cupo', component: Cupo ,meta: {requiresAuth: true}},
-
     ]
   },
   {
     path: '/login',
     component: Login
   },
-  { path: '/registro/:id', component: Registro ,meta: {requiresAuth: true}},
+  { path: '/registro/:id', component: Registro},
   // Always leave this as last one,
   // but you can also remove it
   {
