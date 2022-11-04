@@ -22,6 +22,7 @@
       <q-td :props="props">
         <q-btn flat round dense icon="qr_code" @click="qrPrint(props.row)" />
         <q-btn flat round dense icon="public" @click="cupoRegister(props.row)" />
+        <q-btn flat round dense icon="recycling" @click="cupoReset(props.row)" />
       </q-td>
     </template>
     <template v-slot:body-cell-foto="props">
@@ -30,6 +31,7 @@
       </q-td>
     </template>
   </q-table>
+<!--  <pre>{{store.cupos}}</pre>-->
 </q-page>
 </template>
 
@@ -92,6 +94,57 @@ export default {
     },
     cupoRegister(cupo){
       window.open(process.env.API_FRONT+'registro/'+cupo.codigo,'_blank')
+    },
+    cupoReset(cupo){
+      this.$q.dialog({
+        title: 'Confirmación',
+        message: '¿Está seguro de resetear el cupo?',
+        ok: {
+          label: 'Si',
+          color: 'primary',
+          flat: true,
+          noDismiss: true
+        },
+        cancel: {
+          label: 'No',
+          color: 'primary',
+          flat: true,
+          noDismiss: true
+        }
+      }).onOk(() => {
+        this.$api.put('cupo/'+cupo.id,{
+          ci: "",
+          nombres: "",
+          apellidos: '',
+          carrera: '',
+          foto: 'avatar.png',
+          celular: '',
+          direccion: '',
+          correo: '',
+          credencial: false,
+          folder: false,
+          barbijo: false,
+          certificado: false,
+        }).then((response) => {
+          console.log(response.data)
+          this.$q.notify({
+            message: 'Cupo reseteado',
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'check_circle',
+            position: 'top'
+          })
+          this.cupoGet();
+        }).catch((error) => {
+          this.$q.notify({
+            message: 'Error al resetear el cupo',
+            color: 'red-4',
+            textColor: 'white',
+            icon: 'error',
+            position: 'top'
+          })
+        })
+      })
     },
     cupoPrint: function () {
       if (this.selected.length <= 0) {
@@ -175,8 +228,8 @@ export default {
       this.store.cupos=[];
       this.$api.get(`cupo`).then((res) => {
         res.data.forEach((item) => {
-          item.estado=item.nombres==''?'Libre':'Ocupado';
-          item.nombre=item.nombres+' '+(item.apellidos==null?'':item.apellidos)
+          item.estado=item.nombres==null?'Libre':'Ocupado';
+          item.nombre=(item.nombres==null?'':item.nombres)+' '+(item.apellidos==null?'':item.apellidos)
           // QRCode.toDataURL(process.env.API_FRONT+'registro/'+item.codigo)
           //   .then(url => {
           //     item.qr = url;

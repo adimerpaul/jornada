@@ -123,7 +123,7 @@
                 <q-icon name="o_credit_card" />
               </q-item-section>
               <q-item-section>
-                Credencial
+                Credenciales
               </q-item-section>
             </q-item>
             <q-item clickable exact to="certificado" active-class="bg-blue-grey-6 text-white">
@@ -131,7 +131,7 @@
                 <q-icon name="o_verified_user" />
               </q-item-section>
               <q-item-section>
-                Certificado
+                Certificados
               </q-item-section>
             </q-item>
             <q-item clickable exact to="material" active-class="bg-blue-grey-6 text-white">

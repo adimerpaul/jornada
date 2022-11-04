@@ -42,10 +42,11 @@
                 />
               </div>
               <div class="col-12 col-sm-6 q-px-xs" >
-                <q-input
+                <q-select
                   v-model="cupo.carrera"
                   label="Carrera"
                   outlined
+                  :options="['SISTEMAS','INFORMATICA','CISCO','OTROS']"
                   class="q-mb-md"
                 />
               </div>
@@ -132,8 +133,7 @@ export default {
     this.$q.loading.show()
     this.$api.get(`cupo/${this.codigo}`).then((response) => {
       this.cupo = response.data
-      console.log(this.cupo.nombres)
-      if (this.cupo.nombres=='') {
+      if (this.cupo.nombres==null) {
         this.cupoBool = false
       }
     }).finally(() => {
