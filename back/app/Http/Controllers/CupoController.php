@@ -40,7 +40,46 @@ class CupoController extends Controller
         return response()->file('cupos.pdf');
     }
     public function rotateFoto(Request $request){
-        $img = Image::make('imagenes/'.$request->foto);
-        $img->rotate(90);
+        $image = $request->file('foto');
+
+        $file_name = time().'_'.$image->getClientOriginalName();
+        $file_out = time().$image->getClientOriginalName();
+
+        $parts = pathinfo($file_name);
+
+        $extensions = $parts['extension'];
+
+        if($extensions == "jpeg"){
+
+            $degrees = 90;
+
+            $source = imagecreatefromjpeg($image);
+
+            $rotate = imagerotate($source, $degrees, 0);
+
+            imagejpeg($rotate, $file_out);
+            $cupo = Cupo::find($request->id);
+            $cupo->foto = $file_out;
+            $cupo->save();
+            return response()->file(public_path($file_out));
+
+
+        }elseif($extensions == "png"){
+
+            $degrees = 90;
+
+            $source = imagecreatefrompng($image);
+
+            $rotate = imagerotate($source, $degrees, 0);
+
+            imagepng($rotate, $file_out);
+            $cupo = Cupo::find($request->id);
+            $cupo->foto = $file_out;
+            $cupo->save();
+            return response()->file(public_path($file_out));
+
+        }else{
+            echo "Plz Select jpeg And Png File.";
+        }
     }
 }

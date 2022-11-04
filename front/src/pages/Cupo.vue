@@ -98,7 +98,7 @@ export default {
     },
     rotateFoto(row){
       this.$q.loading.show()
-      this.$api.post(this.url+'rotateFoto',{foto:row.foto})
+      this.$api.post(this.url+'rotateFoto',row)
         .then(response => {
           this.$q.loading.hide()
           this.cupoGet()
