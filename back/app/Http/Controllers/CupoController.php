@@ -44,7 +44,7 @@ class CupoController extends Controller
             'foto'=>'required',
         ]);
         $image = "imagenes/".$request->file('foto');
-//        return $request;
+        return $image;
 //        $file    = $request->file('file');
 //        $nombre     = time().".".$file->getClientOriginalExtension();
         $file_name = time().'_.'.$image->getClientOriginalExtension();
