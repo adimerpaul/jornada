@@ -8,8 +8,8 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: indexPage },
-      { path: 'cupo', component: Cupo },
+      { path: '', component: indexPage ,meta: {requiresAuth: true}},
+      { path: 'cupo', component: Cupo ,meta: {requiresAuth: true}},
 
     ]
   },
@@ -17,7 +17,7 @@ const routes = [
     path: '/login',
     component: Login
   },
-  { path: '/registro/:id', component: Registro },
+  { path: '/registro/:id', component: Registro ,meta: {requiresAuth: true}},
   // Always leave this as last one,
   // but you can also remove it
   {
