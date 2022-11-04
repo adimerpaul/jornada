@@ -25,7 +25,7 @@ class CupoController extends Controller
     public function cupoPdf(Request $request){
         $data=[];
         foreach ($request->all() as $value) {
-            $png = QrCode::format('png')->size(200)->generate(env('URL_FRONT').'register/'.$value['codigo']);
+            $png = QrCode::format('png')->size(250)->generate(env('URL_FRONT').'register/'.$value['codigo']);
             $png = base64_encode($png);
             $value['qr']=$png;
             $data[]=$value;

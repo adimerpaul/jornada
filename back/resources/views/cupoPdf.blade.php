@@ -19,11 +19,11 @@
 <body>
 @foreach($cupos as $cupo)
     @if($loop->index%2==0)
-        <img src="folleto.jpg" style="  position: absolute;top: 5px;left: 5px;width: 525px;height: 800px" >
+        <img src="folleto.jpg" style="  position: absolute;top: 5px;left: 5px;width: 550px;height: 550px" >
         <img src="data:image/png;base64, {!! $cupo['qr'] !!}" style="position: absolute;top: 575px;left: 420px;width: 85px;height: 85px">
         <div style="position: absolute;top: 753px;left: 490px; font-weight: bold;width: 85px;height: 85px;font-family: 'Nunito', sans-serif;color: #a0aec0">{{$cupo['id']}}</div>
     @else
-        <img src="folleto.jpg" style="  position: absolute;top: 5px;right: 5px;width: 525px;height: 800px" >
+        <img src="folleto.jpg" style="  position: absolute;top: 5px;right: 5px;width: 550px;height: 550px" >
         <img src="data:image/png;base64, {!! $cupo['qr'] !!}" style="position: absolute;top: 575px;right: 25px;width: 85px;height: 85px">
         <div style="position: absolute;top: 753px;right: -50px; font-weight: bold;width: 85px;height: 85px;font-family: 'Nunito', sans-serif;color: #a0aec0">{{$cupo['id']}}</div>
         <div class="page_break"></div>
