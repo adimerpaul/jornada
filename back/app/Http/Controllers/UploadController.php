@@ -14,7 +14,7 @@ class UploadController extends Controller
         ]);
         if ($request->hasFile('file')){
             $file    = $request->file('file');
-            $nombre     = time().".".$file->getClientOriginalExtension();;
+            $nombre     = time().".".$file->getClientOriginalExtension();
             $ruta=public_path('/imagenes/'.$nombre);
             Image::make($file->getRealPath())
                 ->resize(300,200

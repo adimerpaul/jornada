@@ -100,6 +100,7 @@ export default {
       this.$q.loading.show()
       this.$api.post(this.url+'rotateFoto',row)
         .then(response => {
+          console.log(response.data)
           this.$q.loading.hide()
           this.cupoGet()
         })
