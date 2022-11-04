@@ -40,51 +40,54 @@ class CupoController extends Controller
         return response()->file('cupos.pdf');
     }
     public function rotateFoto(Request $request){
-        $this->validate($request, [
-            'foto'=>'required',
-        ]);
-        $image = "imagenes/".$request->file('foto');
-        return $image;
-//        $file    = $request->file('file');
-//        $nombre     = time().".".$file->getClientOriginalExtension();
-        $file_name = time().'_.'.$image->getClientOriginalExtension();
-        $file_out = time().'.'.$image->getClientOriginalExtension();
+        // create Image from file
+        $img = Image::make('imagenes/avatar.png');
 
-        $parts = pathinfo($file_name);
+// rotate image 45 degrees clockwise
+        $img->rotate(-45);
 
-        $extensions = $parts['extension'];
-
-        if($extensions == "jpeg"){
-
-            $degrees = 90;
-
-            $source = imagecreatefromjpeg($image);
-
-            $rotate = imagerotate($source, $degrees, 0);
-
-            imagejpeg($rotate, $file_out);
-            $cupo = Cupo::find($request->id);
-            $cupo->foto = $file_out;
-            $cupo->save();
-            return response()->file(public_path($file_out));
-
-
-        }elseif($extensions == "png"){
-
-            $degrees = 90;
-
-            $source = imagecreatefrompng($image);
-
-            $rotate = imagerotate($source, $degrees, 0);
-
-            imagepng($rotate, $file_out);
-            $cupo = Cupo::find($request->id);
-            $cupo->foto = $file_out;
-            $cupo->save();
-            return response()->file(public_path($file_out));
-
-        }else{
-            echo "Plz Select jpeg And Png File.";
-        }
+//        $file = public_path('/imagenes/'.$request->foto);
+//        $img = Image::make($file);
+//        $image = $request->file('foto');
+//
+//        $file_name = time().'_'.$image->getClientOriginalExtension();
+//        $file_out = time().$image->getClientOriginalName();
+//
+//        $parts = pathinfo($file_name);
+//
+//        $extensions = $parts['extension'];
+//
+//        if($extensions == "jpeg"){
+//
+//            $degrees = 90;
+//
+//            $source = imagecreatefromjpeg($image);
+//
+//            $rotate = imagerotate($source, $degrees, 0);
+//
+//            imagejpeg($rotate, $file_out);
+//            $cupo = Cupo::find($request->id);
+//            $cupo->foto = $file_out;
+//            $cupo->save();
+//            return response()->file(public_path($file_out));
+//
+//
+//        }elseif($extensions == "png"){
+//
+//            $degrees = 90;
+//
+//            $source = imagecreatefrompng($image);
+//
+//            $rotate = imagerotate($source, $degrees, 0);
+//
+//            imagepng($rotate, $file_out);
+//            $cupo = Cupo::find($request->id);
+//            $cupo->foto = $file_out;
+//            $cupo->save();
+//            return response()->file(public_path($file_out));
+//
+//        }else{
+//            echo "Plz Select jpeg And Png File.";
+//        }
     }
 }
