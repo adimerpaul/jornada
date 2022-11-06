@@ -110,6 +110,14 @@
                   Principal
               </q-item-section>
             </q-item>
+            <q-item clickable exact to="estudiantes" active-class="bg-blue-grey-6 text-white">
+              <q-item-section avatar>
+                <q-icon name="people" />
+              </q-item-section>
+              <q-item-section>
+                estudiantes
+              </q-item-section>
+            </q-item>
             <q-item clickable exact to="cupo" active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
                 <q-icon name="o_confirmation_number" />

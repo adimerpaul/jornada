@@ -14,6 +14,9 @@ class StudentController extends Controller{
     public function create(){
     }
 
+    public function buscarStudent($ci){
+        return Student::where('ci',$ci)->first();
+    }
 
     public function store(StoreStudentRequest $request){
         $student= new Student;
@@ -39,6 +42,8 @@ class StudentController extends Controller{
 
     public function update(UpdateStudentRequest $request, Student $student){
         $student= Student::find($request->id);
+        $student->nombres=strtoupper($request->nombres);
+        $student->carrera=strtoupper($request->carrera);
         $student->celular=$request->celular;
         $student->direccion=$request->direccion;
         $student->save();
