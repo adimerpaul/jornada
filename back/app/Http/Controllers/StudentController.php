@@ -16,6 +16,13 @@ class StudentController extends Controller{
 
 
     public function store(StoreStudentRequest $request){
+        $student= new Student;
+        $student->ci=$request->ci;
+        $student->nombres=strtoupper($request->nombres);
+        $student->carrera=strtoupper($request->carrera);
+        $student->celular=$request->celular;
+        $student->direccion=$request->direccion;
+        $student->save();
     }
 
 
@@ -31,9 +38,14 @@ class StudentController extends Controller{
 
 
     public function update(UpdateStudentRequest $request, Student $student){
+        $student= Student::find($request->id);
+        $student->celular=$request->celular;
+        $student->direccion=$request->direccion;
+        $student->save();
     }
 
 
     public function destroy(Student $student){
+        $student->delete();
     }
 }

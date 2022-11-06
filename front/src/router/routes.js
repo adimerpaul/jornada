@@ -6,6 +6,7 @@ import Credencial from "pages/Credencial";
 import Certificado from "pages/Certificado";
 import Material from "pages/Material";
 import Refrigerio from "pages/Refrigerio";
+import Estudiantes from "pages/Estudiantes";
 
 const routes = [
   {
@@ -18,6 +19,7 @@ const routes = [
       { path: 'certificado', component: Certificado,meta: {requiresAuth: true}},
       { path: 'material', component: Material,meta: {requiresAuth: true}},
       { path: 'refrigerio', component: Refrigerio,meta: {requiresAuth: true}},
+      { path: 'estudiantes', component: Estudiantes,meta: {requiresAuth: true}},
     ]
   },
   {

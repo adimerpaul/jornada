@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\App;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\ImageManagerStatic as Image;
+
 class CupoController extends Controller
 {
     public function index(){return Cupo::all();}
