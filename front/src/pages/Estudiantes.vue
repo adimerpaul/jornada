@@ -18,8 +18,8 @@
         </template>
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
-            <q-btn flat round dense icon="edit" @click="estudiante2=props.row; dialogMod=true " />
-            <q-btn flat round dense icon="delete" @click="delteEst(props.row)" />
+            <q-btn flat round dense color="yellow" icon="edit" @click="estudiante2=props.row; dialogMod=true " />
+            <q-btn flat round dense color="red" icon="delete" @click="delteEst(props.row)" />
           </q-td>
         </template>
       </q-table>

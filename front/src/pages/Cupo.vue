@@ -51,6 +51,7 @@ export default {
       cupoSearch: '',
       store:useCounterStore(),
       cupos: [],
+
       cupoColumns:[
         {name:'action', label:'Acción', field:'action', align:'left', sortable:true},
         {name:'ci', label:'C.I.', field:'ci', align:'left', sortable:true},
@@ -72,6 +73,7 @@ export default {
   computed: {
   },
   methods: {
+
     qrPrint(row){
       // console.log(row)
       QRCode.toDataURL(process.env.API_FRONT+'registro/'+row.codigo)

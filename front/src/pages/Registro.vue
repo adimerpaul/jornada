@@ -17,7 +17,7 @@
             <div class="row">
               <div class="col-12 col-sm-6 q-px-xs"  >
                 <q-input
-                  @keyup="studentSearch(cupo)"
+                  @keyup="studentSearch(cupo);validar(cupo.ci)"
                   v-model="cupo.ci"
                   label="Carnet de identidad"
                   outlined
@@ -78,6 +78,7 @@
                   class="q-mb-md"
                 />
               </div>
+              <div v-if="reg">{{mensaje}}</div>
               <div class="col-12 col-sm-12 q-px-xs flex flex-center q-pb-xs">
                 <q-uploader
                   accept=".jpg, .png"
@@ -100,6 +101,7 @@
                   type="submit"
                   icon="add_circle_outline"
                   class="full-width"
+                  :disable="reg"
                   />
               </div>
             </div>
@@ -153,6 +155,8 @@ export default {
       loading:false,
       codigo:this.$route.params.id,
       students: [],
+      reg:false,
+      mensaje:'',
     }
   },
   created() {
@@ -161,6 +165,7 @@ export default {
     })
   },
   mounted() {
+
     this.$q.loading.show()
     this.$api.get(`cupo/${this.codigo}`).then((response) => {
       this.cupo = response.data
@@ -172,6 +177,18 @@ export default {
     })
   },
   methods: {
+    validar(ci){
+      this.$api.post('validaCupon/'+ci).then(response => {
+        console.log(response.data)
+        this.reg=false
+        this.mensaje=''
+          if(response.data){
+            this.reg=true
+            this.mensaje='El ci esta registrado'
+          }
+      })
+
+    },
     onRejected (rejectedEntries) {
       this.$q.notify({
         type: 'negative',
