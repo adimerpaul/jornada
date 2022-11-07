@@ -117,7 +117,7 @@
         </q-page>
       </router-view>
     </q-page-container>
-    
+
   </q-layout>
 
 </template>
@@ -282,6 +282,9 @@ export default {
       })
     },
     cupoUpdate() {
+      if(this.reg){
+        return false
+      }
       if (this.foto=='') {
         this.$q.notify({
           message: 'Tienes que subir una foto',

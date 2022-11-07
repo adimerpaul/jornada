@@ -170,6 +170,8 @@
           })
         },
         regStudent(){
+          if(this.val)
+          {return false}
           this.$q.loading.show()
           this.$api.post(`student`,this.estudiante).then((res) => {
             this.dialogReg=false
