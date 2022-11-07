@@ -34,6 +34,8 @@
                   hint="comenzando por el apellido paterno"
                   outlined
                   class="q-mb-md"
+                  readonly
+
                 />
               </div>
 <!--              <div class="col-12 col-sm-6 q-px-xs" >-->
@@ -51,6 +53,8 @@
                   outlined
                   :options="carreas"
                   class="q-mb-md"
+                  readonly
+
                 />
               </div>
               <div class="col-12 col-sm-6 q-px-xs" >
@@ -67,6 +71,8 @@
                   label="Direccion"
                   outlined
                   class="q-mb-md"
+                  readonly
+
                 />
               </div>
               <div class="col-12 col-sm-6 q-px-xs" >
@@ -106,16 +112,18 @@
               </div>
             </div>
           </q-form>
+          <q-btn color="white" text-color="black" label="Standard" @click="impresion"/>
 
         </q-page>
       </router-view>
     </q-page-container>
-
+    
   </q-layout>
 
 </template>
 
 <script>
+import { jsPDF } from "jspdf";
 export default {
   name: `Registro`,
   data() {
@@ -182,12 +190,39 @@ export default {
         console.log(response.data)
         this.reg=false
         this.mensaje=''
-          if(response.data){
+          if(response.data && response.data.id!=this.cupo.id){
             this.reg=true
             this.mensaje='El ci esta registrado'
           }
       })
 
+    },
+    impresion(){
+          let cm=this;
+          var doc = new jsPDF('P','cm','letter')
+          doc.setFont("courier");
+          var img = new Image()
+          img.src = 'baner.jpg'
+          doc.addImage(img, 'jpg', 1, 0.5, 19, 2)
+          doc.setFont(undefined,'bold')
+          doc.setFontSize(12);
+          doc.text(5, 3, 'II JORNADAS DE TECNOLGIAS DE COMUNICACION 2022')
+          doc.text(8, 3.5, 'FORMULARIO DE INSCRIPCION')
+          doc.text(8, 4.5, 'DATOS DEL PARTICIPANTE')
+          doc.text(3, 5, 'CI')
+          doc.text(3, 5.5, 'NOMBRE')
+          doc.text(3, 6, 'CARRERA')
+          doc.text(3, 6.5, 'CELULAR')
+          doc.text(3, 7, 'CORREO')
+          doc.setFont(undefined,'normal')
+
+          doc.text(6, 5, cm.cupo.ci+'')
+          doc.text(6, 5.5, cm.cupo.nombres)
+          doc.text(6, 6, cm.cupo.carrera)
+          doc.text(6, 6.5, cm.cupo.celular==null?'':cm.cupo.celular)
+          doc.text(6, 7, cm.cupo.correo==null?'':cm.cupo.correo)
+          doc.save(cm.cupo.ci+".pdf");
+          //window.open(doc.output('bloburl'), '_blank');
     },
     onRejected (rejectedEntries) {
       this.$q.notify({
@@ -266,7 +301,9 @@ export default {
         this.cupo.foto=this.foto
         this.cupo.nombres= this.cupo.nombres.toUpperCase()
         this.$api.put(`cupo/${this.cupo.id}`, this.cupo).then((response) => {
+          console.log(this.cupo)
           console.log(response.data)
+          this.impresion(this.cupo)
           this.$q.notify({
             message: 'Cupo registrado',
             color: 'positive',

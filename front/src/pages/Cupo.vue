@@ -152,7 +152,6 @@ export default {
         this.$api.put('cupo/'+cupo.id,{
           ci: "",
           nombres: "",
-          apellidos: '',
           carrera: '',
           foto: 'avatar.png',
           celular: '',
@@ -265,6 +264,7 @@ export default {
     cupoGet() {
       this.$q.loading.show();
       this.store.cupos=[];
+      this.cupos=[]
       this.$api.get(`cupo`).then((res) => {
         res.data.forEach((item) => {
           item.estado=item.nombres==null?'Libre':'Ocupado';
