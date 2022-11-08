@@ -297,7 +297,7 @@ export default {
         this.$q.loading.show()
         this.cupo.foto=this.foto
         this.cupo.nombres= this.cupo.nombres.toUpperCase()
-        this.$api.put(`cupo/${this.cupo.id}`, this.cupo).then((response) => {
+        this.$api.put(`updateRegistro/${this.cupo.id}`, this.cupo).then((response) => {
           console.log(this.cupo)
           console.log(response.data)
           this.impresion(this.cupo)
@@ -308,6 +308,13 @@ export default {
             position: 'top'
           })
           this.cupoBool = true
+        }).catch(res=>{
+          this.$q.notify({
+            message: res.response.data.message,
+            color: 'negative',
+            icon: 'warning',
+            position: 'top'
+          })
         }).finally(() => {
           this.$q.loading.hide()
         })
