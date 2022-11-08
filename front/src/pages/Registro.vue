@@ -25,6 +25,7 @@
                   class="q-mb-md"
                 />
               </div>
+              <template v-if="cupo.nombres!=''">
               <div class="col-12 col-sm-6 q-px-xs"  >
                 <q-input
                   required
@@ -38,14 +39,6 @@
 
                 />
               </div>
-<!--              <div class="col-12 col-sm-6 q-px-xs" >-->
-<!--                <q-input-->
-<!--                  v-model="cupo.apellidos"-->
-<!--                  label="Apellido"-->
-<!--                  outlined-->
-<!--                  class="q-mb-md"-->
-<!--                />-->
-<!--              </div>-->
               <div class="col-12 col-sm-6 q-px-xs" >
                 <q-select
                   v-model="cupo.carrera"
@@ -110,9 +103,10 @@
                   :disable="reg"
                   />
               </div>
+              </template>
             </div>
           </q-form>
-          <q-btn color="white" text-color="black" label="Standard" @click="impresion"/>
+<!--          <q-btn color="white" text-color="black" label="Standard" @click="impresion"/>-->
 
         </q-page>
       </router-view>
