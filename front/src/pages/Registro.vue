@@ -77,7 +77,7 @@
                   class="q-mb-md"
                 />
               </div>
-              <div v-if="reg">{{mensaje}}</div>
+              <div v-if="reg" class="q-pa-xs text-bold text-red">{{mensaje}}</div>
               <div class="col-12 col-sm-12 q-px-xs flex flex-center q-pb-xs">
                 <q-uploader
                   accept=".jpg, .png"
