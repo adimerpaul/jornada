@@ -28,11 +28,13 @@ class CupoController extends Controller
     }
     public function updateRegistro(UpdateCupoRequest $request, Cupo $cupo){
         $query=Cupo::where('ci', $request->ci)->get();
-        if ($query->count() > 0) {
+        if (sizeof($query) > 0) {
             return response()->json(['message' => 'El CI ya se encuentra registrado'], 500);
+        }else{
+            $cupo->update($request->all());
+            return $cupo;
         }
-        $cupo->update($request->all());
-        return $cupo;
+
     }
 
     public function updateMaterial(UpdateCupoRequest $request, $ci){
