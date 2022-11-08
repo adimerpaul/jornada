@@ -65,7 +65,6 @@
                   outlined
                   class="q-mb-md"
                   readonly
-
                 />
               </div>
               <div class="col-12 col-sm-6 q-px-xs" >
@@ -74,6 +73,7 @@
                   label="Correo"
                   type="email"
                   outlined
+                  required
                   class="q-mb-md"
                 />
               </div>
