@@ -144,14 +144,14 @@ export default {
       ],
       cupoBool: true,
       cupo: {
-        ci: ``,
-        nombres: ``,
-        apellidos: ``,
-        carrera: ``,
-        celular: ``,
-        direccion: ``,
-        correo: ``,
-        foto: ``,
+        ci: "",
+        nombres: "",
+        apellidos: "",
+        carrera: "",
+        celular: "",
+        direccion: "",
+        correo: "",
+        foto: "",
       },
       foto: '',
       loading:false,
@@ -257,12 +257,12 @@ export default {
     },
     studentSearch(cupo){
       console.log(cupo)
-      this.cupo.nombres=``
-      this.cupo.apellidos=``
-      this.cupo.carrera=``
-      this.cupo.celular=``
-      this.cupo.direccion=``
-      this.cupo.correo=``
+      this.cupo.nombres=""
+      this.cupo.apellidos=""
+      this.cupo.carrera=""
+      this.cupo.celular=""
+      this.cupo.direccion=""
+      this.cupo.correo=""
       this.students.forEach((student) => {
         if (student.ci==cupo.ci){
           this.cupo.nombres=student.nombres
