@@ -27,6 +27,10 @@ class CupoController extends Controller
         return $cupo;
     }
     public function updateRegistro(UpdateCupoRequest $request, Cupo $cupo){
+        $request->validate([
+            'ci' => 'required|unique:cupos,ci,'.$cupo->id,
+            'email' => 'required|unique:cupos,email,'.$cupo->id,
+        ]);
         $query=Cupo::where('ci', $request->ci)->get();
         if (sizeof($query) > 0) {
             return response()->json(['message' => 'El CI ya se encuentra registrado'], 500);
