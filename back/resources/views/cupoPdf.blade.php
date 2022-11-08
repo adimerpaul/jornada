@@ -23,7 +23,7 @@
         <img src="data:image/png;base64, {!! $cupo['qr'] !!}" style="border:2px solid white;position: absolute;top: 530px;left: 420px;width: 90px;height: 90px">
         <div style="position: absolute;top: 753px;left: 490px; font-weight: bold;width: 85px;height: 85px;font-family: 'Nunito', sans-serif;color: #a0aec0">{{$cupo['id']}}</div>
 {{--        <img src="nom.jpg" style="  position: absolute;top: 300px;left: 35px;width: 150px;height: 45px" >--}}
-        <div style="position: absolute;top: 400px;left: 35px;width: 250px;height: 15px;font-family: 'Nunito', sans-serif;color: #000;padding: 5px;background: #f6f9fc ;border: 2px solid #22254b;border-radius: 5px">Nombre..............................</div>
+        <div style="position: absolute;top: 400px;left: 35px;width: 300px;height: 15px;font-family: 'Nunito', sans-serif;color: #000;padding: 5px;background: #f6f9fc ;border: 2px solid #22254b;border-radius: 5px">Nombre..............................</div>
     @else
         <img src="folleto.jpg" style="  position: absolute;top: 5px;right: 5px;width: 518px;height: 800px" >
         <img src="data:image/png;base64, {!! $cupo['qr'] !!}" style="border:2px solid white;position: absolute;top: 530px;right: 25px;width: 90px;height: 90px">
