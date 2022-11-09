@@ -6,29 +6,32 @@
           <div class="col-12">
             <p class="text-red text-bold text-center">Marque los materiales a entregar </p>
           </div>
-          <div class="col-12">PARTICIPANTE : {{cupo.nombres}}</div>
-          <div class="col-xs-12 col-sm-6 ">
+          <div class="col-12">
+             <div class="text-h6 text-bold">PARTICIPANTE : {{cupo.nombres}}</div>
+          </div>
+          <div class="col-xs-12 col-sm-2 ">
             <q-checkbox v-model="credencial" label="Credencial" />
           </div>
-          <div class="col-xs-12 col-sm-6 ">
+          <div class="col-xs-12 col-sm-2 ">
             <q-checkbox v-model="folder" label="Folder" />
           </div>
-          <div class="col-xs-12 col-sm-6 ">
+          <div class="col-xs-12 col-sm-2 ">
             <q-checkbox v-model="barbijo" label="Barbijo" />
           </div>
-          <div class="col-xs-12 col-sm-6 ">
+          <div class="col-xs-12 col-sm-2 ">
             <q-checkbox v-model="certificado" label="Certificado" />
           </div>
-          <div class="col-xs-12 col-sm-6 ">
+          <div class="col-xs-12 col-sm-2 ">
             <q-checkbox v-model="cd" label="CD" />
           </div>
           <div class="col-6 q-px-lg">
             <q-form @submit.prevent="BuscarCupo">
               <q-input label="Colocar el lector"   v-model="ci" outlined />
             </q-form>
-
           </div>
-          <div class="col-6"><q-btn color="primary" icon="check" label="Entregar" @click="materialInsert" /></div>
+          <div class="col-6 flex flex-center">
+            <q-btn color="primary" icon="check" label="Entregar" @click="materialInsert" />
+          </div>
 
         </div>
       </q-card-section>
@@ -57,7 +60,7 @@ export default {
   methods: {
     BuscarCupo(){
       this.cupo={}
-      this.certificado=false
+      this.credencial=false
         this.folder=false
         this.barbijo=false
         this.certificado=false
@@ -65,11 +68,11 @@ export default {
       this.$api.post('buscarCupo/'+this.ci).then((response) => {
         console.log(response.data)
         this.cupo=response.data
-        this.certificado=false
-        this.folder=false
-        this.barbijo=false
-        this.certificado=false
-        this.cd=false
+        // this.certificado=false
+        // this.folder=false
+        // this.barbijo=false
+        // this.certificado=false
+        // this.cd=false
         this.cupo.materials.forEach(r => {
             if(r.nombre=='CREDENCIAL') this.credencial=r.estado==1?true:false
             if(r.nombre=='FOLDER') this.folder=r.estado==1?true:false
@@ -77,7 +80,13 @@ export default {
             if(r.nombre=='CERTIFICADO') this.certificado=r.estado==1?true:false
             if(r.nombre=='CD') this.cd=r.estado==1?true:false
         });
-
+      }).catch(err=>{
+        this.$q.notify({
+          color: 'negative',
+          message: err.response.data.message,
+          position: 'top',
+          timeout: 2000
+        })
       })
 
     },
@@ -112,8 +121,8 @@ export default {
         hora:date.formatDate(new Date(), "HH:mm:ss")
       })
         .then((response) => {
-          console.log(response.data)
-
+          // console.log(response.data)
+          let student = response.data
           this.$q.loading.hide()
           this.$q.notify({
             message: 'Material entregado',
@@ -121,6 +130,11 @@ export default {
             textColor: 'white',
             icon: 'done',
             position: 'top',
+          })
+          let materiales = ''
+          student.materials.forEach(r => {
+            if (r.estado==1)
+            materiales += r.nombre + ' '
           })
           const d = new Printd()
           let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
@@ -154,23 +168,23 @@ export default {
           // this.barbijo = false
           // this.certificado = false
           this.cupo = {}
-          this.certificado=false
+          this.credencial=false
           this.folder=false
           this.barbijo=false
           this.certificado=false
           this.cd=false
 
         })
-        .catch((error) => {
-          this.$q.loading.hide()
-          this.$q.notify({
-            message: 'Error al entregar material',
-            color: 'red-4',
-            textColor: 'white',
-            icon: 'error',
-            position: 'top',
-          })
-        })
+        // .catch((error) => {
+        //   this.$q.loading.hide()
+        //   this.$q.notify({
+        //     message: 'Error al entregar material',
+        //     color: 'red-4',
+        //     textColor: 'white',
+        //     icon: 'error',
+        //     position: 'top',
+        //   })
+        // })
     },
   },
 }

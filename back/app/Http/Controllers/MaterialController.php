@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cupo;
 use App\Models\Material;
 use App\Http\Requests\StoreMaterialRequest;
 use App\Http\Requests\UpdateMaterialRequest;
@@ -80,6 +81,8 @@ class MaterialController extends Controller
             $mat5->estado=$request->cd;
             $mat5->save();
         }
+        $cupo=Cupo::where('id',$request->id)->with('materials')->first();
+        return $cupo;
     }
 
     /**

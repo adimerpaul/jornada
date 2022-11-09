@@ -98,6 +98,14 @@ class CupoController extends Controller
     public function credencialFile(){
         return response()->file('credencials.pdf');
     }
+    public function buscarCupo(Request $request,$ci){
+        $cupo=Cupo::with('materials')->where('ci',$ci)->first();
+        if ($cupo==null){
+            return response()->json(['message' => 'El CI no se encuentra registrado'], 500);
+        }else{
+            return $cupo;
+        }
+    }
     public function rotateFoto(Request $request){
         // create Image from file
 // create Image from file
