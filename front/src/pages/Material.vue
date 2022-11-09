@@ -26,7 +26,7 @@
           </div>
           <div class="col-6 q-px-lg">
             <q-form @submit.prevent="BuscarCupo">
-              <q-input label="Colocar el lector"   v-model="ci" outlined />
+              <q-input label="Colocar el lector" ref="ci"  v-model="ci" outlined />
             </q-form>
           </div>
           <div class="col-6 flex flex-center">
@@ -230,6 +230,10 @@ export default {
           this.barbijo=false
           this.certificado=false
           this.cd=false
+          this.ci=null
+          this.$nextTick(() => {
+            this.$refs.ci.focus()
+          })
 
         })
         // .catch((error) => {

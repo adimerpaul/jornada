@@ -23,6 +23,7 @@
 <div style="text-align: center;position: absolute;top: 230px;left: 800px;font-size: 15px; font-weight: bold;width: 220px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48">{{$credencial['nombres']}}</div>
 <img src="data:image/png;base64, {!! $credencial['qr'] !!}" style="border:2px solid white;position: absolute;top: 275px;left: 830px;width: 170px;height: 60px">
 <div style="color: #a0aec0;position: absolute;top: 350px;left: 915px;width: 10px;height: 10px">{{$credencial['id']}}</div>
+<div class="page_break"></div>
 @endforeach
 </body>
 </html>
