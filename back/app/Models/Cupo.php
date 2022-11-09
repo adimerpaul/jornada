@@ -23,4 +23,9 @@ class Cupo extends Model
         'barbijo',
         'certificado',
     ];
+
+    public function materials()
+    {
+        return $this->hasMany(Material::class);
+    }
 }

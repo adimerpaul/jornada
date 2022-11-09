@@ -6,24 +6,30 @@
           <div class="col-12">
             <p class="text-red text-bold text-center">Marque los materiales a entregar </p>
           </div>
-          <div class="col-12 col-sm-3 flex flex-center">
+          <div class="col-12">PARTICIPANTE : {{cupo.nombres}}</div>
+          <div class="col-xs-12 col-sm-6 ">
             <q-checkbox v-model="credencial" label="Credencial" />
           </div>
-          <div class="col-12 col-sm-3 flex flex-center">
+          <div class="col-xs-12 col-sm-6 ">
             <q-checkbox v-model="folder" label="Folder" />
           </div>
-          <div class="col-12 col-sm-3 flex flex-center">
+          <div class="col-xs-12 col-sm-6 ">
             <q-checkbox v-model="barbijo" label="Barbijo" />
           </div>
-          <div class="col-12 col-sm-3 flex flex-center">
+          <div class="col-xs-12 col-sm-6 ">
             <q-checkbox v-model="certificado" label="Certificado" />
           </div>
-          <div class="col-12 q-px-lg">
-            <q-form @submit.prevent="materialInsert">
+          <div class="col-xs-12 col-sm-6 ">
+            <q-checkbox v-model="cd" label="CD" />
+          </div>
+          <div class="col-6 q-px-lg">
+            <q-form @submit.prevent="BuscarCupo">
               <q-input label="Colocar el lector"   v-model="ci" outlined />
             </q-form>
 
           </div>
+          <div class="col-6"><q-btn color="primary" icon="check" label="Entregar" @click="materialInsert" /></div>
+
         </div>
       </q-card-section>
     </q-card>
@@ -43,13 +49,49 @@ export default {
       folder: false,
       barbijo: false,
       certificado: false,
+      cd: false,
       ci: '',
+      cupo:{},
     }
   },
   methods: {
-    materialInsert() {
+    BuscarCupo(){
+      this.cupo={}
+      this.certificado=false
+        this.folder=false
+        this.barbijo=false
+        this.certificado=false
+        this.cd=false
+      this.$api.post('buscarCupo/'+this.ci).then((response) => {
+        console.log(response.data)
+        this.cupo=response.data
+        this.certificado=false
+        this.folder=false
+        this.barbijo=false
+        this.certificado=false
+        this.cd=false
+        this.cupo.materials.forEach(r => {
+            if(r.nombre=='CREDENCIAL') this.credencial=r.estado==1?true:false
+            if(r.nombre=='FOLDER') this.folder=r.estado==1?true:false
+            if(r.nombre=='BARBIJO') this.barbijo=r.estado==1?true:false
+            if(r.nombre=='CERTIFICADO') this.certificado=r.estado==1?true:false
+            if(r.nombre=='CD') this.cd=r.estado==1?true:false
+        });
 
-      if (!this.credencial && !this.folder && !this.barbijo && !this.certificado) {
+      })
+
+    },
+    materialInsert() {
+      if (this.cupo.id==undefined) {
+            this.$q.notify({
+              message: 'Ingrese participante',
+              color: 'negative',
+              icon: 'warning',
+              position: 'top',
+            })
+        return false
+      }
+      if (!this.credencial && !this.folder && !this.barbijo && !this.certificado && !this.cd) {
             this.$q.notify({
               message: 'No se puede entregar material sin seleccionar',
               color: 'negative',
@@ -60,28 +102,18 @@ export default {
       }
 
       this.$q.loading.show()
-      this.$api.post('updateMaterial/'+this.ci, {
+      this.$api.post('material', {id:this.cupo.id,
         credencial: this.credencial,
         folder: this.folder,
         barbijo: this.barbijo,
         certificado: this.certificado,
+        cd: this.cd,
+        fecha:date.formatDate(new Date(), 'YYYY-MM-DD'),
+        hora:date.formatDate(new Date(), "HH:mm:ss")
       })
         .then((response) => {
-          let student = response.data
           console.log(response.data)
-          let materiales = ''
-          if (student.credencial) {
-            materiales += 'Credencial, '
-          }
-          if (student.folder) {
-            materiales += 'Folder, '
-          }
-          if (student.barbijo) {
-            materiales += 'Barbijo, '
-          }
-          if (student.certificado) {
-            materiales += 'Certificado, '
-          }
+
           this.$q.loading.hide()
           this.$q.notify({
             message: 'Material entregado',
@@ -121,7 +153,13 @@ export default {
           // this.folder = false
           // this.barbijo = false
           // this.certificado = false
-          this.ci = ''
+          this.cupo = {}
+          this.certificado=false
+          this.folder=false
+          this.barbijo=false
+          this.certificado=false
+          this.cd=false
+
         })
         .catch((error) => {
           this.$q.loading.hide()

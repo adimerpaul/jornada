@@ -29,11 +29,13 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::post('me', [\App\Http\Controllers\UserController::class, 'me']);
     Route::post('logout', [\App\Http\Controllers\UserController::class, 'logout']);
     Route::apiResource('user', \App\Http\Controllers\UserController::class);
+    Route::apiResource('material', \App\Http\Controllers\MaterialController::class);
     Route::post('cupoPdf', [\App\Http\Controllers\CupoController::class, 'cupoPdf']);
     Route::post('certificadoPdf', [\App\Http\Controllers\CupoController::class, 'certificadoPdf']);
     Route::post('credencialPdf', [\App\Http\Controllers\CupoController::class, 'credencialPdf']);
     Route::post('updateMaterial/{ci}', [\App\Http\Controllers\CupoController::class, 'updateMaterial']);
     Route::post('buscarStudent/{ci}', [\App\Http\Controllers\StudentController::class, 'buscarStudent']);
+    Route::post('buscarCupo/{ci}', [\App\Http\Controllers\CupoController::class, 'buscarCupo']);
     Route::post('validaCupon/{ci}', [\App\Http\Controllers\CupoController::class, 'validaCupon']);
     Route::post('rotateFoto', [\App\Http\Controllers\CupoController::class, 'rotateFoto']);
 
