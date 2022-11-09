@@ -50,6 +50,8 @@ class MaterialController extends Controller
         if(!$mat4){ $mat4=DB::table('materials')->insert(['nombre'=>'CERTIFICADO','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
         $mat5=Material::where('cupo_id',$request->id)->where('nombre','CD')->first();
         if(!$mat5){ $mat5=DB::table('materials')->insert(['nombre'=>'CD','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
+        $mat6=Material::where('cupo_id',$request->id)->where('nombre','BOLIGRAFO')->first();
+        if(!$mat6){ $mat6=DB::table('materials')->insert(['nombre'=>'BOLIGRAFO','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
 
         if($request->credencial && $mat1->estado==0){
             $mat1->fecha=$request->fecha;
@@ -80,6 +82,12 @@ class MaterialController extends Controller
             $mat5->hora=$request->hora;
             $mat5->estado=$request->cd;
             $mat5->save();
+        }
+        if( $request->boligrafo && $mat6->estado==0){
+            $mat6->fecha=$request->fecha;
+            $mat6->hora=$request->hora;
+            $mat6->estado=$request->boligrafo;
+            $mat6->save();
         }
         $cupo=Cupo::where('id',$request->id)->with('materials')->first();
         return $cupo;

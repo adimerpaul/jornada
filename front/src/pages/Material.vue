@@ -16,6 +16,9 @@
             <q-checkbox v-model="folder" label="Folder" />
           </div>
           <div class="col-xs-12 col-sm-2 ">
+            <q-checkbox v-model="boligrafo" label="Boligrafo" />
+          </div>
+          <div class="col-xs-12 col-sm-2 ">
             <q-checkbox v-model="barbijo" label="Barbijo" />
           </div>
           <div class="col-xs-12 col-sm-2 ">
@@ -55,6 +58,7 @@ export default {
       barbijo: false,
       certificado: false,
       cd: false,
+      boligrafo: false,
       ci: '',
       cupo:{},
     }
@@ -67,6 +71,7 @@ export default {
         this.barbijo=false
         this.certificado=false
         this.cd=false
+        this.boligrafo=false
       this.$api.post('buscarCupo/'+this.ci).then((response) => {
         console.log(response.data)
         this.cupo=response.data
@@ -81,6 +86,7 @@ export default {
             if(r.nombre=='BARBIJO') this.barbijo=r.estado==1?true:false
             if(r.nombre=='CERTIFICADO') this.certificado=r.estado==1?true:false
             if(r.nombre=='CD') this.cd=r.estado==1?true:false
+            if(r.nombre=='BOLIGRAFO') this.boligrafo=r.estado==1?true:false
         });
       }).catch(err=>{
         this.$q.notify({
@@ -116,7 +122,7 @@ export default {
           let student = this.cupo
           let materiales = ''
           student.materials.forEach(r => {
-            if (r.estado==1)
+            if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + ' '
           })
           const d = new Printd()
@@ -145,6 +151,7 @@ export default {
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
+          if(materiales!='')
           d.print( document.getElementById('myelement') )
     },
     materialInsert() {
@@ -174,6 +181,7 @@ export default {
         barbijo: this.barbijo,
         certificado: this.certificado,
         cd: this.cd,
+        boligrafo: this.boligrafo,
         fecha:date.formatDate(new Date(), 'YYYY-MM-DD'),
         hora:date.formatDate(new Date(), "HH:mm:ss")
       })
@@ -190,7 +198,7 @@ export default {
           })
           let materiales = ''
           student.materials.forEach(r => {
-            if (r.estado==1)
+            if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + ' '
           })
           const d = new Printd()
@@ -219,6 +227,7 @@ export default {
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
+          if(materiales!='')
           d.print( document.getElementById('myelement') )
           // this.credencial = false
           // this.folder = false
@@ -230,6 +239,7 @@ export default {
           this.barbijo=false
           this.certificado=false
           this.cd=false
+          this.boligrafo=false
           this.ci=null
           this.$nextTick(() => {
             this.$refs.ci.focus()
