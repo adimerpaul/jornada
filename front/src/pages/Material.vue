@@ -32,7 +32,9 @@
           <div class="col-6 flex flex-center">
             <q-btn color="primary" icon="check" label="Entregar" @click="materialInsert" />
           </div>
-
+          <div class="col-6 flex flex-center">
+            <q-btn color="accent" icon="print" label="Impresion" @click="impresion" />
+          </div>
         </div>
       </q-card-section>
     </q-card>
@@ -89,6 +91,61 @@ export default {
         })
       })
 
+    },
+    impresion() {
+      if (this.cupo.id==undefined) {
+            this.$q.notify({
+              message: 'Ingrese participante',
+              color: 'negative',
+              icon: 'warning',
+              position: 'top',
+            })
+        return false
+      }
+      if (this.cupo.materials.leng) {
+            this.$q.notify({
+              message: 'No se puede entregar material sin seleccionar',
+              color: 'negative',
+              icon: 'warning',
+              position: 'top',
+            })
+        return false
+      }
+
+
+          let student = this.cupo
+          let materiales = ''
+          student.materials.forEach(r => {
+            if (r.estado==1)
+            materiales += r.nombre + ' '
+          })
+          const d = new Printd()
+          let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
+          document.getElementById('myelement').innerHTML = `
+<style>
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.bold {
+  text-weight: bold;
+}
+</style>
+          <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
+          <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
+          <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
+          <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
+          <div class="left "> <b>Material entregado: </b> ${materiales}</div>
+
+          <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
+          `
+          d.print( document.getElementById('myelement') )
     },
     materialInsert() {
       if (this.cupo.id==undefined) {

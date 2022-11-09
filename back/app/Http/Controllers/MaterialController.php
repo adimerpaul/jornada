@@ -51,31 +51,31 @@ class MaterialController extends Controller
         $mat5=Material::where('cupo_id',$request->id)->where('nombre','CD')->first();
         if(!$mat5){ $mat5=DB::table('materials')->insert(['nombre'=>'CD','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
 
-        if($mat1->estado != $request->credencial){
+        if($request->credencial && $mat1->estado==0){
             $mat1->fecha=$request->fecha;
             $mat1->hora=$request->hora;
             $mat1->estado=$request->credencial;
             $mat1->save();
         }
-        if($mat2->estado != $request->barbijo){
+        if($request->barbijo && $mat2->estado==0){
             $mat2->fecha=$request->fecha;
             $mat2->hora=$request->hora;
             $mat2->estado=$request->barbijo;
             $mat2->save();
         }
-        if($mat3->estado != $request->folder){
+        if( $request->folder && $mat3->estado==0){
             $mat3->fecha=$request->fecha;
             $mat3->hora=$request->hora;
             $mat3->estado=$request->folder;
             $mat3->save();
         }
-        if($mat4->estado != $request->certificado){
+        if( $request->certificado && $mat4->estado==0){
             $mat4->fecha=$request->fecha;
             $mat4->hora=$request->hora;
             $mat4->estado=$request->certificado;
             $mat4->save();
         }
-        if($mat5->estado != $request->cd){
+        if( $request->cd && $mat5->estado==0){
             $mat5->fecha=$request->fecha;
             $mat5->hora=$request->hora;
             $mat5->estado=$request->cd;
