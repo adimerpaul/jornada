@@ -10,7 +10,7 @@
              <div class="text-h6 text-bold">PARTICIPANTE : {{cupo.nombres}}</div>
           </div>
           <div class="col-xs-12 col-sm-2 ">
-            <q-checkbox v-model="credencial" label="Credencial" />
+            <q-checkbox v-model="credencial" label="Credencial - Portacredencial" />
           </div>
           <div class="col-xs-12 col-sm-2 ">
             <q-checkbox v-model="folder" label="Folder" />
@@ -123,7 +123,10 @@ export default {
           let materiales = ''
           student.materials.forEach(r => {
             if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
-            materiales += r.nombre + ' '
+            if(r.nombre=='CREDENCIAL')
+            materiales += r.nombre + '-Portacredencial  '
+            else
+            materiales += r.nombre + '  '
           })
           const d = new Printd()
           let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
@@ -144,6 +147,7 @@ export default {
 </style>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
@@ -199,7 +203,10 @@ export default {
           let materiales = ''
           student.materials.forEach(r => {
             if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
-            materiales += r.nombre + ' '
+            if(r.nombre=='CREDENCIAL')
+            materiales += r.nombre + '-Portacredencial  '
+            else
+            materiales += r.nombre + '  '
           })
           const d = new Printd()
           let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
@@ -220,6 +227,7 @@ export default {
 </style>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
