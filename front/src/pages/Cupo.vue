@@ -19,7 +19,7 @@
       </q-td>
     </template>
     <template v-slot:body-cell-action="props">
-      <q-td :props="props">
+      <q-td :props="props" v-if="store.user.role=='ADMINISTRADOR'">
         <q-btn flat round dense icon="qr_code" @click="qrPrint(props.row)" />
         <q-btn flat round dense icon="public" @click="cupoRegister(props.row)" />
         <q-btn flat round dense icon="recycling" @click="cupoReset(props.row)" />
