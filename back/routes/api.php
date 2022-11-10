@@ -28,6 +28,8 @@ Route::put('updateRegistro/{cupo}', [\App\Http\Controllers\CupoController::class
 Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::post('me', [\App\Http\Controllers\UserController::class, 'me']);
     Route::post('logout', [\App\Http\Controllers\UserController::class, 'logout']);
+    Route::put('updatePassword/{user}', [\App\Http\Controllers\UserController::class, 'updatePassword']);
+
     Route::apiResource('user', \App\Http\Controllers\UserController::class);
     Route::apiResource('material', \App\Http\Controllers\MaterialController::class);
     Route::post('cupoPdf', [\App\Http\Controllers\CupoController::class, 'cupoPdf']);

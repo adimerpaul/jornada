@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::get();
+        return User::all();
     }
 
     /**
@@ -63,6 +63,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'role' => 'required',
+        ]);
+        $request['password']=Hash::make($request['password']);
         return(User::create($request->all()));
     }
 
@@ -97,6 +104,19 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'role' => 'required',
+        ]);
+        $user->update($request->all());
+    }
+    public function updatePassword(Request $request, User $user)
+    {
+        $request->validate([
+            'password' => 'required|min:6',
+        ]);
+        $request['password']=Hash::make($request['password']);
         $user->update($request->all());
     }
 

@@ -91,8 +91,8 @@
               <!--              </q-avatar>-->
             </div>
             <div class="col-9">
-              <div class="text-h6 text-bold " >Jornadas</div>
-              <div class="text-caption">1.4.8</div>
+              <div class="text-h6 text-bold "  > {{ store.user.name }}</div>
+              <div class="text-caption"> <b>Rol:</b> <q-badge :label="store.user.role" /></div>
             </div>
           </div>
         </q-item-label>
@@ -110,15 +110,23 @@
                   Principal
               </q-item-section>
             </q-item>
-            <q-item clickable exact to="estudiantes" active-class="bg-blue-grey-6 text-white">
+            <q-item clickable exact to="estudiantes" v-if="store.user.role=='ADMINISTRADOR'" active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
-                <q-icon name="people" />
+                <q-icon name="o_people" />
               </q-item-section>
               <q-item-section>
-                estudiantes
+                Estudiantes
               </q-item-section>
             </q-item>
-            <q-item clickable exact to="cupo" active-class="bg-blue-grey-6 text-white">
+            <q-item clickable exact to="user" v-if="store.user.role=='ADMINISTRADOR'"  active-class="bg-blue-grey-6 text-white">
+              <q-item-section avatar>
+                <q-icon name="o_account_circle" />
+              </q-item-section>
+              <q-item-section>
+                Usuarios
+              </q-item-section>
+            </q-item>
+            <q-item clickable exact to="cupo" v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'||store.user.role=='ACREDITADOR'"  active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
                 <q-icon name="o_confirmation_number" />
               </q-item-section>
@@ -126,7 +134,7 @@
                 Cupos
               </q-item-section>
             </q-item>
-            <q-item clickable exact to="credencial" active-class="bg-blue-grey-6 text-white">
+            <q-item clickable exact to="credencial"  v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'||store.user.role=='ACREDITADOR'" active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
                 <q-icon name="o_credit_card" />
               </q-item-section>
@@ -134,7 +142,7 @@
                 Credenciales
               </q-item-section>
             </q-item>
-            <q-item clickable exact to="certificado" active-class="bg-blue-grey-6 text-white">
+            <q-item clickable exact to="certificado"  v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'||store.user.role=='ACREDITADOR'" active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
                 <q-icon name="o_verified_user" />
               </q-item-section>
@@ -142,7 +150,7 @@
                 Certificados
               </q-item-section>
             </q-item>
-            <q-item clickable exact to="material" active-class="bg-blue-grey-6 text-white">
+            <q-item clickable exact to="material" v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'" active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
                 <q-icon name="o_category" />
               </q-item-section>
@@ -150,7 +158,7 @@
                 Entrega material
               </q-item-section>
             </q-item>
-            <q-item clickable exact to="refrigerio" active-class="bg-blue-grey-6 text-white">
+            <q-item clickable exact to="refrigerio" v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='REFRIGERIO'" active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
                 <q-icon name="o_restaurant_menu" />
               </q-item-section>
