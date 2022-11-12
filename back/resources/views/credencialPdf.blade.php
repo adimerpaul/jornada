@@ -13,12 +13,12 @@
             border: 0px;
         }
         .page_break { page-break-before: always; }
-        @page { size: 8.5cm 10.5cm; }
+        @page { size: 8cm 10cm; }
     </style>
 </head>
 <body>
 @foreach($credencials as $credencial)
-{{--<img src="certificado.jpg" style="  position: absolute;top: 5px;left: 785px;width: 259px;height: 400px" >--}}
+<img src="crendcial.jpg" style="  position: absolute;top: 0px;left: 0px;width: 8cm;height: 10cm" >
 <img src="imagenes/{{$credencial['foto']}}" style="  position: absolute;top: 60px;left: 120px;width: 66px;height: 66px;border-radius: 33px" >
 <div style="text-align: center;position: absolute;top: 230px;left: 10px;font-size: 14px; font-weight: bold;width: 220px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48">{{$credencial['nombres']}}</div>
 <img src="data:image/png;base64, {!! $credencial['qr'] !!}" style="border:2px solid white;position: absolute;top: 150px;left: 60px;width: 170px;height: 60px">

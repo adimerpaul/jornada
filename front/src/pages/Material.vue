@@ -124,9 +124,9 @@ export default {
           student.materials.forEach(r => {
             if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             if(r.nombre=='CREDENCIAL')
-            materiales += r.nombre + '-Portacredencial  '
+            materiales += r.nombre + '-Portacredencial + '
             else
-            materiales += r.nombre + '  '
+            materiales += r.nombre + ' + '
           })
           const d = new Printd()
           let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
