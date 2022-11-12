@@ -22,6 +22,7 @@ class Cupo extends Model
         'folder',
         'barbijo',
         'certificado',
+        'tipo',
     ];
 
     public function materials()
