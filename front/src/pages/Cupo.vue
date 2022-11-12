@@ -45,7 +45,7 @@
         <q-form @submit.prevent="CambioTipo">
           <div class="row">
             <div class="col-12">
-              <q-select outlined v-model="cupo.tipo" label="Tipo" :options="['PARTICIPANTE','EXPOCITOR','ORGANIZADOR','LOGISTICA']" />
+              <q-select outlined v-model="cupo.tipo" label="Tipo" :options="['PARTICIPANTE','EXPOSITOR','ORGANIZADOR','DOCENTE']" />
             </div>
             <div class="col-12">
               <q-btn type="submit" color="primary" label="Actualizar"  class="full-width"/>
