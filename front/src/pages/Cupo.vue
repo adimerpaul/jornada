@@ -19,10 +19,13 @@
       </q-td>
     </template>
     <template v-slot:body-cell-action="props">
-      <q-td :props="props" v-if="store.user.role=='ADMINISTRADOR'">
-        <q-btn flat round dense icon="qr_code" @click="qrPrint(props.row)" />
-        <q-btn flat round dense icon="public" @click="cupoRegister(props.row)" />
-        <q-btn flat round dense icon="recycling" @click="cupoReset(props.row)" />
+      <q-td :props="props" >
+        <template v-if="store.user.role=='ADMINISTRADOR'">
+          <q-btn flat round dense icon="qr_code" @click="qrPrint(props.row)" />
+          <q-btn flat round dense icon="public" @click="cupoRegister(props.row)" />
+          <q-btn flat round dense icon="recycling" @click="cupoReset(props.row)" />
+          <q-btn flat round dense icon="published_with_changes" @click="cupoChange(props.row)" />
+        </template>
       </q-td>
     </template>
     <template v-slot:body-cell-foto="props">
@@ -31,7 +34,27 @@
         <q-img @click="fotoShow(props.row)" :src="url+'../imagenes/'+props.row.foto" width="30px" height="30px" />
       </q-td>
     </template>
+
   </q-table>
+  <q-dialog v-model="cupoUpdateShow">
+    <q-card >
+      <q-card-section class="q-pb-none">
+        <div class="text-h6 ">Actualizar Tipo</div>
+      </q-card-section>
+      <q-card-section class="q-pt-none">
+        <q-form @submit.prevent="CambioTipo">
+          <div class="row">
+            <div class="col-12">
+              <q-select outlined v-model="cupo.tipo" label="Tipo" :options="['PARTICIPANTE','EXPOCITOR','ORGANIZADOR','LOGISTICA']" />
+            </div>
+            <div class="col-12">
+              <q-btn type="submit" color="primary" label="Actualizar"  class="full-width"/>
+            </div>
+          </div>
+        </q-form>
+      </q-card-section>
+    </q-card>
+  </q-dialog>
 <!--  <pre>{{store.cupos}}</pre>-->
 </q-page>
 </template>
@@ -51,14 +74,16 @@ export default {
       cupoSearch: '',
       store:useCounterStore(),
       cupos: [],
-
+      cupo:{},
+      cupoUpdateShow: false,
       cupoColumns:[
         {name:'action', label:'Acción', field:'action', align:'left', sortable:true},
         {name:'ci', label:'C.I.', field:'ci', align:'left', sortable:true},
+        {name:'tipo', label:'Usuario', field:'tipo', align:'left', sortable:true},
         {name:'estado', label:'Estado', field:'estado', align:'left', sortable:true},
         {name:'id', label:'ID', field:'id', align:'left', sortable:true},
         {name:'nombre', label:'Nombre', field:'nombre', align:'left', sortable:true},
-        {name:'carrera', label:'Carrera', field:'carrera', align:'left', sortable:true},
+        // {name:'carrera', label:'Carrera', field:'carrera', align:'left', sortable:true},
         {name:'celular', label:'Celular', field:'celular', align:'left', sortable:true},
         {name:'correo', label:'Correo', field:'correo', align:'left', sortable:true},
         {name:'foto', label:'Foto', field:'foto', align:'left', sortable:true},
@@ -73,7 +98,9 @@ export default {
   computed: {
   },
   methods: {
+    cupoUpdate(){
 
+    },
     qrPrint(row){
       // console.log(row)
       QRCode.toDataURL(process.env.API_FRONT+'registro/'+row.codigo)
@@ -120,9 +147,10 @@ export default {
         this.$q.loading.show()
         this.$api.post(this.url+'rotateFoto',row)
           .then(response => {
-            console.log(response.data)
+            row.foto = response.data.foto
+            // console.log(response.data)
             this.$q.loading.hide()
-            this.cupoGet()
+            // this.cupoGet()
           })
           .catch(error => {
             this.$q.loading.hide()
@@ -130,6 +158,12 @@ export default {
           })
       })
 
+
+    },
+    cupoChange(cupo){
+      this.cupoUpdateShow=true
+      console.log(cupo)
+      this.cupo=cupo
 
     },
     cupoReset(cupo){
@@ -263,13 +297,13 @@ export default {
     },
     CambioTipo() {
       this.$q.loading.show();
-      this.$api.post(`updateTipo`).then((res) => {
+      this.$api.post(`updateTipo`,this.cupo).then((res) => {
       }).catch((error) => {
           console.log(error);
       }).finally(() => {
+        this.cupoUpdateShow=false
         this.$q.loading.hide();
       });
-    },
   },
     cupoGet() {
       this.$q.loading.show();
