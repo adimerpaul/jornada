@@ -261,6 +261,16 @@ export default {
         }
       })
     },
+    CambioTipo() {
+      this.$q.loading.show();
+      this.$api.post(`updateTipo`).then((res) => {
+      }).catch((error) => {
+          console.log(error);
+      }).finally(() => {
+        this.$q.loading.hide();
+      });
+    },
+  },
     cupoGet() {
       this.$q.loading.show();
       this.store.cupos=[];

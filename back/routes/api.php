@@ -40,6 +40,7 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::post('buscarCupo/{ci}', [\App\Http\Controllers\CupoController::class, 'buscarCupo']);
     Route::post('validaCupon/{ci}', [\App\Http\Controllers\CupoController::class, 'validaCupon']);
     Route::post('rotateFoto', [\App\Http\Controllers\CupoController::class, 'rotateFoto']);
+    Route::post('updateTipo', [\App\Http\Controllers\CupoController::class, 'updateTipo']);
 
 
 });

@@ -48,6 +48,12 @@ class CupoController extends Controller
         return $cupo;
     }
 
+    public function updateTipo(Request $reques){
+        $cupo= Cupo::find($reques->id);
+        $cupo->tipo=$reques->tipo;
+        return $cupo->save();
+    }
+
     public function destroy(Cupo $cupo){$cupo->delete();return $cupo;}
     public function cupoPdf(Request $request){
         $data=[];
