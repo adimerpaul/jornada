@@ -168,7 +168,7 @@ export default {
             })
         return false
       }
-      if (!this.credencial && !this.folder && !this.barbijo && !this.certificado && !this.cd) {
+      if (!this.credencial && !this.folder && !this.barbijo && !this.certificado && !this.cd && ! this.boligrafo) {
             this.$q.notify({
               message: 'No se puede entregar material sin seleccionar',
               color: 'negative',
