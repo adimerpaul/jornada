@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean('folder')->nullable()->default(false);
             $table->boolean('barbijo')->nullable()->default(false);
             $table->boolean('certificado')->nullable()->default(false);
+            $table->string('tipo')->default('PARTICIPANTE');
             $table->timestamps();
         });
     }
