@@ -23,7 +23,7 @@
     <div style="border: 1px solid red;position: absolute;top: 380px;left: 100px;text-align: justify;font-size: 1em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
         Por su participación en calidad de <span style="font-size: 1.5em;font-weight: bold;">{{$certificado['tipo']}}</span> de las <span style="font-size: 1.5em;font-weight: bold;">II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022</span> desarrollado del 16 al 18 de noviembre de 2022, con una carga horaria académica de 32 horas lectivas.
     </div>
-    <div style="border: 1px solid red;position: absolute;top: 500px;left: 100px;text-align: left;font-size: 1em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
+    <div style="border: 1px solid red;position: absolute;top: 450px;left: 100px;text-align: left;font-size: 1em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
         Oruro, Noviembre de 2022
     </div>
     <div style="border: 1px solid red;position: absolute;top: 550px;left: 100px;text-align: center;font-size: 0.6em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
