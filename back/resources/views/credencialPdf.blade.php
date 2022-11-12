@@ -18,7 +18,7 @@
 </head>
 <body>
 @foreach($credencials as $credencial)
-<img src="credencial.jpg" style="  position: absolute;top: 0px;left: 0px;width: 8cm;height: 10cm" >
+<img src="credencial.jpeg" style="  position: absolute;top: 0px;left: 0px;width: 8cm;height: 10cm" >
 <img src="imagenes/{{$credencial['foto']}}" style="position: absolute;top: 80px;left: 112px;width: 80px;height: 80px;border-radius: 40px" >
 <div style="text-align: center;position: absolute;top: 180px;left: 45px;font-size: 14px; font-weight: bold;width: 210px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['nombres']}}</div>
 <div style="text-align: center;position: absolute;top: 230px;left: 45px;font-size: 14px; font-weight: bold;width: 210px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['tipo']}}</div>
