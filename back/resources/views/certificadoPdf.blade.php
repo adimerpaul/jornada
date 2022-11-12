@@ -21,7 +21,19 @@
     <img src="certificado.jpg" style=" position: absolute;top: 5px;left: 5px;width: 1036px;height: 800px" >
     <div style="border: 1px solid red;position: absolute;top: 310px;left: 100px;text-align: center;font-size: 2.5em; font-weight: bold;width: 850px;height: 35px;font-family: 'Nunito', sans-serif;color: #343c47">{{$certificado['nombres']}}</div>
     <div style="border: 1px solid red;position: absolute;top: 450px;left: 100px;text-align: center;font-size: 0.5em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
-        Por su participación en calidad de ORGANIZADOR de las II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022” desarrollado del 16 al 18 de noviembre de 2022, con una carga horaria académica de 32 horas lectivas.
+        Por su participación en calidad de {{$certificado['tipo']}} de las II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022” desarrollado del 16 al 18 de noviembre de 2022, con una carga horaria académica de 32 horas lectivas.
+    </div>
+    <div style="border: 1px solid red;position: absolute;top: 450px;left: 100px;text-align: center;font-size: 0.5em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
+        Oruro, Noviembre de 2022
+    </div>
+    <div style="border: 1px solid red;position: absolute;top: 450px;left: 100px;text-align: center;font-size: 0.5em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
+        <table style="width: 100%">
+            <tr>
+                <td>MSc. Ing. Gregorio Fernando Ureña Merida<br>COORDINADOR ACADEMIA REGIONAL<br>CISCO SIS-FNI-UTO</td>
+                <td>MSc. Ing. Franz Chinche Imaña<br>DIRECTOR DE CARRERA<br>ING. DE SISTEMAS E ING. INFORMATICA</td>
+                <td>MCs. Ing. Julio Cesar Bermudez Vargas<br>VICEDECANO<br>FACULTAD NACIONAL DE INGENIERIA</td>
+            </tr>
+        </table>
     </div>
     <img src="data:image/png;base64, {!! $certificado['qr'] !!}" style="border:2px solid white;position: absolute;top: 575px;right: 150px;width: 90px;height: 90px">
     <div class="page_break"></div>
