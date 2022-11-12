@@ -19,7 +19,10 @@
 <body>
 @foreach($certificados as $certificado)
     <img src="certificado.jpg" style=" position: absolute;top: 5px;left: 5px;width: 1036px;height: 800px" >
-    <div style="border: 0px solid red;position: absolute;top: 310px;left: 100px;text-align: center;font-size: 2.5em; font-weight: bold;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">{{$certificado['nombres']}}</div>
+    <div style="border: 1px solid red;position: absolute;top: 310px;left: 100px;text-align: center;font-size: 2.5em; font-weight: bold;width: 850px;height: 35px;font-family: 'Nunito', sans-serif;color: #343c47">{{$certificado['nombres']}}</div>
+    <div style="border: 1px solid red;position: absolute;top: 450px;left: 100px;text-align: center;font-size: 0.5em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
+        Por su participación en calidad de ORGANIZADOR de las II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022” desarrollado del 16 al 18 de noviembre de 2022, con una carga horaria académica de 32 horas lectivas.
+    </div>
     <img src="data:image/png;base64, {!! $certificado['qr'] !!}" style="border:2px solid white;position: absolute;top: 575px;right: 150px;width: 90px;height: 90px">
     <div class="page_break"></div>
 {{--    @if($loop->index%2==0)--}}
