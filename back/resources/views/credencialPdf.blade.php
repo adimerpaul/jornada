@@ -22,7 +22,7 @@
 <img src="imagenes/{{$credencial['foto']}}" style="position: absolute;top: 95px;left: 112px;width: 80px;height: 80px;border-radius: 40px" >
 <div style="text-align: center;position: absolute;top: 200px;left: 45px;font-size: 14px; font-weight: bold;width: 210px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['nombres']}}</div>
 <div style="text-align: center;position: absolute;top: 255px;left: 45px;font-size: 14px; font-weight: bold;width: 210px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['tipo']}}</div>
-<img src="data:image/png;base64, {!! $credencial['qr'] !!}" style="background : white ; border:2px solid white;position: absolute;top: 305px;left: 60px;width: 150px;height: 60px">
+<img src="data:image/png;base64, {!! $credencial['qr'] !!}" style="background : white ; border:2px solid white;position: absolute;top: 285px;left: 60px;width: 160px;height: 50px">
 {{--<div style="color: #a0aec0;position: absolute;top: 350px;left: 915px;width: 10px;height: 10px">{{$credencial['id']}}</div>--}}
 <div class="page_break"></div>
 @endforeach
