@@ -81,7 +81,7 @@ export default {
         // this.certificado=false
         // this.cd=false
         this.cupo.materials.forEach(r => {
-            if(r.nombre=='CREDENCIAL') this.credencial=r.estado==1?true:false
+            if(r.nombre=='CREDENCIAL Y PORTA CREDENCIAL') this.credencial=r.estado==1?true:false
             if(r.nombre=='FOLDER') this.folder=r.estado==1?true:false
             if(r.nombre=='BARBIJO') this.barbijo=r.estado==1?true:false
             if(r.nombre=='CERTIFICADO') this.certificado=r.estado==1?true:false

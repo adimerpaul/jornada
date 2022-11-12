@@ -36,59 +36,145 @@ class MaterialController extends Controller
      * @param  \App\Http\Requests\StoreMaterialRequest  $request
      * @return \Illuminate\Http\Response
      */
+    public function register($material, $request){
+
+    }
     public function store(StoreMaterialRequest $request)
     {
-        //
-        $request->id;
-        $mat1=Material::where('cupo_id',$request->id)->where('nombre','CREDENCIAL')->first();
-        if(!$mat1){ $mat1=DB::table('materials')->insert(['nombre'=>'CREDENCIAL','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
-        $mat2=Material::where('cupo_id',$request->id)->where('nombre','BARBIJO')->first();
-        if(!$mat2){ $mat2=DB::table('materials')->insert(['nombre'=>'BARBIJO','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
-        $mat3=Material::where('cupo_id',$request->id)->where('nombre','FOLDER')->first();
-        if(!$mat3){ $mat3=DB::table('materials')->insert(['nombre'=>'FOLDER','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
-        $mat4=Material::where('cupo_id',$request->id)->where('nombre','CERTIFICADO')->first();
-        if(!$mat4){ $mat4=DB::table('materials')->insert(['nombre'=>'CERTIFICADO','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
-        $mat5=Material::where('cupo_id',$request->id)->where('nombre','CD')->first();
-        if(!$mat5){ $mat5=DB::table('materials')->insert(['nombre'=>'CD','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
-        $mat6=Material::where('cupo_id',$request->id)->where('nombre','BOLIGRAFO')->first();
-        if(!$mat6){ $mat6=DB::table('materials')->insert(['nombre'=>'BOLIGRAFO','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
 
-        if($request->credencial && $mat1->estado==0){
-            $mat1->fecha=$request->fecha;
-            $mat1->hora=$request->hora;
-            $mat1->estado=$request->credencial;
-            $mat1->save();
+
+        $materiales= Material::where('cupo_id', $request->id)->get()->count();
+
+        if ($materiales == 0) {
+            $material = new Material();
+            $material->nombre = "CREDENCIAL Y PORTA CREDENCIAL";
+            $material->fecha=date('Y-m-d');
+            $material->hora=date('H:i:s');
+            $material->estado=$request->credencial;
+            $material->cupo_id=$request->id;
+            $material->save();
+            $material = new Material();
+            $material->nombre = "FOLDER";
+            $material->fecha=date('Y-m-d');
+            $material->hora=date('H:i:s');
+            $material->estado=$request->folder;
+            $material->cupo_id=$request->id;
+            $material->save();
+            $material = new Material();
+            $material->nombre = "BOLIGRAFO";
+            $material->fecha=date('Y-m-d');
+            $material->hora=date('H:i:s');
+            $material->estado=$request->boligrafo;
+            $material->cupo_id=$request->id;
+            $material->save();
+            $material = new Material();
+            $material->nombre = "BARBIJO";
+            $material->fecha=date('Y-m-d');
+            $material->hora=date('H:i:s');
+            $material->estado=$request->barbijo;
+            $material->cupo_id=$request->id;
+            $material->save();
+            $material = new Material();
+            $material->nombre = "CERTIFICADO";
+            $material->fecha=date('Y-m-d');
+            $material->hora=date('H:i:s');
+            $material->estado=$request->certificado;
+            $material->cupo_id=$request->id;
+            $material->save();
+            $material = new Material();
+            $material->nombre = "CD";
+            $material->fecha=date('Y-m-d');
+            $material->hora=date('H:i:s');
+            $material->estado=$request->cd;
+            $material->cupo_id=$request->id;
+            $material->save();
+        }else{
+            $material= Material::whereCupo_id($request->id)->whereNombre("CREDENCIAL Y PORTA CREDENCIAL")->first();
+            error_log($material);
+            if ($material->estado==0 && $request->credencial) {
+                $material->estado=true;
+                $material->save();
+            }
+            $material= Material::whereCupo_id($request->id)->whereNombre("FOLDER")->first();
+            if ($material->estado==0 && $request->folder) {
+                $material->estado=true;
+                $material->save();
+            }
+            $material= Material::whereCupo_id($request->id)->whereNombre("BOLIGRAFO")->first();
+            if ($material->estado==0 && $request->boligrafo) {
+                $material->estado=true;
+                $material->save();
+            }
+            $material= Material::whereCupo_id($request->id)->whereNombre("BARBIJO")->first();
+            if ($material->estado==0 && $request->barbijo) {
+                $material->estado=true;
+                $material->save();
+            }
+            $material= Material::whereCupo_id($request->id)->whereNombre("CERTIFICADO")->first();
+            if ($material->estado==0 && $request->certificado) {
+                $material->estado=true;
+                $material->save();
+            }
+            $material= Material::whereCupo_id($request->id)->whereNombre("CD")->first();
+            if ($material->estado==0 && $request->cd) {
+                $material->estado=true;
+                $material->save();
+            }
         }
-        if($request->barbijo && $mat2->estado==0){
-            $mat2->fecha=$request->fecha;
-            $mat2->hora=$request->hora;
-            $mat2->estado=$request->barbijo;
-            $mat2->save();
-        }
-        if( $request->folder && $mat3->estado==0){
-            $mat3->fecha=$request->fecha;
-            $mat3->hora=$request->hora;
-            $mat3->estado=$request->folder;
-            $mat3->save();
-        }
-        if( $request->certificado && $mat4->estado==0){
-            $mat4->fecha=$request->fecha;
-            $mat4->hora=$request->hora;
-            $mat4->estado=$request->certificado;
-            $mat4->save();
-        }
-        if( $request->cd && $mat5->estado==0){
-            $mat5->fecha=$request->fecha;
-            $mat5->hora=$request->hora;
-            $mat5->estado=$request->cd;
-            $mat5->save();
-        }
-        if( $request->boligrafo && $mat6->estado==0){
-            $mat6->fecha=$request->fecha;
-            $mat6->hora=$request->hora;
-            $mat6->estado=$request->boligrafo;
-            $mat6->save();
-        }
+
+
+
+        //
+//        $request->id;
+//        $mat1=Material::where('cupo_id',$request->id)->where('nombre','CREDENCIAL')->first();
+//        if(!$mat1){ $mat1=DB::table('materials')->insert(['nombre'=>'CREDENCIAL','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
+//        $mat2=Material::where('cupo_id',$request->id)->where('nombre','BARBIJO')->first();
+//        if(!$mat2){ $mat2=DB::table('materials')->insert(['nombre'=>'BARBIJO','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
+//        $mat3=Material::where('cupo_id',$request->id)->where('nombre','FOLDER')->first();
+//        if(!$mat3){ $mat3=DB::table('materials')->insert(['nombre'=>'FOLDER','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
+//        $mat4=Material::where('cupo_id',$request->id)->where('nombre','CERTIFICADO')->first();
+//        if(!$mat4){ $mat4=DB::table('materials')->insert(['nombre'=>'CERTIFICADO','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
+//        $mat5=Material::where('cupo_id',$request->id)->where('nombre','CD')->first();
+//        if(!$mat5){ $mat5=DB::table('materials')->insert(['nombre'=>'CD','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
+//        $mat6=Material::where('cupo_id',$request->id)->where('nombre','BOLIGRAFO')->first();
+//        if(!$mat6){ $mat6=DB::table('materials')->insert(['nombre'=>'BOLIGRAFO','fecha'=>$request->fecha,'hora'=>$request->hora,'cupo_id'=>$request->id]);}
+//
+//        if($request->credencial && $mat1->estado==0){
+//            $mat1->fecha=$request->fecha;
+//            $mat1->hora=$request->hora;
+//            $mat1->estado=$request->credencial;
+//            $mat1->save();
+//        }
+//        if($request->barbijo && $mat2->estado==0){
+//            $mat2->fecha=$request->fecha;
+//            $mat2->hora=$request->hora;
+//            $mat2->estado=$request->barbijo;
+//            $mat2->save();
+//        }
+//        if( $request->folder && $mat3->estado==0){
+//            $mat3->fecha=$request->fecha;
+//            $mat3->hora=$request->hora;
+//            $mat3->estado=$request->folder;
+//            $mat3->save();
+//        }
+//        if( $request->certificado && $mat4->estado==0){
+//            $mat4->fecha=$request->fecha;
+//            $mat4->hora=$request->hora;
+//            $mat4->estado=$request->certificado;
+//            $mat4->save();
+//        }
+//        if( $request->cd && $mat5->estado==0){
+//            $mat5->fecha=$request->fecha;
+//            $mat5->hora=$request->hora;
+//            $mat5->estado=$request->cd;
+//            $mat5->save();
+//        }
+//        if( $request->boligrafo && $mat6->estado==0){
+//            $mat6->fecha=$request->fecha;
+//            $mat6->hora=$request->hora;
+//            $mat6->estado=$request->boligrafo;
+//            $mat6->save();
+//        }
         $cupo=Cupo::where('id',$request->id)->with('materials')->first();
         return $cupo;
     }
