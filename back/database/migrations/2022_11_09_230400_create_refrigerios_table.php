@@ -19,8 +19,7 @@ return new class extends Migration
             $table->time('hora');
             $table->string('turno');
             $table->unsignedBigInteger('cupo_id');
-            $table->foreign('cupo_id')->references('id')->on('cupos');
-         
+            $table->foreign('cupo_id')->references('id')->on('cupos');         
             $table->timestamps();
         });
     }

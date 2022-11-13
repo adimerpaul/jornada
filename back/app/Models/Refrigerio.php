@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Refrigerio extends Model
 {
     use HasFactory;
+    protected $fillable=[
+    'fecha',
+    'hora',
+    'turno',
+    'cupo_id',
+    ];
 }
