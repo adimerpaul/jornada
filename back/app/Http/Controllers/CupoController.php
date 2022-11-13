@@ -71,7 +71,25 @@ class CupoController extends Controller
     public function certificadoPdf(Request $request){
         $data=[];
         foreach ($request->all() as $value) {
-            $png = QrCode::format('png')->size(250)->generate($value['nombres'].' '.$value['ci']);
+            $tip='';
+            switch ($alue['tipo']) {
+                case 'PARTICIPANTE':
+                    $tip='par';
+                    break;
+                    case 'EXPOSITOR':
+                        $tip='exp';
+                        break;
+                        case 'ORGANIZADOR':
+                            case 'DOCENTE':
+                        $tip='org';
+                        # code...
+                            break;
+                default:
+                    # code...
+                    $tip='par';
+                    break;
+            }
+            $png = QrCode::format('png')->size(250)->generate('https://certificados.sistemas.edu.bo/jtc2022'.$tip.'/'.$value['ci']);
             $png = base64_encode($png);
             $value['qr']=$png;
             $data[]=$value;

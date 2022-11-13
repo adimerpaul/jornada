@@ -11,6 +11,7 @@
             padding: 0px;
             margin: 0px;
             border: 0px;
+            font-family:"Calibri, sans-serif";
         }
         .page_break { page-break-before: always; }
 
@@ -35,7 +36,7 @@
             </tr>
         </table>
     </div>
-    <img src="data:image/png;base64, {!! $certificado['qr'] !!}" style="border:2px solid white;position: absolute;top: 600px;right: 150px;width: 90px;height: 90px">
+    <img src="data:image/png;base64, {!! $certificado['qr'] !!}" style="border:2px solid white;position: absolute;top: 600px;right: 450px;width: 90px;height: 90px">
     <div class="page_break"></div>
 {{--    @if($loop->index%2==0)--}}
 {{--        <img src="folleto.jpg" style="  position: absolute;top: 5px;left: 5px;width: 518px;height: 800px" >--}}
