@@ -72,7 +72,7 @@ class CupoController extends Controller
         $data=[];
         foreach ($request->all() as $value) {
             $tip='';
-            switch ($alue['tipo']) {
+            switch ($value['tipo']) {
                 case 'PARTICIPANTE':
                     $tip='par';
                     break;
