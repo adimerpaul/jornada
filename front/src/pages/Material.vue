@@ -123,9 +123,6 @@ export default {
           let materiales = ''
           student.materials.forEach(r => {
             if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
-            if(r.nombre=='CREDENCIAL')
-            materiales += r.nombre + '-Portacredencial + '
-            else
             materiales += r.nombre + ' + '
           })
           const d = new Printd()
@@ -203,11 +200,9 @@ export default {
           let materiales = ''
           student.materials.forEach(r => {
             if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
-            if(r.nombre=='CREDENCIAL')
-            materiales += r.nombre + '-Portacredencial  '
-            else
-            materiales += r.nombre + '  '
+            materiales += r.nombre + '  +'
           })
+          console.log('asdsa')
           const d = new Printd()
           let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
           document.getElementById('myelement').innerHTML = `
@@ -235,7 +230,7 @@ export default {
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
-          if(materiales!='')
+          // if(materiales!='')
           d.print( document.getElementById('myelement') )
           // this.credencial = false
           // this.folder = false

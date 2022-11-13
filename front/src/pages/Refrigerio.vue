@@ -1,8 +1,21 @@
 <template>
   <q-page>
+
     <q-card>
       <q-card-section>
         <div class="row">
+            <div class="col-6">
+              <small class="text-bold text-subtitle1">Fecha actual:</small> {{ fechaActual }}
+            </div>
+          <div class="col-6">
+            <q-toggle
+              :label="turno"
+              color="primary"
+              false-value="MAÑANA"
+              true-value="TARDE"
+              v-model="turno"
+            />
+          </div>
           <div class="col-12 q-px-lg">
             <q-form @submit.prevent="refrigerioInsert">
               <q-input label="Colocar el lector"   v-model="ci" outlined />
@@ -11,6 +24,38 @@
         </div>
       </q-card-section>
     </q-card>
+    <div class="row">
+      <div class="col-12 col-sm-4 q-pa-md">
+        <q-card class="bg-green">
+          <q-card-section>
+            <div class="text-h6 text-white">Mañana <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
+          </q-card-section>
+          <q-card-section>
+            <div class="text-h2 text-white">{{manana}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="col-12 col-sm-4 q-pa-md">
+        <q-card class="bg-red">
+          <q-card-section>
+            <div class="text-h6 text-white">Tarde <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
+          </q-card-section>
+          <q-card-section>
+            <div class="text-h2 text-white">{{tarde}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="col-12 col-sm-4 q-pa-md">
+        <q-card class="bg-blue">
+          <q-card-section>
+            <div class="text-h6 text-white">Inscritos <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
+          </q-card-section>
+          <q-card-section>
+            <div class="text-h2 text-white">{{total}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+    </div>
     <div id="myelement" class="hidden"></div>
   </q-page>
 </template>
@@ -24,13 +69,41 @@ export default {
   data() {
     return {
       ci: '',
+      turno: 'MAÑANA',
+      fechaActual: date.formatDate(new Date(), 'DD/MM/YYYY'),
+      total:0,
+      manana:0,
+      tarde:0,
     }
   },
+  created() {
+  this.totalreg()
+  },
   methods: {
+    totalreg(){
+      this.$api.post('totalreg',{
+        fecha: date.formatDate(new Date(), 'YYYY-MM-DD'),
+      })
+        .then(response => {
+          console.log(response.data)
+          this.total = response.data[0].total
+          this.manana = response.data[0].manana
+          this.tarde = response.data[0].tarde
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     refrigerioInsert() {
       this.$q.loading.show()
-      this.$api.post('updateMaterial/'+this.ci)
+      this.$api.post('refrigerio/',{
+        ci: this.ci,
+        turno: this.turno,
+        fecha: date.formatDate(new Date(), 'YYYY-MM-DD'),
+        hora: date.formatDate(new Date(), 'HH:mm:ss')
+      })
         .then((response) => {
+          this.totalreg()
           let student = response.data
           this.$q.loading.hide()
           this.$q.notify({
@@ -62,21 +135,51 @@ export default {
           <div class="center bold"> <b>TICKET REFRIGERIO</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
+          <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
           d.print( document.getElementById('myelement') )
+
+          const e = new Printd()
+          document.getElementById('myelement').innerHTML = `
+<style>
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.bold {
+  text-weight: bold;
+}
+</style>
+          <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
+          <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>TICKET REFRIGERIO</b></div>
+          <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
+          <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
+          <div class="left "> <b>Turno: </b> ${this.turno}</div>
+          <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
+`
+          e.print( document.getElementById('myelement') )
           // this.credencial = false
           // this.folder = false
           // this.barbijo = false
           // this.certificado = false
           this.ci = ''
-        })
+        }).finally(() => {
+        this.$q.loading.hide()
+
+      })
         .catch((error) => {
           this.$q.loading.hide()
           this.$q.notify({
-            message: 'Error al entregar material',
+            message: error.response.data.message,
             color: 'red-4',
             textColor: 'white',
             icon: 'error',

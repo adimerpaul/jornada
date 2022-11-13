@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cupo;
 use App\Models\Refrigerio;
 use App\Http\Requests\StoreRefrigerioRequest;
 use App\Http\Requests\UpdateRefrigerioRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class RefrigerioController extends Controller
 {
@@ -35,14 +39,16 @@ class RefrigerioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function totalreg(Request $request){
+//        return DB::select("SELECT turno,count(*) total FROM `refrigerios` WHERE fecha='$request->fecha' GROUP BY turno;");
         return DB::SELECT("SELECT (select count(*) from cupos where ci is not null) total,
-         (select COUNT(*) from refrigerios where turno='$request->turno' and date(fecha)='$request->fecha') refri ");
-        
+         (select COUNT(*) from refrigerios where turno='MAÑANA' and date(fecha)='$request->fecha') manana,
+(select COUNT(*) from refrigerios where turno='TARDE' and date(fecha)='$request->fecha') tarde");
+
     }
     public function store(StoreRefrigerioRequest $request)
     {
         //
-        $cupo=Cupo::where('ci',$ci)->first();
+        $cupo=Cupo::where('ci',$request->ci)->first();
         $refrigerio=Refrigerio::where('cupo_id',$cupo->id)->where('turno',$request->turno)->where('fecha',$request->fecha)->get();
         if(sizeof($refrigerio)==0){
             $refri=new Refrigerio;
@@ -51,6 +57,7 @@ class RefrigerioController extends Controller
             $refri->turno=$request->turno;
             $refri->cupo_id=$cupo->id;
             $refri->save();
+            return $cupo;
         }
         else{
             return response()->json(['message' => 'Se encuentra registrado'], 500);
