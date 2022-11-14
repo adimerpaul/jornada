@@ -126,7 +126,7 @@
                 Usuarios
               </q-item-section>
             </q-item>
-            <q-item clickable exact to="cupo" v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'||store.user.role=='ACREDITADOR'"  active-class="bg-blue-grey-6 text-white">
+            <q-item clickable exact to="cupo" v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'||store.user.role=='ACREDITACION'"  active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
                 <q-icon name="o_confirmation_number" />
               </q-item-section>
@@ -134,7 +134,7 @@
                 Cupos
               </q-item-section>
             </q-item>
-            <q-item clickable exact to="credencial"  v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'||store.user.role=='ACREDITADOR'" active-class="bg-blue-grey-6 text-white">
+            <q-item clickable exact to="credencial"  v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'||store.user.role=='ACREDITACION'" active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
                 <q-icon name="o_credit_card" />
               </q-item-section>
@@ -142,7 +142,7 @@
                 Credenciales
               </q-item-section>
             </q-item>
-            <q-item clickable exact to="certificado"  v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'||store.user.role=='ACREDITADOR'" active-class="bg-blue-grey-6 text-white">
+            <q-item clickable exact to="certificado"  v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'||store.user.role=='ACREDITACION'" active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
                 <q-icon name="o_verified_user" />
               </q-item-section>
