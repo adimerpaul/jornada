@@ -48,9 +48,7 @@ class MaterialController extends Controller
         (select count(*) from materials where nombre='BOLIGRAFO' and estado=true and user_id=".$request->user()->id." ) cantbol,
         (select count(*) from materials where nombre='BARBIJO' and estado=true and user_id=".$request->user()->id." ) cantbar,
         (select count(*) from materials where nombre='CERTIFICADO' and estado=true and user_id=".$request->user()->id." ) cantcert,
-        (select count(*) from materials where nombre='CD' and estado=true and user_id=".$request->user()->id." ) cantcd,
-
-        ");
+        (select count(*) from materials where nombre='CD' and estado=true and user_id=".$request->user()->id." ) cantcd");
     }
 
     public function store(StoreMaterialRequest $request)
