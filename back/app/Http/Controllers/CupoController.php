@@ -70,11 +70,12 @@ class CupoController extends Controller
     }
     public function certificadoPdf(Request $request){
         $data=[];
-        foreach ($request->all() as $value) {
+        foreach ($request->lista as $value) {
             $tip='';
             switch ($value['tipo']) {
                 case 'PARTICIPANTE':
                     $tip='par';
+                    $titulo='CERTIFICADO DE PARTICIPACION A';
                     break;
                     case 'EXPOSITOR':
                         $tip='exp';
@@ -82,6 +83,7 @@ class CupoController extends Controller
                         case 'ORGANIZADOR':
                             case 'DOCENTE':
                         $tip='org';
+                        $titulo='CERTIFICADO DE RECONOCIMIENTO A';
                         # code...
                             break;
                 default:
@@ -91,6 +93,8 @@ class CupoController extends Controller
             }
             $png = QrCode::format('png')->size(250)->generate('https://certificados.sistemas.edu.bo/jtc2022'.$tip.'/'.$value['ci']);
             $png = base64_encode($png);
+            $value['titulo']=$titulo;
+            $value['fondo']=$request->fondo;
             $value['qr']=$png;
             $data[]=$value;
         }
