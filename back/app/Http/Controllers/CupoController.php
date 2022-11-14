@@ -99,6 +99,7 @@ class CupoController extends Controller
             }
             $png = QrCode::format('png')->size(250)->generate('https://certificados.sistemas.edu.bo/jtc2022'.$tip.'/'.$value['ci']);
             $png = base64_encode($png);
+            $value['url']='https://certificados.sistemas.edu.bo/jtc2022'.$tip.'/'.$value['ci'];
             $value['titulo']=$titulo;
             $value['fondo']=$request->fondo;
             $value['qr']=$png;

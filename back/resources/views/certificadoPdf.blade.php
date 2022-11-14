@@ -40,6 +40,8 @@
         </table>
     </div>
     <img src="data:image/png;base64, {!! $certificado['qr'] !!}" style="border:2px solid white;position: absolute;top: 600px;right: 450px;width: 90px;height: 90px">
+    <div style="border: 0px solid red;position: absolute;top: 700px;left: 120px;text-align: center;font-size: 0.5em; font-weight: bold;width: 850px;height: 35px;font-family: 'Nunito', sans-serif;color: #343c47">A: {{$certificado['url']}}</div>
+
     <div class="page_break"></div>
 {{--    @if($loop->index%2==0)--}}
 {{--        <img src="folleto.jpg" style="  position: absolute;top: 5px;left: 5px;width: 518px;height: 800px" >--}}
