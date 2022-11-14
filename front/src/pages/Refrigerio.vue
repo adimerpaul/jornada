@@ -20,6 +20,7 @@
             <q-form @submit.prevent="refrigerioInsert">
               <q-input label="Colocar el lector"   v-model="ci" outlined />
             </q-form>
+            <q-btn color="accent" icon="print" label="Re Impresion" @click="refrigerioPrint" />
           </div>
         </div>
       </q-card-section>
@@ -116,7 +117,7 @@ export default {
       })
         .then((response) => {
           this.totalreg()
-          let student = response.data
+          let student = response.data.cupo
           this.$q.loading.hide()
           this.$q.notify({
             message: 'Se ha entregado el refrigerio',
@@ -157,7 +158,7 @@ export default {
           <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
           <div class="left "> <b>Refrigerio: </b> ${re}</div>
-          
+
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
           d.print( document.getElementById('myelement') )
@@ -208,6 +209,106 @@ export default {
           })
         })
     },
+    refrigerioPrint() {
+      if(this.ci==undefined || this.ci=='')
+      return false
+      this.$q.loading.show()
+      this.$api.post('printRefri/',{
+        ci: this.ci,
+        turno: this.turno,
+        fecha: date.formatDate(new Date(), 'YYYY-MM-DD'),
+      })
+        .then((response) => {
+          console.log(response.data)
+          //return false
+          let student = response.data.cupo
+          let refrigerio=response.data
+          let user=response.data.user
+          this.$q.loading.hide()
+          const d = new Printd()
+          let re=''
+          this.entrega.forEach(r => {
+            if(r.fecha==refrigerio.fecha && r.turno==refrigerio.turno){
+              re=r.refrig
+            }
+          });
+
+          document.getElementById('myelement').innerHTML = `
+              <style>
+              .center {
+                text-align: center;
+              }
+              .left {
+                text-align: left;
+              }
+              .right {
+                text-align: right;
+              }
+              .bold {
+                text-weight: bold;
+              }
+              </style>
+          <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
+          <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>TICKET REFRIGERIO REIMPRESION</b></div>
+          <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
+          <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
+          <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
+          <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} ${refrigerio.hora}</div>
+          <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          <div class="left "> <b>User: </b> ${user.name}</div>
+
+          <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
+          `
+          d.print( document.getElementById('myelement') )
+
+          const e = new Printd()
+          document.getElementById('myelement').innerHTML = `
+          <style>
+          .center {
+            text-align: center;
+          }
+          .left {
+            text-align: left;
+          }
+          .right {
+            text-align: right;
+          }
+          .bold {
+            text-weight: bold;
+          }
+          </style>
+          <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
+          <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>TICKET REFRIGERIO REIMPRESION</b></div>
+          <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
+          <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
+          <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
+          <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} ${refrigerio.hora}</div>
+          <div class="left "> <b>Refrigerio: </b> ${re}</div>
+`
+          e.print( document.getElementById('myelement') )
+          // this.credencial = false
+          // this.folder = false
+          // this.barbijo = false
+          // this.certificado = false
+          this.ci = ''
+        }).finally(() => {
+        this.$q.loading.hide()
+
+      })
+        .catch((error) => {
+          this.$q.loading.hide()
+          this.$q.notify({
+            message: error.message,
+            color: 'red-4',
+            textColor: 'white',
+            icon: 'error',
+            position: 'top',
+          })
+        })
+    },
+
   },
 }
 </script>

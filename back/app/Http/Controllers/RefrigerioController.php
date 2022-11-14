@@ -41,8 +41,8 @@ class RefrigerioController extends Controller
     public function totalreg(Request $request){
 //        return DB::select("SELECT turno,count(*) total FROM `refrigerios` WHERE fecha='$request->fecha' GROUP BY turno;");
         return DB::SELECT("SELECT (select count(*) from cupos where ci is not null) total,
-         (select COUNT(*) from refrigerios where turno='MAÑANA' and date(fecha)='$request->fecha') manana,
-(select COUNT(*) from refrigerios where turno='TARDE' and date(fecha)='$request->fecha') tarde");
+         (select COUNT(*) from refrigerios where turno='MAÑANA' and date(fecha)='$request->fecha' AND user_id=".$request->user()->id.") manana,
+        (select COUNT(*) from refrigerios where turno='TARDE' and date(fecha)='$request->fecha' AND user_id=".$request->user()->id.") tarde");
 
     }
     public function store(StoreRefrigerioRequest $request)
@@ -56,8 +56,24 @@ class RefrigerioController extends Controller
             $refri->hora=$request->hora;
             $refri->turno=$request->turno;
             $refri->cupo_id=$cupo->id;
+            $refri->user_id=$request->user()->id;
             $refri->save();
-            return $cupo;
+            $refu=Refrigerio::where('id',$refri->id)->with('cupo')->with('user')->first();
+            return $refu;
+        }
+        else{
+            return response()->json(['message' => 'Se encuentra registrado'], 500);
+
+        }
+    }
+
+    public function printRefri(Request $request)
+    {
+        //
+        $cupo=Cupo::where('ci',$request->ci)->first();
+        $refrigerio=Refrigerio::with('cupo')->with('user')->where('cupo_id',$cupo->id)->where('turno',$request->turno)->where('fecha',$request->fecha)->get();
+        if(sizeof($refrigerio)>0){
+            return $refrigerio[0];
         }
         else{
             return response()->json(['message' => 'Se encuentra registrado'], 500);

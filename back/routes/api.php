@@ -33,6 +33,7 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::apiResource('user', \App\Http\Controllers\UserController::class);
     Route::apiResource('refrigerio', \App\Http\Controllers\RefrigerioController::class);
     Route::post('totalreg', [\App\Http\Controllers\RefrigerioController::class, 'totalreg']);
+    Route::post('printRefri', [\App\Http\Controllers\RefrigerioController::class, 'printRefri']);
 
     Route::apiResource('material', \App\Http\Controllers\MaterialController::class);
     Route::post('cupoPdf', [\App\Http\Controllers\CupoController::class, 'cupoPdf']);
