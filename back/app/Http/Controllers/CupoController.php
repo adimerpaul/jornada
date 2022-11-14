@@ -109,7 +109,7 @@ class CupoController extends Controller
     public function credencialPdf(Request $request){
         $data=[];
         $generator = new BarcodeGeneratorPNG();
-        foreach ($request->all() as $value) {
+        foreach ($request->lista as $value) {
 //            $png = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($value['ci'], $generator::TYPE_CODE_128)) . '">';
             $value['qr']=base64_encode($generator->getBarcode($value['ci']==null?'123':$value['ci'], $generator::TYPE_CODE_128));
             $value['fondo']=$request->fondo;
