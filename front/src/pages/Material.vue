@@ -141,7 +141,7 @@ export default {
         this.ncred=res.data[0].cantcred
         this.nfolder=res.data[0].cantfolder
         this.nbarbijo=res.data[0].cantbar
-        this.ncert=res.data[0].cantcerd
+        this.ncert=res.data[0].cantcert
         this.ncd=res.data[0].cantcd
         this.nbol=res.data[0].cantbol
       })
