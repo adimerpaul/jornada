@@ -138,12 +138,12 @@ export default {
     totalreg(){
       this.$api.post('totalmaterial').then(res=>{
         console.log(res.data)
-        this.ncred=res.data.cantcred
-        this.nfolder=res.data.cantfolder
-        this.nbarbijo=res.data.cantbar
-        this.ncert=res.data.cantcerd
-        this.ncd=res.data.cantcd
-        this.nbol=res.data.cantbol
+        this.ncred=res.data[0].cantcred
+        this.nfolder=res.data[0].cantfolder
+        this.nbarbijo=res.data[0].cantbar
+        this.ncert=res.data[0].cantcerd
+        this.ncd=res.data[0].cantcd
+        this.nbol=res.data[0].cantbol
       })
     },
     BuscarCupo(){
