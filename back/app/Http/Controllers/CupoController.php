@@ -76,22 +76,25 @@ class CupoController extends Controller
             switch ($value['tipo']) {
                 case 'PARTICIPANTE':
                     $tip='par';
-                    $titulo='CERTIFICADO DE PARTICIPACION A';
+                    $titulo='CERTIFICADO DE PARTICIPACION';
                     break;
                     case 'EXPOSITOR':
                         $tip='exp';
-                        $titulo='CERTIFICADO DE RECONOCIMIENTO A';
+                        $titulo='CERTIFICADO DE RECONOCIMIENTO';
                         break;
                         case 'ORGANIZADOR':
-                            case 'DOCENTE':
                         $tip='org';
-                        $titulo='CERTIFICADO DE RECONOCIMIENTO A';
-                        # code...
+                        $titulo='CERTIFICADO DE RECONOCIMIENTO';
+                        break;
+                        case 'DOCENTE':
+                        $tip='org';
+                        $titulo='CERTIFICADO DE PARTICIPACION';
+                    # code...
                             break;
                 default:
                     # code...
                     $tip='par';
-                    $titulo='CERTIFICADO DE PARTICIPACION A';
+                    $titulo='CERTIFICADO DE PARTICIPACION';
                     break;
             }
             $png = QrCode::format('png')->size(250)->generate('https://certificados.sistemas.edu.bo/jtc2022'.$tip.'/'.$value['ci']);
