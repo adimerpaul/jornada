@@ -57,11 +57,10 @@ class CupoController extends Controller
     public function destroy(Cupo $cupo){$cupo->delete();return $cupo;}
     public function cupoPdf(Request $request){
         $data=[];
-        foreach ($request->lista as $value) {
+        foreach ($request->all() as $value) {
  
             $png = QrCode::format('png')->size(250)->generate(env('URL_FRONT').'registro/'.$value['codigo']);
             $png = base64_encode($png);
-            $value['fondo']=$request->fondo;
             $value['qr']=$png;
             $data[]=$value;
         }
@@ -113,6 +112,7 @@ class CupoController extends Controller
         foreach ($request->all() as $value) {
 //            $png = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($value['ci'], $generator::TYPE_CODE_128)) . '">';
             $value['qr']=base64_encode($generator->getBarcode($value['ci']==null?'123':$value['ci'], $generator::TYPE_CODE_128));
+            $value['fondo']=$request->fondo;
             $data[]=$value;
         }
         $pdf = app('dompdf.wrapper');
