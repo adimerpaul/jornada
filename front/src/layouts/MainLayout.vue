@@ -150,7 +150,7 @@
                 Certificados
               </q-item-section>
             </q-item>
-            <q-item clickable exact to="material" v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'" active-class="bg-blue-grey-6 text-white">
+            <q-item clickable exact to="material" v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='INSCRIPCION'||store.user.role=='ACREDITACION'" active-class="bg-blue-grey-6 text-white">
               <q-item-section avatar>
                 <q-icon name="o_category" />
               </q-item-section>
