@@ -75,6 +75,10 @@ export default {
       manana:0,
       tarde:0,
       entrega:[
+        {fecha:'2022-11-13',turno:'MAÑANA',refrig:"Mini Pizzitas (cada racion de 2 piezas) + refresco de 300ml"},
+        {fecha:'2022-11-13',turno:'TARDE',refrig:"Postre de Oreo (cada racion de 2 piezas, tamaño mediano) + Vaso de Café"},
+        {fecha:'2022-11-14',turno:'MAÑANA',refrig:"Mini Pizzitas (cada racion de 2 piezas) + refresco de 300ml"},
+        {fecha:'2022-11-14',turno:'TARDE',refrig:"Postre de Oreo (cada racion de 2 piezas, tamaño mediano) + Vaso de Café"},
         {fecha:'2022-11-16',turno:'MAÑANA',refrig:"Mini Pizzitas (cada racion de 2 piezas) + refresco de 300ml"},
         {fecha:'2022-11-16',turno:'TARDE',refrig:"Postre de Oreo (cada racion de 2 piezas, tamaño mediano) + Vaso de Café"},
         {fecha:'2022-11-17',turno:'MAÑANA',refrig:"Mini Hamburguezas (cada racion de 2 piezas, Pan, Carne especial, queso, Lechuga, tomate y cebolla caramelizada + refresco de 300ml"},
