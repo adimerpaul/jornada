@@ -137,6 +137,7 @@ export default {
   methods: {
     totalreg(){
       this.$api.post('totalmaterial').then(res=>{
+        console.log(res.data)
         this.ncred=res.data.cantcred
         this.nfolder=res.data.cantfolder
         this.nbarbijo=res.data.cantbar
