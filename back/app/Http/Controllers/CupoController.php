@@ -57,9 +57,11 @@ class CupoController extends Controller
     public function destroy(Cupo $cupo){$cupo->delete();return $cupo;}
     public function cupoPdf(Request $request){
         $data=[];
-        foreach ($request->all() as $value) {
+        foreach ($request->lista as $value) {
+ 
             $png = QrCode::format('png')->size(250)->generate(env('URL_FRONT').'registro/'.$value['codigo']);
             $png = base64_encode($png);
+            $value['fondo']=$request->fondo;
             $value['qr']=$png;
             $data[]=$value;
         }

@@ -18,7 +18,10 @@
 </head>
 <body>
 @foreach($credencials as $credencial)
+@if($credencial['fondo']=='SI')
 <img src="credencial.jpeg" style="  position: absolute;top: 0px;left: 0px;width: 8cm;height: 10cm" >
+    
+@endif
 <img src="imagenes/{{$credencial['foto']}}" style="position: absolute;top: 95px;left: 112px;width: 80px;height: 80px;border-radius: 40px" >
 <div style="text-align: center;position: absolute;top: 200px;left: 45px;font-size: 14px; font-weight: bold;width: 210px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['nombres']}}</div>
 <div style="text-align: center;position: absolute;top: 255px;left: 45px;font-size: 14px; font-weight: bold;width: 210px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['tipo']}}</div>

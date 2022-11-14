@@ -5,6 +5,8 @@
       :virtual-scroll-item-size="48"
       :selected-rows-label="getSelectedString" v-model:selected="selected" selection="multiple" dense :rows-per-page-options="[15,100,150,500]" :rows="cupos" :columns="cupoColumns" :filter="cupoSearch">
       <template v-slot:top-right>
+        <q-toggle v-model="fondo" true-value="SI" false-value="NO" :label="`${fondo} Fondo`"/>
+
         <q-btn flat round dense icon="o_print" @click="cupoPrint" />
         <q-btn flat round dense icon="refresh" @click="cupoGet();cupoSearch=''" />
         <q-input dense outlined placeholder="Buscar..." v-model="cupoSearch">
@@ -47,6 +49,7 @@ export default {
       selected: [],
       url: process.env.API,
       cupoSearch: '',
+      fondo:'NO',
       store:useCounterStore(),
       cupos: [],
       cupoColumns:[
@@ -192,7 +195,7 @@ export default {
       }
 
       this.$q.loading.show()
-      this.$api.post('credencialPdf',this.selected).then(response => {
+      this.$api.post('credencialPdf',{lista:this.selected,fondo:this.fondo}).then(response => {
         console.log(response.data);
         window.open(this.url+'credencialFile', '_blank');
         this.$q.notify({
