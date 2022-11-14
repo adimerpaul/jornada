@@ -79,6 +79,7 @@ class CupoController extends Controller
                     break;
                     case 'EXPOSITOR':
                         $tip='exp';
+                        $titulo='CERTIFICADO DE RECONOCIMIENTO A';
                         break;
                         case 'ORGANIZADOR':
                             case 'DOCENTE':
@@ -89,6 +90,7 @@ class CupoController extends Controller
                 default:
                     # code...
                     $tip='par';
+                    $titulo='CERTIFICADO DE PARTICIPACION A';
                     break;
             }
             $png = QrCode::format('png')->size(250)->generate('https://certificados.sistemas.edu.bo/jtc2022'.$tip.'/'.$value['ci']);
