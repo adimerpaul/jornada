@@ -7,6 +7,7 @@ use App\Models\Material;
 use App\Http\Requests\StoreMaterialRequest;
 use App\Http\Requests\UpdateMaterialRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class MaterialController extends Controller
 {
@@ -39,6 +40,19 @@ class MaterialController extends Controller
     public function register($material, $request){
 
     }
+
+    public function totalmaterial(Request $request){
+        return DB::SELECT("SELECT
+        (select count(*) from materials where nombre='CREDENCIAL Y PORTA CREDENCIAL' and estado=true and user_id=".$request->user()->id." ) cantcred,
+        (select count(*) from materials where nombre='FOLDER' and estado=true and user_id=".$request->user()->id." ) cantfolder,
+        (select count(*) from materials where nombre='BOLIGRAFO' and estado=true and user_id=".$request->user()->id." ) cantbol,
+        (select count(*) from materials where nombre='BARBIJO' and estado=true and user_id=".$request->user()->id." ) cantbar,
+        (select count(*) from materials where nombre='CERTIFICADO' and estado=true and user_id=".$request->user()->id." ) cantcert,
+        (select count(*) from materials where nombre='CD' and estado=true and user_id=".$request->user()->id." ) cantcd,
+
+        ");
+    }
+
     public function store(StoreMaterialRequest $request)
     {
 
@@ -52,6 +66,7 @@ class MaterialController extends Controller
             $material->hora=date('H:i:s');
             $material->estado=$request->credencial;
             $material->cupo_id=$request->id;
+            $material->user_id=$request->user()->id;
             $material->save();
             $material = new Material();
             $material->nombre = "FOLDER";
@@ -59,6 +74,7 @@ class MaterialController extends Controller
             $material->hora=date('H:i:s');
             $material->estado=$request->folder;
             $material->cupo_id=$request->id;
+            $material->user_id=$request->user()->id;
             $material->save();
             $material = new Material();
             $material->nombre = "BOLIGRAFO";
@@ -66,6 +82,7 @@ class MaterialController extends Controller
             $material->hora=date('H:i:s');
             $material->estado=$request->boligrafo;
             $material->cupo_id=$request->id;
+            $material->user_id=$request->user()->id;
             $material->save();
             $material = new Material();
             $material->nombre = "BARBIJO";
@@ -73,6 +90,7 @@ class MaterialController extends Controller
             $material->hora=date('H:i:s');
             $material->estado=$request->barbijo;
             $material->cupo_id=$request->id;
+            $material->user_id=$request->user()->id;
             $material->save();
             $material = new Material();
             $material->nombre = "CERTIFICADO";
@@ -80,6 +98,7 @@ class MaterialController extends Controller
             $material->hora=date('H:i:s');
             $material->estado=$request->certificado;
             $material->cupo_id=$request->id;
+            $material->user_id=$request->user()->id;
             $material->save();
             $material = new Material();
             $material->nombre = "CD";
@@ -87,38 +106,45 @@ class MaterialController extends Controller
             $material->hora=date('H:i:s');
             $material->estado=$request->cd;
             $material->cupo_id=$request->id;
+            $material->user_id=$request->user()->id;
             $material->save();
         }else{
             $material= Material::whereCupo_id($request->id)->whereNombre("CREDENCIAL Y PORTA CREDENCIAL")->first();
             error_log($material);
             if ($material->estado==0 && $request->credencial) {
                 $material->estado=true;
+                $material->user_id=$request->user()->id;
                 $material->save();
             }
             $material= Material::whereCupo_id($request->id)->whereNombre("FOLDER")->first();
             if ($material->estado==0 && $request->folder) {
                 $material->estado=true;
-                $material->save();
+            $material->user_id=$request->user()->id;
+            $material->save();
             }
             $material= Material::whereCupo_id($request->id)->whereNombre("BOLIGRAFO")->first();
             if ($material->estado==0 && $request->boligrafo) {
                 $material->estado=true;
-                $material->save();
+            $material->user_id=$request->user()->id;
+            $material->save();
             }
             $material= Material::whereCupo_id($request->id)->whereNombre("BARBIJO")->first();
             if ($material->estado==0 && $request->barbijo) {
                 $material->estado=true;
-                $material->save();
+            $material->user_id=$request->user()->id;
+            $material->save();
             }
             $material= Material::whereCupo_id($request->id)->whereNombre("CERTIFICADO")->first();
             if ($material->estado==0 && $request->certificado) {
                 $material->estado=true;
-                $material->save();
+            $material->user_id=$request->user()->id;
+            $material->save();
             }
             $material= Material::whereCupo_id($request->id)->whereNombre("CD")->first();
             if ($material->estado==0 && $request->cd) {
                 $material->estado=true;
-                $material->save();
+            $material->user_id=$request->user()->id;
+            $material->save();
             }
         }
 

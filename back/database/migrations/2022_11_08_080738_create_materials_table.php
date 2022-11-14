@@ -21,6 +21,8 @@ return new class extends Migration
             $table->boolean('estado')->default(0);
             $table->unsignedBigInteger('cupo_id');
             $table->foreign('cupo_id')->references('id')->on('cupos');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

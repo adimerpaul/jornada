@@ -13,6 +13,7 @@ class Material extends Model
         'fecha',
         'hora',
         'estado',
-        'cupo_id'
+        'cupo_id',
+        'user_id'
     ];
 }
