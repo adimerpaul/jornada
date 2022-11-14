@@ -74,6 +74,14 @@ export default {
       total:0,
       manana:0,
       tarde:0,
+      entrega:[
+        {fecha:'2022-11-16',turno:'MAÑANA',refrig:"Mini Pizzitas (cada racion de 2 piezas) + refresco de 300ml"},
+        {fecha:'2022-11-16',turno:'TARDE',refrig:"Postre de Oreo (cada racion de 2 piezas, tamaño mediano) + Vaso de Café"},
+        {fecha:'2022-11-17',turno:'MAÑANA',refrig:"Mini Hamburguezas (cada racion de 2 piezas, Pan, Carne especial, queso, Lechuga, tomate y cebolla caramelizada + refresco de 300ml"},
+        {fecha:'2022-11-17',turno:'TARDE',refrig:"Cupcakes (cada racion de 2 piezas, tamaño nornal, con relleno y decorado) + Vaso de Café"},
+        {fecha:'2022-11-18',turno:'MAÑANA',refrig:"Mini Sandwiich (cada racion de 2 piezas, Pan tostado, Lechuga, tomate, Filete de pollo, Jamons y Queso) + refresco de 300ml  "},
+        {fecha:'2022-11-18',turno:'TARDE',refrig:"Postre tres Leches (cada racion de 2 piezas, tamaño mediano) + Vaso de Café"},
+    ]
     }
   },
   created() {
@@ -115,6 +123,13 @@ export default {
           })
           const d = new Printd()
           let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
+          let re=''
+          this.entrega.forEach(r => {
+            if(r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD') && r.turno==this.turno){
+              re=r.refrig
+            }
+          });
+
           document.getElementById('myelement').innerHTML = `
 <style>
 .center {
@@ -137,7 +152,8 @@ export default {
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
-
+          <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
           d.print( document.getElementById('myelement') )
@@ -165,6 +181,7 @@ export default {
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
+          <div class="left "> <b>Refrigerio: </b> ${re}</div>
 `
           e.print( document.getElementById('myelement') )
           // this.credencial = false
