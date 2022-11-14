@@ -45,6 +45,8 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::post('validaCupon/{ci}', [\App\Http\Controllers\CupoController::class, 'validaCupon']);
     Route::post('rotateFoto', [\App\Http\Controllers\CupoController::class, 'rotateFoto']);
     Route::post('updateTipo', [\App\Http\Controllers\CupoController::class, 'updateTipo']);
+    Route::post('totalmaterial', [\App\Http\Controllers\MaterialController::class, 'totalmaterial']);
+
 
 
 });

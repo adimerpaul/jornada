@@ -39,6 +39,68 @@
             <q-btn color="accent" icon="print" label="Impresion" @click="impresion" />
           </div>
         </div>
+        <div class="row">
+      <div class="col-12 col-sm-4 q-pa-md">
+        <q-card class="bg-green">
+          <q-card-section>
+            <div class="text-h6 text-white">Credencial y Porta Credencial <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
+          </q-card-section>
+          <q-card-section>
+            <div class="text-h2 text-white">{{ncred}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="col-12 col-sm-4 q-pa-md">
+        <q-card class="bg-red">
+          <q-card-section>
+            <div class="text-h6 text-white">Folder <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
+          </q-card-section>
+          <q-card-section>
+            <div class="text-h2 text-white">{{nfolder}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="col-12 col-sm-4 q-pa-md">
+        <q-card class="bg-blue">
+          <q-card-section>
+            <div class="text-h6 text-white">Barbijo <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
+          </q-card-section>
+          <q-card-section>
+            <div class="text-h2 text-white">{{nbarbijo}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="col-12 col-sm-4 q-pa-md">
+        <q-card class="bg-blue">
+          <q-card-section>
+            <div class="text-h6 text-white">Boligrafo <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
+          </q-card-section>
+          <q-card-section>
+            <div class="text-h2 text-white">{{nbol}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="col-12 col-sm-4 q-pa-md">
+        <q-card class="bg-blue">
+          <q-card-section>
+            <div class="text-h6 text-white">Certificado <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
+          </q-card-section>
+          <q-card-section>
+            <div class="text-h2 text-white">{{ncert}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+      <div class="col-12 col-sm-4 q-pa-md">
+        <q-card class="bg-blue">
+          <q-card-section>
+            <div class="text-h6 text-white">CD <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
+          </q-card-section>
+          <q-card-section>
+            <div class="text-h2 text-white">{{ncd}}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+    </div>
       </q-card-section>
     </q-card>
 <div id="myelement" class="hidden"></div>
@@ -59,11 +121,30 @@ export default {
       certificado: false,
       cd: false,
       boligrafo: false,
+      ncred: 0,
+      nfolder: 0,
+      nbarbijo: 0,
+      ncert: 0,
+      ncd: 0,
+      nbol: 0,
       ci: '',
       cupo:{},
     }
   },
+  created(){
+    this.totalreg()
+  },
   methods: {
+    totalreg(){
+      this.$api.post('totalmaterial').then(res=>{
+        this.ncred=res.data.cantcred
+        this.nfolder=res.data.cantfolder
+        this.nbarbijo=res.data.cantbar
+        this.ncert=res.data.cantcerd
+        this.ncd=res.data.cantcd
+        this.nbol=res.data.cantbol
+      })
+    },
     BuscarCupo(){
       this.cupo={}
       this.credencial=false
