@@ -305,7 +305,7 @@ export default {
         .catch((error) => {
           this.$q.loading.hide()
           this.$q.notify({
-            message: error.message,
+            message: error.response.data.message,
             color: 'red-4',
             textColor: 'white',
             icon: 'error',
