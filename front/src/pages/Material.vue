@@ -71,7 +71,7 @@
         </q-card>
       </div>
       <div class="col-12 col-sm-4 q-pa-md">
-        <q-card class="bg-blue">
+        <q-card class="bg-info">
           <q-card-section>
             <div class="text-h6 text-white">Boligrafo <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
           </q-card-section>
@@ -81,7 +81,7 @@
         </q-card>
       </div>
       <div class="col-12 col-sm-4 q-pa-md">
-        <q-card class="bg-blue">
+        <q-card class="bg-primary">
           <q-card-section>
             <div class="text-h6 text-white">Certificado <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
           </q-card-section>
@@ -91,7 +91,7 @@
         </q-card>
       </div>
       <div class="col-12 col-sm-4 q-pa-md">
-        <q-card class="bg-blue">
+        <q-card class="bg-secondary">
           <q-card-section>
             <div class="text-h6 text-white">CD <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
           </q-card-section>
@@ -269,6 +269,7 @@ export default {
         hora:date.formatDate(new Date(), "HH:mm:ss")
       })
         .then((response) => {
+          this.totalreg()
           // console.log(response.data)
           let student = response.data
           this.$q.loading.hide()
