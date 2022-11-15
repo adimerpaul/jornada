@@ -162,7 +162,9 @@ export default {
         // this.barbijo=false
         // this.certificado=false
         // this.cd=false
+        let idMaterials=''
         this.cupo.materials.forEach(r => {
+            idMaterials+=r.id+','
             if(r.nombre=='CREDENCIAL Y PORTA CREDENCIAL') this.credencial=r.estado==1?true:false
             if(r.nombre=='FOLDER') this.folder=r.estado==1?true:false
             if(r.nombre=='BARBIJO') this.barbijo=r.estado==1?true:false
@@ -224,6 +226,7 @@ export default {
   text-weight: bold;
 }
 </style>
+          <div class="right bold"> <b>${idMaterials}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
           <div class="center bold"> <b>II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022</b></div>
