@@ -76,7 +76,7 @@ class RefrigerioController extends Controller
             return $refrigerio[0];
         }
         else{
-            return response()->json(['message' => 'Se encuentra registrado'], 500);
+            return response()->json(['message' => 'No se encuentra registrado'], 500);
 
         }
     }

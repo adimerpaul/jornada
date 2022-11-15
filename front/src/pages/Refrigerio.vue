@@ -116,8 +116,10 @@ export default {
         hora: date.formatDate(new Date(), 'HH:mm:ss')
       })
         .then((response) => {
+          let idRefrigerio = response.data.id
           this.totalreg()
           let student = response.data.cupo
+          let user = response.data.user
           this.$q.loading.hide()
           this.$q.notify({
             message: 'Se ha entregado el refrigerio',
@@ -150,6 +152,7 @@ export default {
   text-weight: bold;
 }
 </style>
+          <div class="right bold"> <b>${idRefrigerio}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
           <div class="center bold"> <b>TICKET REFRIGERIO</b></div>
@@ -158,6 +161,7 @@ export default {
           <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
           <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          <div class="left "> <b>User: </b> ${user.name}</div>
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
@@ -179,6 +183,7 @@ export default {
   text-weight: bold;
 }
 </style>
+          <div class="right bold"> <b>${idRefrigerio}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
           <div class="center bold"> <b>TICKET REFRIGERIO</b></div>
@@ -187,6 +192,7 @@ export default {
           <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
           <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          <div class="left "> <b>User: </b> ${user.name}</div>
 `
           e.print( document.getElementById('myelement') )
           // this.credencial = false
@@ -248,6 +254,7 @@ export default {
                 text-weight: bold;
               }
               </style>
+              <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
           <div class="center bold"> <b>TICKET REFRIGERIO REIMPRESION</b></div>
@@ -278,6 +285,7 @@ export default {
             text-weight: bold;
           }
           </style>
+          <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
           <div class="center bold"> <b>TICKET REFRIGERIO REIMPRESION</b></div>
@@ -286,6 +294,7 @@ export default {
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} ${refrigerio.hora}</div>
           <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          <div class="left "> <b>User: </b> ${user.name}</div>
 `
           e.print( document.getElementById('myelement') )
           // this.credencial = false
@@ -300,7 +309,7 @@ export default {
         .catch((error) => {
           this.$q.loading.hide()
           this.$q.notify({
-            message: error.message,
+            message: error.response.data.message,
             color: 'red-4',
             textColor: 'white',
             icon: 'error',
