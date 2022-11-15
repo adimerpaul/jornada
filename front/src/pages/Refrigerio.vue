@@ -180,6 +180,7 @@ export default {
   text-weight: bold;
 }
 </style>
+          <div class="right bold"> <b>${response.data.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
           <div class="center bold"> <b>TICKET REFRIGERIO</b></div>
@@ -249,6 +250,7 @@ export default {
                 text-weight: bold;
               }
               </style>
+              <div class="right bold"> <b>${response.data.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
           <div class="center bold"> <b>TICKET REFRIGERIO REIMPRESION</b></div>
@@ -279,6 +281,7 @@ export default {
             text-weight: bold;
           }
           </style>
+          <div class="right bold"> <b>${response.data.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
           <div class="center bold"> <b>TICKET REFRIGERIO REIMPRESION</b></div>
