@@ -204,6 +204,7 @@ export default {
 
           let student = this.cupo
           let materiales = ''
+          let user=student.materials[0].user
           student.materials.forEach(r => {
             if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + ' + '
@@ -233,11 +234,44 @@ export default {
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
           <div class="left "> <b>Material entregado: </b> ${materiales}</div>
+          <div class="left "> <b>Usuario: </b> ${user.name}</div>
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
           if(materiales!='')
           d.print( document.getElementById('myelement') )
+
+      const e = new Printd()
+      let hora = date.formatDate(new Date(), 'HH:mm:ss')
+      document.getElementById('myelement').innerHTML = `
+<style>
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.bold {
+  text-weight: bold;
+}
+</style>
+          <div class="right bold"> <b>${student.ci}-${student.id}</b></div>
+          <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
+          <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022</b></div>
+          <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
+          <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
+          <div class="left "> <b>Fecha hora: </b> 2022/11/21 ${hora}</div>
+          <div class="left "> <b>Material: </b> CERTIFICADO Y CD</div>
+          <div class="left "> <b>Usuario: </b> ${user.name}</div>
+
+          <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
+          `
+      if(materiales!='')
+        e.print( document.getElementById('myelement') )
     },
     materialInsert() {
       if (this.cupo.id==undefined) {
@@ -287,7 +321,7 @@ export default {
             if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + '  +'
           })
-          console.log('asdsa')
+          let user=student.materials[0].user
           const d = new Printd()
           let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
           document.getElementById('myelement').innerHTML = `
@@ -313,11 +347,42 @@ export default {
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
           <div class="left "> <b>Material entregado: </b> ${materiales}</div>
+          <div class="left "> <b>Usuario: </b> ${user.name}</div>
+
+          <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>          `
+          // if(materiales!='')
+          d.print( document.getElementById('myelement') )
+          const e = new Printd()
+          let hora = date.formatDate(new Date(), 'HH:mm:ss')
+          document.getElementById('myelement').innerHTML = `
+<style>
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.bold {
+  text-weight: bold;
+}
+</style>
+          <div class="right bold"> <b>${student.ci}-${student.id}</b></div>
+          <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
+          <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022</b></div>
+          <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
+          <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
+          <div class="left "> <b>Fecha hora: </b> 2022/11/21 ${hora}</div>
+          <div class="left "> <b>Material: </b> CERTIFICADO Y CD</div>
+          <div class="left "> <b>Usuario: </b> ${user.name}</div>
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
-          // if(materiales!='')
-          d.print( document.getElementById('myelement') )
+          if(materiales!='')
+            e.print( document.getElementById('myelement') )
           // this.credencial = false
           // this.folder = false
           // this.barbijo = false

@@ -119,6 +119,7 @@ export default {
           let idRefrigerio = response.data.id
           this.totalreg()
           let student = response.data.cupo
+          let user = response.data.user
           this.$q.loading.hide()
           this.$q.notify({
             message: 'Se ha entregado el refrigerio',
@@ -160,6 +161,7 @@ export default {
           <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
           <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          <div class="left "> <b>User: </b> ${user.name}</div>
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
@@ -190,6 +192,7 @@ export default {
           <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
           <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          <div class="left "> <b>User: </b> ${user.name}</div>
 `
           e.print( document.getElementById('myelement') )
           // this.credencial = false
@@ -291,6 +294,7 @@ export default {
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} ${refrigerio.hora}</div>
           <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          <div class="left "> <b>User: </b> ${user.name}</div>
 `
           e.print( document.getElementById('myelement') )
           // this.credencial = false
