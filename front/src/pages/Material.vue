@@ -162,9 +162,8 @@ export default {
         // this.barbijo=false
         // this.certificado=false
         // this.cd=false
-        let idMaterials=''
         this.cupo.materials.forEach(r => {
-            idMaterials+=r.id+','
+
             if(r.nombre=='CREDENCIAL Y PORTA CREDENCIAL') this.credencial=r.estado==1?true:false
             if(r.nombre=='FOLDER') this.folder=r.estado==1?true:false
             if(r.nombre=='BARBIJO') this.barbijo=r.estado==1?true:false
@@ -205,7 +204,9 @@ export default {
 
           let student = this.cupo
           let materiales = ''
+          let idMaterials = ''
           student.materials.forEach(r => {
+            idMaterials+=r.id+','
             if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + ' + '
           })
@@ -284,7 +285,9 @@ export default {
             position: 'top',
           })
           let materiales = ''
+          let idMaterials = ''
           student.materials.forEach(r => {
+            idMaterials+=r.id+','
             if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + '  +'
           })
