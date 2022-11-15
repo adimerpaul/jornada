@@ -309,6 +309,7 @@ export default {
   text-weight: bold;
 }
 </style>
+          <div class="right bold"> <b>${idMaterials}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
           <div class="center bold"> <b>II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022</b></div>
