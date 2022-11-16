@@ -33,9 +33,9 @@
     <div style="border: 0px solid red;position: absolute;top: 550px;left: 120px;text-align: center;font-size: 0.6em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
         <table style="width: 100%">
             <tr>
-                <td style="text-align: center">MSc. Ing. Gregorio Fernando Ureña Merida<br>COORDINADOR ACADEMIA REGIONAL<br>CISCO SIS-FNI-UTO</td>
+                <td style="text-align: center">MSc. Ing. Gregorio Fernando Ureña Mérida<br>COORDINADOR ACADEMIA REGIONAL<br>CISCO SIS-FNI-UTO</td>
                 <td style="text-align: center">MSc. Ing. Franz Chinche Imaña<br>DIRECTOR DE CARRERA<br>ING. DE SISTEMAS E ING. INFORMATICA</td>
-                <td style="text-align: center">MCs. Ing. Julio Cesar Bermudez Vargas<br>VICEDECANO<br>FACULTAD NACIONAL DE INGENIERIA</td>
+                <td style="text-align: center">MCs. Ing. Julio César Bermúdez Vargas<br>VICEDECANO<br>FACULTAD NACIONAL DE INGENIERIA</td>
             </tr>
         </table>
     </div>
