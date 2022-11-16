@@ -216,6 +216,7 @@ export default {
         this.ncert=res.data[0].cantcert
         this.ncd=res.data[0].cantcd
         this.nbol=res.data[0].cantbol
+        this.listado()
       })
     },
     BuscarCupo(){
