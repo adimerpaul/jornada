@@ -193,7 +193,6 @@ export default {
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
-          <div class="left "> <b>Refrigerio: </b> ${re}</div>
           <div class="left "> <b>User: </b> ${user.name}</div>
 `
           e.print( document.getElementById('myelement') )
@@ -295,7 +294,6 @@ export default {
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} ${refrigerio.hora}</div>
-          <div class="left "> <b>Refrigerio: </b> ${re}</div>
           <div class="left "> <b>User: </b> ${user.name}</div>
 `
           e.print( document.getElementById('myelement') )
