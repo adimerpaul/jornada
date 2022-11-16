@@ -279,7 +279,8 @@ export default {
           let materiales = ''
           let user=student.materials[0].user
           student.materials.forEach(r => {
-           // if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
+            if (r.estado==1 )
+          //if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + ' + '
           })
           const d = new Printd()
@@ -346,8 +347,8 @@ export default {
       if(materiales!='')
         e.print( document.getElementById('myelement') )
     },
-    materialInsert(){
-      if (this.cupo.id==undefined){
+    materialInsert() {
+      if (this.cupo.id==undefined) {
             this.$q.notify({
               message: 'Ingrese participante',
               color: 'negative',
