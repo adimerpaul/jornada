@@ -61,6 +61,23 @@ class MaterialController extends Controller
         }
     }
 
+    public function listentrega(Request $request){
+        if($request->user()->id==1){
+            return DB::SELECT("SELECT DISTINCT(c.ci),c.nombres 
+            FROM cupos c inner join materials m on c.id=m.cupo_id 
+            where date(m.fecha)='$request->fecha'
+            order by c.nombres asc;");
+        }
+        else
+        {
+            return DB::SELECT("SELECT DISTINCT(c.ci),c.nombres 
+            FROM cupos c inner join materials m on c.id=m.cupo_id 
+            where m.user_id=".$request->user()->id."
+            and date(m.fecha)='$request->fecha'
+            order by c.nombres asc;");
+        }
+    }
+
     public function store(StoreMaterialRequest $request)
     {
 

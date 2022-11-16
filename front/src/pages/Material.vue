@@ -103,6 +103,19 @@
     </div>
       </q-card-section>
     </q-card>
+    <div class="col-12">
+      <q-table title="Inscritos" :rows="listcupo" :columns="columns" row-key="name" >
+      <template v-slot:top-right>
+        <q-btn
+          color="primary"
+          icon-right="archive"
+          label="Export to csv"
+          no-caps
+          @click="exportTable"
+        />
+      </template>
+    </q-table>
+    </div>
 <div id="myelement" class="hidden"></div>
   </q-page>
 </template>
@@ -110,6 +123,7 @@
 <script>
 import { Printd } from 'printd'
 import {date} from "quasar";
+import { exportFile, useQuasar } from 'quasar'
 
 export default {
   name: `Material`,
@@ -129,12 +143,70 @@ export default {
       nbol: 0,
       ci: '',
       cupo:{},
+      listcupo:[],
+      columns:[
+        {name:"ci",label:"ci",field:"ci"},
+        {name:"nombres",label:"nombres",field:"nombres"},
+      ]
     }
   },
   created(){
     this.totalreg()
+    this.listado()
   },
+  
   methods: {
+     wrapCsvValue (val, formatFn, row) {
+  let formatted = formatFn !== void 0
+    ? formatFn(val, row)
+    : val
+
+  formatted = formatted === void 0 || formatted === null
+    ? ''
+    : String(formatted)
+
+  formatted = formatted.split('"').join('""')
+  /**
+   * Excel accepts \n and \r in strings, but some other CSV parsers do not
+   * Uncomment the next two lines to escape new lines
+   */
+  // .split('\n').join('\\n')
+  // .split('\r').join('\\r')
+
+  return `"${formatted}"`
+},
+    listado(){
+      this.$api.post('listentrega',{fecha:date.formatDate(new Date(), 'YYYY-MM-DD')}).then(res=>{
+        console.log(res.data)
+        this.listcupo=res.data
+      })
+    },
+    exportTable () {
+        // naive encoding to csv format
+        const content = [this.columns.map(col => this.wrapCsvValue(col.label))].concat(
+          this.listcupo.map(row => this.columns.map(col => this.wrapCsvValue(
+            typeof col.field === 'function'
+              ? col.field(row)
+              : row[ col.field === void 0 ? col.name : col.field ],
+            col.format,
+            row
+          )).join(','))
+        ).join('\r\n')
+
+        const status = exportFile(
+          'table-export.csv',
+          content,
+          'text/csv'
+        )
+
+        if (status !== true) {
+          $q.notify({
+            message: 'Browser denied file download...',
+            color: 'negative',
+            icon: 'warning'
+          })
+        }
+      },
     totalreg(){
       this.$api.post('totalmaterial').then(res=>{
         console.log(res.data)
