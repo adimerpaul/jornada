@@ -279,8 +279,8 @@ export default {
           let materiales = ''
           let user=student.materials[0].user
           student.materials.forEach(r => {
-            if (r.estado==1 )
-          //if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
+          //  if (r.estado==1 )
+          if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + ' + '
           })
           const d = new Printd()
