@@ -35,7 +35,7 @@
             <tr>
                 <td style="text-align: center">MSc. Ing. Gregorio Fernando Ureña Mérida<br>COORDINADOR ACADEMIA REGIONAL<br>CISCO SIS-FNI-UTO</td>
                 <td style="text-align: center">MSc. Ing. Franz Chinche Imaña<br>DIRECTOR DE CARRERA<br>ING. DE SISTEMAS E ING. INFORMATICA</td>
-                <td style="text-align: center">MCs. Ing. Julio César Bermúdez Vargas<br>VICEDECANO<br>FACULTAD NACIONAL DE INGENIERIA</td>
+                <td style="text-align: center">MCs. Ing. Julio Cesar Bermúdez Vargas<br>VICEDECANO<br>FACULTAD NACIONAL DE INGENIERIA</td>
             </tr>
         </table>
     </div>
