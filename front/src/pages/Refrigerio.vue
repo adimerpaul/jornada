@@ -20,7 +20,7 @@
             <q-form @submit.prevent="refrigerioInsert">
               <q-input label="Colocar el lector"   v-model="ci" outlined />
             </q-form>
-            <q-btn color="accent" icon="print" label="Re Impresion" @click="refrigerioPrint" />
+            <!--<q-btn color="accent" icon="print" label="Re Impresion" @click="refrigerioPrint" />-->
           </div>
         </div>
       </q-card-section>
