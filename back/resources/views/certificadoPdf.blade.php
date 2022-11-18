@@ -20,7 +20,7 @@
 <body>
 @foreach($certificados as $certificado)
     @if($certificado['fondo']=='SI')
-        <img src="certificado.jpeg" style=" position: absolute;top: 5px;left: 5px;width: 1036px;height: 800px" >
+        <img src="certificado.jpeg" style=" position: absolute;top: 0px;left: 0px;width: 1056px;height: 816px" >
     @endif
     <div style="border: 0px solid red;position: absolute;top: 255px;left: 110px;text-align: center;font-size: 2.8em; font-weight: bold;width: 870px;height: 35px;font-family: 'Nunito', sans-serif;color: #343c47">{{$certificado['titulo']}}</div>
     <div style="border: 0px solid red;position: absolute;top: 325px;left: 90px;text-align: center;font-size: 1.8em; font-weight: bold;width: 900px;height: 35px;font-family: 'Nunito', sans-serif;color: #343c47">A: {{$certificado['nombres']}}</div>
