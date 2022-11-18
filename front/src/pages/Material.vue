@@ -284,8 +284,8 @@ export default {
           let hora1=student.materials[0].hora
           student.materials.forEach(r => {
             if (r.estado==1 )
-          //if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + ' + '
+          //if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
           })
           const d = new Printd()
           let fecha = fec1+' ' + hora1
