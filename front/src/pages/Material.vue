@@ -255,6 +255,7 @@ export default {
 
     },
     impresion() {
+      console.log(this.cupo)
       if (this.cupo.id==undefined) {
             this.$q.notify({
               message: 'Ingrese participante',
@@ -264,7 +265,8 @@ export default {
             })
         return false
       }
-      if (this.cupo.materials) {
+      //if (this.cupo.materials) {
+        if (!this.credencial && !this.folder && !this.barbijo && !this.certificado && !this.cd && ! this.boligrafo) {
             this.$q.notify({
               message: 'No se puede entregar material sin seleccionar',
               color: 'negative',
