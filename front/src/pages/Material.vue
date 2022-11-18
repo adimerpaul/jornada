@@ -264,7 +264,7 @@ export default {
             })
         return false
       }
-      if (this.cupo.materials.leng) {
+      if (this.cupo.materials.length) { 
             this.$q.notify({
               message: 'No se puede entregar material sin seleccionar',
               color: 'negative',
@@ -278,13 +278,15 @@ export default {
           let student = this.cupo
           let materiales = ''
           let user=student.materials[0].user
+          let fec1=student.materials[0].fecha
+          let hora1=student.materials[0].hora
           student.materials.forEach(r => {
-          //  if (r.estado==1 )
-          if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
+            if (r.estado==1 )
+          //if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + ' + '
           })
           const d = new Printd()
-          let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
+          let fecha = fec1+' ' + hora1
           document.getElementById('myelement').innerHTML = `
 <style>
 .center {
