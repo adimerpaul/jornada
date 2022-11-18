@@ -264,7 +264,7 @@ export default {
             })
         return false
       }
-      if (this.cupo.materials.length) { 
+      if (this.cupo.materials.length>0) {
             this.$q.notify({
               message: 'No se puede entregar material sin seleccionar',
               color: 'negative',
