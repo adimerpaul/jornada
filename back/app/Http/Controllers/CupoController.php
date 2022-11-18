@@ -14,7 +14,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class CupoController extends Controller
 {
-    public function index(){return Cupo::all();}
+    public function index(){return Cupo::with('materials')->get();}
     public function validaCupon($ci){
         return Cupo::where('ci',$ci)->first();
     }

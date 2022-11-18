@@ -76,6 +76,7 @@ export default {
       cupos: [],
       cupo:{},
       cupoUpdateShow: false,
+      valida:true,
       cupoColumns:[
         {name:'action', label:'Acción', field:'action', align:'left', sortable:true},
         {name:'ci', label:'C.I.', field:'ci', align:'left', sortable:true},
@@ -167,6 +168,22 @@ export default {
 
     },
     cupoReset(cupo){
+      this.valido=true
+      cupo.materials.forEach(r => {
+          if(r.estado==1){
+            this.valido=false
+          }
+      })
+      if(!this.valido){
+        this.$q.notify({
+            message: 'Existe registro material',
+            color: 'red-4',
+            textColor: 'white',
+            icon: 'info',
+            position: 'top'
+          })
+        return false;
+      }
       this.$q.dialog({
         title: 'Confirmación',
         message: '¿Está seguro de resetear el cupo?',
