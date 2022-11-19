@@ -54,6 +54,7 @@ export default {
       cupos: [],
       cupoColumns:[
         {name:'action', label:'Acción', field:'action', align:'left', sortable:true},
+        {name:'tipo', label:'Usuario', field:'tipo', align:'left', sortable:true},
         {name:'ci', label:'C.I.', field:'ci', align:'left', sortable:true},
         {name:'estado', label:'Estado', field:'estado', align:'left', sortable:true},
         {name:'id', label:'ID', field:'id', align:'left', sortable:true},
