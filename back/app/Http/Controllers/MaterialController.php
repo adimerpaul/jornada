@@ -63,15 +63,15 @@ class MaterialController extends Controller
 
     public function listentrega(Request $request){
         if($request->user()->id==1){
-            return DB::SELECT("SELECT DISTINCT(c.ci),c.nombres 
-            FROM cupos c inner join materials m on c.id=m.cupo_id 
+            return DB::SELECT("SELECT DISTINCT(c.ci),c.nombres
+            FROM cupos c inner join materials m on c.id=m.cupo_id
             where date(m.fecha)='$request->fecha'
             order by c.nombres asc;");
         }
         else
         {
-            return DB::SELECT("SELECT DISTINCT(c.ci),c.nombres 
-            FROM cupos c inner join materials m on c.id=m.cupo_id 
+            return DB::SELECT("SELECT DISTINCT(c.ci),c.nombres
+            FROM cupos c inner join materials m on c.id=m.cupo_id
             where m.user_id=".$request->user()->id."
             and date(m.fecha)='$request->fecha'
             order by c.nombres asc;");
@@ -137,36 +137,42 @@ class MaterialController extends Controller
             $material= Material::whereCupo_id($request->id)->whereNombre("CREDENCIAL Y PORTA CREDENCIAL")->first();
             error_log($material);
             if ($material->estado==0 && $request->credencial) {
-                $material->estado=true;
+            $material->fecha=date('Y-m-d');
+            $material->estado=true;
                 $material->user_id=$request->user()->id;
                 $material->save();
             }
             $material= Material::whereCupo_id($request->id)->whereNombre("FOLDER")->first();
             if ($material->estado==0 && $request->folder) {
-                $material->estado=true;
+            $material->fecha=date('Y-m-d');
+            $material->estado=true;
             $material->user_id=$request->user()->id;
             $material->save();
             }
             $material= Material::whereCupo_id($request->id)->whereNombre("BOLIGRAFO")->first();
             if ($material->estado==0 && $request->boligrafo) {
-                $material->estado=true;
+            $material->fecha=date('Y-m-d');
+            $material->estado=true;
             $material->user_id=$request->user()->id;
             $material->save();
             }
             $material= Material::whereCupo_id($request->id)->whereNombre("BARBIJO")->first();
             if ($material->estado==0 && $request->barbijo) {
-                $material->estado=true;
+            $material->fecha=date('Y-m-d');
+            $material->estado=true;
             $material->user_id=$request->user()->id;
             $material->save();
             }
             $material= Material::whereCupo_id($request->id)->whereNombre("CERTIFICADO")->first();
             if ($material->estado==0 && $request->certificado) {
-                $material->estado=true;
+            $material->fecha=date('Y-m-d');
+            $material->estado=true;
             $material->user_id=$request->user()->id;
             $material->save();
             }
             $material= Material::whereCupo_id($request->id)->whereNombre("CD")->first();
             if ($material->estado==0 && $request->cd) {
+                $material->fecha=date('Y-m-d');
                 $material->estado=true;
             $material->user_id=$request->user()->id;
             $material->save();

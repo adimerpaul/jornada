@@ -196,6 +196,7 @@ export default {
   created() {
   },
   methods: {
+
     logout(){
       this.$q.dialog({
         message:'¿Quieres cerrar sesión?',

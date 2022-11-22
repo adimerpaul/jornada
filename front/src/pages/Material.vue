@@ -283,7 +283,8 @@ export default {
           let fec1=student.materials[0].fecha
           let hora1=student.materials[0].hora
           student.materials.forEach(r => {
-            if (r.estado==1 )
+            //if (r.estado==1 )
+          if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
             materiales += r.nombre + ' + '
           //if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
           })
@@ -317,9 +318,9 @@ export default {
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
           if(materiales!='')
-          d.print( document.getElementById('myelement') )
+            d.print( document.getElementById('myelement') )
 
-      const e = new Printd()
+      /*const e = new Printd()
       let hora = date.formatDate(new Date(), 'HH:mm:ss')
       document.getElementById('myelement').innerHTML = `
 <style>
@@ -349,7 +350,7 @@ export default {
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
       if(materiales!='')
-        e.print( document.getElementById('myelement') )
+        e.print( document.getElementById('myelement') )*/
     },
     materialInsert() {
       if (this.cupo.id==undefined) {
@@ -428,9 +429,9 @@ export default {
           <div class="left "> <b>Usuario: </b> ${user.name}</div>
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>          `
-          // if(materiales!='')
+           if(materiales!='')
           d.print( document.getElementById('myelement') )
-          const e = new Printd()
+          /*const e = new Printd()
           let hora = date.formatDate(new Date(), 'HH:mm:ss')
           document.getElementById('myelement').innerHTML = `
 <style>
@@ -460,7 +461,7 @@ export default {
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
           `
           if(materiales!='')
-            e.print( document.getElementById('myelement') )
+            e.print( document.getElementById('myelement') )*/
           // this.credencial = false
           // this.folder = false
           // this.barbijo = false
