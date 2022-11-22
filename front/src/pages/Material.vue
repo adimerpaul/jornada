@@ -285,7 +285,9 @@ export default {
           student.materials.forEach(r => {
             //if (r.estado==1 )
           if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
-            materiales += r.nombre + ' + '
+            {materiales += r.nombre + ' + '
+            user=r.user
+          }
           //if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
           })
           const d = new Printd()
@@ -396,11 +398,14 @@ export default {
             position: 'top',
           })
           let materiales = ''
+          let user=student.materials[0].user
+
           student.materials.forEach(r => {
             if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
-            materiales += r.nombre + '  +'
+            {materiales += r.nombre + '  +'
+            user=r.user
+          }
           })
-          let user=student.materials[0].user
           const d = new Printd()
           let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
           document.getElementById('myelement').innerHTML = `
