@@ -284,7 +284,7 @@ export default {
           let hora1=student.materials[0].hora
           student.materials.forEach(r => {
             //if (r.estado==1 )
-          if (r.estado==1 && r.fecha==fec1)
+          if (r.estado==1 && r.fecha=='2022-11-21')
             {materiales += r.nombre + ' + '
             user=r.user
           }
