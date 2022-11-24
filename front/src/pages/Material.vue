@@ -286,6 +286,7 @@ export default {
             //if (r.estado==1 )
           if (r.estado==1 && r.fecha=='2022-11-21')
             {materiales += r.nombre + ' + '
+            fec1=r.fecha
             user=r.user
           }
           //if (r.estado==1 && r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD'))
