@@ -81,6 +81,14 @@ class RefrigerioController extends Controller
         }
     }
 
+    public function reporteDia(Request $request){
+        return DB::SELECT("SELECT c.id,c.ci,c.nombres,m.fecha,m.hora 
+        FROM cupos c inner join refrigerios m on c.id=m.cupo_id
+        WHERE  c.ci is not null 
+        and  m.fecha='$request->fecha' and m.turno=$request->turno");
+    }
+    
+
     /**
      * Display the specified resource.
      *
