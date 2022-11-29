@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-6">
               <small class="text-bold text-subtitle1">Fecha actual:</small> {{ fechaActual }}
+              <q-input square outlined v-model="fechaActual" label="fecha"  type="date"/>
             </div>
           <div class="col-6">
             <q-toggle
@@ -20,7 +21,7 @@
             <q-form @submit.prevent="refrigerioInsert">
               <q-input label="Colocar el lector"   v-model="ci" outlined />
             </q-form>
-            <!--<q-btn color="accent" icon="print" label="Re Impresion" @click="refrigerioPrint" />-->
+            <q-btn color="accent" icon="print" label="Re Impresion" @click="refrigerioPrint" />
           </div>
         </div>
       </q-card-section>
@@ -216,6 +217,7 @@ export default {
           })
         })
     },
+
     refrigerioPrint() {
       if(this.ci==undefined || this.ci=='')
       return false
