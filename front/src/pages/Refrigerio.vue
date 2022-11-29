@@ -299,7 +299,7 @@ export default {
           <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} </div>
           <div class="left "> <b>Refrigerio: </b> ${re}</div>
           <div class="left "> <b>User: </b> ${user.name}</div>
-          <div class="left "> <b>Nota: </b> Con este boucher le da derecho a recoger su refrigerio</div>
+          <div class="left "> <b>Nota: </b> Este boucher le da derecho a recoger su refrigerio</div>
 `
           e.print( document.getElementById('myelement') )
           // this.credencial = false
