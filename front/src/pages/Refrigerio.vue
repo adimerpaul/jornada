@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-6">
               <small class="text-bold text-subtitle1">Fecha actual:</small> {{ fechaActual }}
-              <q-input square outlined v-model="fechaActual" label="fecha"  type="date"/>
+              <q-input square outlined v-model="fechaprint" label="fecha"  type="date"/>
             </div>
           <div class="col-6">
             <q-toggle
@@ -76,6 +76,7 @@ export default {
       total:0,
       manana:0,
       tarde:0,
+      fechaprint: date.formatDate(new Date(), 'YYYY-MM-DD'),
       entrega:[
         {fecha:'2022-11-13',turno:'MAÑANA',refrig:"Mini Pizzitas (cada racion de 2 piezas) + refresco de 300ml"},
         {fecha:'2022-11-13',turno:'TARDE',refrig:"Postre de Oreo (cada racion de 2 piezas, tamaño mediano) + Vaso de Café"},
@@ -225,7 +226,7 @@ export default {
       this.$api.post('printRefri/',{
         ci: this.ci,
         turno: this.turno,
-        fecha: date.formatDate(new Date(), 'YYYY-MM-DD'),
+        fecha: this.fechaprint,
       })
         .then((response) => {
           console.log(response.data)
