@@ -292,12 +292,14 @@ export default {
           <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>TICKET REFRIGERIO </b></div>
+          <div class="center bold"> <b>CONTROL REFRIGERIO </b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
-          <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} ${refrigerio.hora}</div>
+          <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} </div>
+          <div class="left "> <b>Refrigerio: </b> ${re}</div>
           <div class="left "> <b>User: </b> ${user.name}</div>
+          <div class="left "> <b>Nota: </b> Con este boucher le da derecho a recoger su refrigerio</div>
 `
           e.print( document.getElementById('myelement') )
           // this.credencial = false
