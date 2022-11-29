@@ -261,7 +261,7 @@ export default {
               <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>TICKET REFRIGERIO REIMPRESION</b></div>
+          <div class="center bold"> <b>TICKET REFRIGERIO </b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
@@ -292,7 +292,7 @@ export default {
           <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>TICKET REFRIGERIO REIMPRESION</b></div>
+          <div class="center bold"> <b>TICKET REFRIGERIO </b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
