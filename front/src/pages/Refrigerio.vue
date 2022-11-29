@@ -18,7 +18,7 @@
             />
           </div>
           <div class="col-12 q-px-lg">
-            <q-form @submit.prevent="refrigerioInsert">
+            <q-form >
               <q-input label="Colocar el lector"   v-model="ci" outlined />
             </q-form>
             <q-btn color="accent" icon="print" label="Re Impresion" @click="refrigerioPrint" />
