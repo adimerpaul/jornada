@@ -58,7 +58,7 @@ class CupoController extends Controller
     public function cupoPdf(Request $request){
         $data=[];
         foreach ($request->all() as $value) {
- 
+
             $png = QrCode::format('png')->size(250)->generate(env('URL_FRONT').'registro/'.$value['codigo']);
             $png = base64_encode($png);
             $value['qr']=$png;
@@ -125,9 +125,9 @@ class CupoController extends Controller
         $pdf->save('credencials.pdf')->stream();
     }
 
-    public function cupoFile(){
-        return response()->file('cupos.pdf');
-    }
+        public function cupoFile(){
+            return response()->file('cupos.pdf');
+        }
     public function certificadoFile(){
         return response()->file('certificados.pdf');
     }
