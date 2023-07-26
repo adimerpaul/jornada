@@ -78,6 +78,33 @@ class MaterialController extends Controller
         }
     }
 
+
+    public function reporteMat1(Request $request){
+        return DB::SELECT("
+        SELECT c.id,c.ci,c.nombres,
+        (SELECT m.estado from materials m where  m.nombre='CREDENCIAL Y PORTA CREDENCIAL' and m.cupo_id=c.id ) as credencial ,
+        (SELECT m.estado from materials m where  m.nombre='FOLDER' and m.cupo_id=c.id ) as folder ,
+        (SELECT m.estado from materials m where  m.nombre='BOLIGRAFO' and m.cupo_id=c.id ) as boligrafo ,
+        (SELECT m.estado from materials m where  m.nombre='BARBIJO' and m.cupo_id=c.id ) as barbijo, 
+        (SELECT m.estado from materials m where  m.nombre='CERTIFICADO' and m.cupo_id=c.id ) as certificado, 
+        (SELECT m.estado from materials m where  m.nombre='CD' and m.cupo_id=c.id ) as cd, 
+        (SELECT m.fecha from materials m where  m.nombre='CREDENCIAL Y PORTA CREDENCIAL' and m.cupo_id=c.id ) as fecha
+        
+        FROM cupos c
+        WHERE c.ci is not null;");
+    }
+
+    public function reporteMat2(Request $request){
+        return DB::SELECT("
+        SELECT c.id,c.ci,c.nombres,
+        (SELECT m.estado from materials m where  m.nombre='CERTIFICADO' and m.cupo_id=c.id ) as certificado, 
+        (SELECT m.estado from materials m where  m.nombre='CD' and m.cupo_id=c.id ) as cd, 
+        (SELECT m.fecha from materials m where  m.nombre='CERTIFICADO' and m.cupo_id=c.id ) as fecha
+        
+        FROM cupos c
+        WHERE c.ci is not null;");
+    }
+
     public function store(StoreMaterialRequest $request)
     {
 

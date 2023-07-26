@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-6">
               <small class="text-bold text-subtitle1">Fecha actual:</small> {{ fechaActual }}
+              <q-input square outlined v-model="fechaprint" label="fecha"  type="date"/>
             </div>
           <div class="col-6">
             <q-toggle
@@ -17,10 +18,10 @@
             />
           </div>
           <div class="col-12 q-px-lg">
-            <q-form @submit.prevent="refrigerioInsert">
+            <q-form >
               <q-input label="Colocar el lector"   v-model="ci" outlined />
             </q-form>
-            <!--<q-btn color="accent" icon="print" label="Re Impresion" @click="refrigerioPrint" />-->
+            <q-btn color="accent" icon="print" label="Re Impresion" @click="refrigerioPrint" />
           </div>
         </div>
       </q-card-section>
@@ -75,6 +76,7 @@ export default {
       total:0,
       manana:0,
       tarde:0,
+      fechaprint: date.formatDate(new Date(), 'YYYY-MM-DD'),
       entrega:[
         {fecha:'2022-11-13',turno:'MAÑANA',refrig:"Mini Pizzitas (cada racion de 2 piezas) + refresco de 300ml"},
         {fecha:'2022-11-13',turno:'TARDE',refrig:"Postre de Oreo (cada racion de 2 piezas, tamaño mediano) + Vaso de Café"},
@@ -216,6 +218,7 @@ export default {
           })
         })
     },
+
     refrigerioPrint() {
       if(this.ci==undefined || this.ci=='')
       return false
@@ -223,7 +226,7 @@ export default {
       this.$api.post('printRefri/',{
         ci: this.ci,
         turno: this.turno,
-        fecha: date.formatDate(new Date(), 'YYYY-MM-DD'),
+        fecha: this.fechaprint,
       })
         .then((response) => {
           console.log(response.data)
@@ -258,7 +261,7 @@ export default {
               <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>TICKET REFRIGERIO REIMPRESION</b></div>
+          <div class="center bold"> <b>TICKET REFRIGERIO </b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
@@ -289,12 +292,14 @@ export default {
           <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>TICKET REFRIGERIO REIMPRESION</b></div>
+          <div class="center bold"> <b>CONTROL REFRIGERIO </b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
-          <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} ${refrigerio.hora}</div>
+          <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} </div>
+          <div class="left "> <b>Refrigerio: </b> ${re}</div>
           <div class="left "> <b>User: </b> ${user.name}</div>
+          <div class="left "> <b>Nota: </b> Este boucher le da derecho a recoger su refrigerio</div>
 `
           e.print( document.getElementById('myelement') )
           // this.credencial = false
