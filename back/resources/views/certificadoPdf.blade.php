@@ -41,9 +41,9 @@
         Oruro, Agosto de 2023
     </div>
     <div style="border: 0px solid red;position: absolute;top: 575px;left: 120px;text-align: center;font-size: 0.6em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
-        <img src="Signature.png" alt="" style="width: 100px;height: 100px;position: absolute;top: -35px;z-index:-1;left: 160px">
-        <img src="Signature.png" alt="" style="width: 100px;height: 100px;position: absolute;top: -35px;z-index:-1;left: 410px">
-        <img src="Signature.png" alt="" style="width: 100px;height: 100px;position: absolute;top: -35px;z-index:-1;left: 720px">
+{{--        <img src="Signature.png" alt="" style="width: 100px;height: 100px;position: absolute;top: -35px;z-index:-1;left: 160px">--}}
+{{--        <img src="Signature.png" alt="" style="width: 100px;height: 100px;position: absolute;top: -35px;z-index:-1;left: 410px">--}}
+{{--        <img src="Signature.png" alt="" style="width: 100px;height: 100px;position: absolute;top: -35px;z-index:-1;left: 720px">--}}
         <table style="width: 100%;padding: 10px;margin-left: 90px">
             <tr>
                 <td style="text-align: center">Ing. Edmar Perez Villarroel<br><b>INSTRUCTOR</b><br></td>
