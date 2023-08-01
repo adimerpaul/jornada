@@ -20,22 +20,32 @@
 <body>
 @foreach($certificados as $certificado)
     @if($certificado['fondo']=='SI')
-        <img src="certificado.jpeg" style=" position: absolute;top: 0px;left: 0px;width: 1056px;height: 816px" >
+        <img src="WhatsApp Image 2023-07-31 at 21.05.44.jpeg" style=" position: absolute;top: 0px;left: 0px;width: 1056px;height: 816px" >
     @endif
     <div style="border: 0px solid red;position: absolute;top: 255px;left: 110px;text-align: center;font-size: 2.8em; font-weight: bold;width: 870px;height: 35px;font-family: 'Nunito', sans-serif;color: #343c47">{{$certificado['titulo']}}</div>
     <div style="border: 0px solid red;position: absolute;top: 325px;left: 90px;text-align: center;font-size: 1.8em; font-weight: bold;width: 900px;height: 35px;font-family: 'Nunito', sans-serif;color: #343c47">A: {{$certificado['nombres']}}</div>
     <div style="border: 0px solid red;position: absolute;top: 380px;left: 120px;text-align: justify;font-size: 1em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
-        Por su participación en calidad de <span style="font-size: 1.5em;font-weight: bold;">{{$certificado['tipo']}}</span> de las <span style="font-size: 1.5em;font-weight: bold;">II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022</span> desarrollado del 16 al 18 de noviembre de 2022, con una carga horaria académica de 32 horas lectivas.
+        Por su participación en calidad de <span style="font-size: 1.5em;font-weight: bold;">{{$certificado['tipo']}}</span> del Evento <span style="font-size: 1.5em;font-weight: bold;">“PyhtonDay 2023”</span> desarrollado el 2 de agosto de 2023 con las siguientes temáticas:
+        <br>
+        <div style="padding: 20px">
+            <ul>
+                <li>Python Aplicado a las Ciencia de la Ingeniería</li>
+                <li>Python Aplicado al Internet de las Cosas</li>
+            </ul>
+        </div>
     </div>
-    <div style="border: 0px solid red;position: absolute;top: 480px;left: 150px;text-align: left;font-size: 1em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
-        Oruro, Noviembre de 2022
+    <div style="border: 0px solid red;position: absolute;top: 510px;left: 150px;text-align: left;font-size: 1em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
+        con una carga horaria académica de 10 horas lectivas.
     </div>
     <div style="border: 0px solid red;position: absolute;top: 550px;left: 120px;text-align: center;font-size: 0.6em;width: 850px;height: 85px;font-family: 'Nunito', sans-serif;color: #343c47">
-        <table style="width: 100%">
+        <img src="Signature.png" alt="" style="width: 100px;height: 100px;position: absolute;top: -35px;left: 70px">
+        <img src="Signature.png" alt="" style="width: 100px;height: 100px;position: absolute;top: -35px;left: 310px">
+        <img src="Signature.png" alt="" style="width: 100px;height: 100px;position: absolute;top: -35px;left: 620px">
+        <table style="width: 100%;padding: 10px">
             <tr>
-                <td style="text-align: center">MSc. Ing. Gregorio Fernando Ureña Mérida<br>COORDINADOR ACADEMIA REGIONAL<br>CISCO SIS-FNI-UTO</td>
-                <td style="text-align: center">MSc. Ing. Franz Chinche Imaña<br>DIRECTOR DE CARRERA<br>ING. DE SISTEMAS E ING. INFORMATICA</td>
-                <td style="text-align: center">MCs. Ing. Julio Cesar Bermúdez Vargas<br>VICEDECANO<br>FACULTAD NACIONAL DE INGENIERIA</td>
+                <td style="text-align: center">Ing. Edmar Perez Villarroel<br><b>INSTRUCTOR</b><br></td>
+                <td style="text-align: center">MSc. Ing. G. Fernando Ureña Merida<br><b>INSTRUCTOR</b><br></td>
+                <td style="text-align: center">MSc. Ing. Franz Chinche Imaña<br><b>DIRECTOR DE CARRERA</b><br><b>ING. DE SISTEMAS E ING. INFORMATICA</b></td>
             </tr>
         </table>
     </div>

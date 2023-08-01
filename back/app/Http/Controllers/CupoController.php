@@ -78,28 +78,31 @@ class CupoController extends Controller
                     $tip='par';
                     $titulo='CERTIFICADO DE PARTICIPACION';
                     break;
-                    case 'EXPOSITOR':
-                        $tip='exp';
-                        $titulo='CERTIFICADO DE RECONOCIMIENTO';
-                        break;
-                        case 'ORGANIZADOR':
-                        $tip='org';
-                        $titulo='CERTIFICADO DE RECONOCIMIENTO';
-                        break;
-                        case 'DOCENTE':
-                        $tip='org';
-                        $titulo='CERTIFICADO DE PARTICIPACION';
-                    # code...
-                            break;
+                case 'EXPOSITOR':
+                    $tip='exp';
+                    $titulo='CERTIFICADO DE RECONOCIMIENTO';
+                    break;
+                case 'ORGANIZADOR':
+                    $tip='org';
+                    $titulo='CERTIFICADO DE RECONOCIMIENTO';
+                    break;
+                case 'DOCENTE':
+                    $tip='org';
+                    $titulo='CERTIFICADO DE PARTICIPACION';
+                    break;
+                case 'DESARROLLADOR DEL SISTEMA':
+                    $tip='programado';
+                    $titulo='CERTIFICADO DE DESARROLLADOR';
+                    break;
                 default:
                     # code...
                     $tip='par';
                     $titulo='CERTIFICADO DE PARTICIPACION';
                     break;
             }
-            $png = QrCode::format('png')->size(250)->generate('https://certificados.sistemas.edu.bo/jtc2022'.$tip.'/'.$value['ci']);
+            $png = QrCode::format('png')->size(250)->generate('https://certificados.sistemas.edu.bo/pd2023'.$tip.'/'.$value['ci']);
             $png = base64_encode($png);
-            $value['url']='https://certificados.sistemas.edu.bo/jtc2022'.$tip.'/'.$value['ci'];
+            $value['url']='https://certificados.sistemas.edu.bo/pd2023'.$tip.'/'.$value['ci'];
             $value['titulo']=$titulo;
             $value['fondo']=$request->fondo;
             $value['qr']=$png;
