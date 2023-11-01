@@ -26,8 +26,8 @@
 <div style="text-align: center;position: absolute;top: 213px;left: 58px;font-size: 12px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['nombres']}}</div>
 <div style="text-align: center;position: absolute;top: 255px;left: 58px;font-size: 12px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['tipo']}}</div>
 <div style="text-align: center;position: absolute;top: 290px;left: 58px;font-size: 12px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['carrera']}}</div>
-<div style="text-align: center;position: absolute;top: 320px;left: 58px;font-size: 15px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: red;text-align: center">{{$credencial['ci']}}</div>
-{{--<img src="data:image/png;base64, {!! $credencial['qr'] !!}" style="background : white ; border:2px solid white;position: absolute;top: 295px;left: 45px;width: 170px;height: 50px">--}}
+{{--<div style="text-align: center;position: absolute;top: 320px;left: 58px;font-size: 15px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: red;text-align: center">{{$credencial['ci']}}</div>--}}
+<img src="data:image/png;base64, {!! $credencial['qr'] !!}" style="background : white ; border:2px solid white;position: absolute;top: 315px;left: 68px;width: 170px;height: 35px">
 {{--<div style="color: #a0aec0;position: absolute;top: 350px;left: 915px;width: 10px;height: 10px">{{$credencial['id']}}</div>--}}
 <div class="page_break"></div>
 @endforeach
