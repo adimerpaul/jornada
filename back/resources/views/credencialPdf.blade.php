@@ -22,7 +22,7 @@
 <img src="CREDENCIAL_JTDC2022.png" style="  position: absolute;top: 0px;left: 0px;width: 8cm;height: 10cm" >
 
 @endif
-{{--<img src="imagenes/{{$credencial['foto']}}" style="position: absolute;top: 95px;left: 97px;width: 80px;height: 80px;border-radius: 40px" >--}}
+<img src="imagenes/{{$credencial['foto']}}" style="position: absolute;top: 105px;left: 115px;width: 80px;height: 80px;border-radius: 40px" >
 <div style="text-align: center;position: absolute;top: 213px;left: 58px;font-size: 12px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['nombres']}}</div>
 <div style="text-align: center;position: absolute;top: 255px;left: 58px;font-size: 12px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['tipo']}}</div>
 <div style="text-align: center;position: absolute;top: 290px;left: 58px;font-size: 12px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['carrera']}}</div>
