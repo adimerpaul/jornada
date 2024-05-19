@@ -17,7 +17,7 @@ export default {
   },
   created() {
     this.$q.loading.show()
-    this.$api.get(`eventoSearch/${this.$route.params.id}`).then((response) => {
+    this.$api.get(`evento/${this.$route.params.id}`).then((response) => {
       this.evento = response.data
     }).finally(() => {
       this.$q.loading.hide()

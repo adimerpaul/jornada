@@ -94,6 +94,17 @@ class EventoController extends Controller{
         if (!$evento) {
             return response()->json(['message' => 'Evento no encontrado'], 404);
         }
+        $fecha_inicio = strtotime($evento->fecha_inicio);
+        $fecha_fin = strtotime($evento->fecha_fin);
+        if (time() < $fecha_inicio || time() > $fecha_fin) {
+            return response()->json(['message' => 'Evento fuera de rango de fecha'], 404);
+        }
+
+        //veriifcar cantidad de cupos
+        $libres = $evento->cupos - $evento->cupo->count();
+        if ($libres <= 0) {
+            return response()->json(['message' => 'Evento sin cupos'], 404);
+        }
 //        $verificadmos si esta en evntocupo
         $cupo = $evento->cupo->where('ci', $ci)->first();
         if (!$cupo) {

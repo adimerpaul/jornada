@@ -12,7 +12,7 @@
             <br>
             Hasta: {{evento.fecha_fin}}
             <br>
-            Cupos: {{evento.libres}}
+            Cupos: <span class="text-red text-subtitle2 text-h6">{{evento.libres}}</span>
           </div>
         </q-toolbar-title>
       </q-toolbar>
@@ -26,7 +26,7 @@
           </div>
           <q-form class="q-pa-lg" v-else @submit.prevent="cupoUpdate">
             <div class="row">
-              <div class="col-12 col-sm-6 q-px-xs"  >
+              <div class="col-12 col-sm-12 q-px-xs"  >
                 <div class="text-caption">
                   Porfavor ingrese el carnet de identidad del estudiante y su nombre aparecera automaticamente
                 </div>

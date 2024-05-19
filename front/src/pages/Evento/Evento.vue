@@ -30,6 +30,7 @@
 <!--          <q-btn flat round dense icon="published_with_changes" @click="eventoChange(props.row)" />-->
 <!--          boton editar-->
           <q-btn flat round dense icon="edit" @click="eventoChange(props.row)" />
+          <q-btn flat round dense icon="how_to_vote" @click="eventoChange(props.row)" />
         </template>
       </q-td>
     </template>
@@ -222,9 +223,7 @@ export default {
 
     },
     eventoChange(evento){
-      this.eventoDialog=true
-      // console.log(evento)
-      this.evento={...evento}
+      this.$router.push('/eventoShow/'+evento.id)
     },
     eventoReset(evento){
       this.valido=true
