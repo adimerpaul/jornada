@@ -8,6 +8,7 @@ import Material from "pages/Material";
 import Refrigerio from "pages/Refrigerio";
 import Estudiantes from "pages/Estudiantes";
 import User from "pages/User";
+import Evento from "pages/Evento/Evento.vue";
 
 const routes = [
   {
@@ -22,6 +23,8 @@ const routes = [
       { path: 'refrigerio', component: Refrigerio,meta: {requiresAuth: true}},
       { path: 'estudiantes', component: Estudiantes,meta: {requiresAuth: true}},
       { path: 'user', component: User,meta: {requiresAuth: true}},
+      { path: 'evento', component: Evento,meta: {requiresAuth: true}},
+      { path: 'evento/:id', component: Evento,meta: {requiresAuth: true}},
     ]
   },
   {

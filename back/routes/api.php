@@ -48,6 +48,9 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::post('totalmaterial', [\App\Http\Controllers\MaterialController::class, 'totalmaterial']);
     Route::post('listentrega', [\App\Http\Controllers\MaterialController::class, 'listentrega']);
 
-
+    Route::get('evento', [\App\Http\Controllers\EventoController::class, 'index']);
+    Route::post('evento', [\App\Http\Controllers\EventoController::class, 'store']);
+    Route::put('evento/{evento}', [\App\Http\Controllers\EventoController::class, 'update']);
+    Route::delete('evento/{evento}', [\App\Http\Controllers\EventoController::class, 'destroy']);
 
 });

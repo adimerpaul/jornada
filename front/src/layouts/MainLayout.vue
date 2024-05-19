@@ -166,6 +166,14 @@
                 Refrigerio
               </q-item-section>
             </q-item>
+            <q-item clickable exact to="evento" v-if="store.user.role=='ADMINISTRADOR'||store.user.role=='REFRIGERIO'" active-class="bg-blue-grey-6 text-white">
+              <q-item-section avatar>
+                <q-icon name="o_event" />
+              </q-item-section>
+              <q-item-section>
+                Eventos
+              </q-item-section>
+            </q-item>
           </q-list>
           <q-separator />
         </q-list>
