@@ -21,4 +21,7 @@ class Evento extends Model
         'created_at',
         'updated_at'
     ];
+    public function cupo(){
+        return $this->hasMany(EventoCupo::class);
+    }
 }

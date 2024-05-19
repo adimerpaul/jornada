@@ -9,6 +9,8 @@ import Refrigerio from "pages/Refrigerio";
 import Estudiantes from "pages/Estudiantes";
 import User from "pages/User";
 import Evento from "pages/Evento/Evento.vue";
+import RegistroEvento from "pages/Evento/RegistroEvento.vue";
+import ShowEvento from "pages/Evento/ShowEvento.vue";
 
 const routes = [
   {
@@ -24,7 +26,7 @@ const routes = [
       { path: 'estudiantes', component: Estudiantes,meta: {requiresAuth: true}},
       { path: 'user', component: User,meta: {requiresAuth: true}},
       { path: 'evento', component: Evento,meta: {requiresAuth: true}},
-      { path: 'evento/:id', component: Evento,meta: {requiresAuth: true}},
+      { path: 'eventoShow/:id', component: ShowEvento,meta: {requiresAuth: true}},
     ]
   },
   {
@@ -32,6 +34,7 @@ const routes = [
     component: Login
   },
   { path: '/registro/:id', component: Registro},
+  { path: '/evento/:id', component: RegistroEvento,meta: {requiresAuth: true}},
   // Always leave this as last one,
   // but you can also remove it
   {
