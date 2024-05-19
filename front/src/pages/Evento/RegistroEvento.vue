@@ -121,6 +121,11 @@ export default {
         this.ci=''
         this.nombres=''
         this.carrera=''
+        this.$api.get(`eventoSearch/${this.codigo}`).then((response) => {
+          this.evento = response.data
+        }).finally(() => {
+          this.$q.loading.hide()
+        })
       }).finally(() => {
         this.loading=false
       }).catch(err => {
