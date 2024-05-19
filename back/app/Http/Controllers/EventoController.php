@@ -26,7 +26,9 @@ class EventoController extends Controller{
         return $evento;
     }
     public function show($id){
-        return Evento::findOrFail($id);
+        $evento= Evento::with('cupo')->findOrFail($id);
+        $evento->libres = $evento->cupos - $evento->cupo->count();
+        return $evento;
     }
     public function update(Request $request, $id){
         $evento = Evento::findOrFail($id);

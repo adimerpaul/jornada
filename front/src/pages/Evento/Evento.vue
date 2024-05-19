@@ -29,7 +29,7 @@
 <!--          <q-btn flat round dense icon="recycling" @click="eventoReset(props.row)" />-->
 <!--          <q-btn flat round dense icon="published_with_changes" @click="eventoChange(props.row)" />-->
 <!--          boton editar-->
-          <q-btn flat round dense icon="edit" @click="eventoChange(props.row)" />
+          <q-btn flat round dense icon="edit" @click="editClickEvent(props.row)" />
           <q-btn flat round dense icon="how_to_vote" @click="eventoChange(props.row)" />
         </template>
       </q-td>
@@ -290,6 +290,10 @@ export default {
           })
         })
       })
+    },
+    editClickEvent(row) {
+      this.evento = {...row}
+      this.eventoDialog = true
     },
     eventoAdd() {
       this.evento = {
