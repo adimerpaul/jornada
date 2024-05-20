@@ -2,10 +2,13 @@
   <q-page class="bg-grey-3">
     <q-card class="q-pa-md">
       <q-card-section class="q-pa-xs">
-        <div class="col-6 text-h5 text-bold text-center" style="text-transform: uppercase;">{{ evento.nombre }}<br><span class="text-h6">{{evento.descripcion}}</span></div>
-        <div class="col-12"><q-input dense square outlined v-model="cedula" label="Carnet" /></div>
-        <div class="col-12 q-pa-xs" align="center"> <q-btn color="green" label="Registrar"  @click="registro" :loading="loading" />
+        <div class="col-6 text-h5 text-bold text-center" style="text-transform: uppercase;">
+          {{ evento.nombre }}<br>
+<!--          <span class="text-h6">{{evento.descripcion}}</span>-->
         </div>
+<!--        <div class="col-12"><q-input dense square outlined v-model="cedula" label="Carnet" /></div>-->
+<!--        <div class="col-12 q-pa-xs" align="center"> <q-btn color="green" label="Registrar"  @click="registro" :loading="loading" />-->
+<!--        </div>-->
       </q-card-section>
       <div class="row">
         <div class="col-12 col-md-3">
@@ -72,7 +75,7 @@
                 <q-btn color="green" outline label="Validar" no-caps @click="registrar(props.row,'REGISTRADO')"
                        icon="mdi-check" dense :loading="loading" v-if="props.row.estado == 'PENDIENTE' || props.row.estado == 'ANULADO'" />
                 <q-btn color="red" outline label="Anular" no-caps @click="registrar(props.row,'ANULADO')"
-                       icon="mdi-close" dense :loading="loading" v-else-if="$store.role=='ADMINISTRADOR'" />
+                       icon="mdi-close" dense :loading="loading" v-else-if="$store.user.role=='ADMINISTRADOR'" />
 <!--                <pre>{{store.user}}</pre>-->
               </q-td>
             </template>
