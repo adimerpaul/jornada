@@ -54,10 +54,12 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::put('evento/{evento}', [\App\Http\Controllers\EventoController::class, 'update']);
     Route::delete('evento/{evento}', [\App\Http\Controllers\EventoController::class, 'destroy']);
     
-    Route::get('searchStudent/{ci}/{codigo}', [\App\Http\Controllers\EventoController::class, 'searchStudent']);
-    Route::post('buscarEventoEst', [\App\Http\Controllers\EventoCupoController::class, 'buscarEventoEst']);
-//    registroEvento
-    Route::put('registroEvento/{evento}', [\App\Http\Controllers\EventoController::class, 'registroEvento']);
+
 });
 Route::get('eventoCupoRegister/{ci}/{codigo}', [\App\Http\Controllers\EventoController::class, 'eventoCupoRegister']);
 Route::get('eventoSearch/{codigo}', [\App\Http\Controllers\EventoController::class, 'eventoSearch']);
+
+Route::get('searchStudent/{ci}/{codigo}', [\App\Http\Controllers\EventoController::class, 'searchStudent']);
+    Route::post('buscarEventoEst', [\App\Http\Controllers\EventoCupoController::class, 'buscarEventoEst']);
+//    registroEvento
+    Route::put('registroEvento/{evento}', [\App\Http\Controllers\EventoController::class, 'registroEvento']);
