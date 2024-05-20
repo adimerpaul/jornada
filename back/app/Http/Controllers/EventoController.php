@@ -10,8 +10,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller{
-    public function index(){
-        return Evento::orderBy('id', 'desc')->get();
+    public function index(Request $request){
+        if ($request->user()->role == 'ADMINISTRADOR') {
+            return Evento::orderBy('id', 'desc')->get();
+        }else{
+            return Evento::orderBy('id', 'desc')->where('estado', 'ACTIVO')->get();
+        }
     }
     public function store(Request $request){
         $codigo = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);

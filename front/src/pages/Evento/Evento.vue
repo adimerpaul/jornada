@@ -60,6 +60,7 @@
           <q-input v-model="evento.fecha_inicio" label="Inicio" type="datetime-local" outlined :rules="[val => !!val || 'Campo requerido']"/>
           <q-input v-model="evento.fecha_fin" label="Fin" type="datetime-local" outlined :rules="[val => !!val || 'Campo requerido']"/>
           <q-input v-model="evento.cupos" label="Cupos" type="number" outlined :rules="[val => !!val || 'Campo requerido']"/>
+          <q-select v-model="evento.estado" label="Estado" outlined :options="['ACTIVO','INACTIVO']" :rules="[val => !!val || 'Campo requerido']"/>
             <q-card-actions align="right">
               <q-btn flat label="Cancelar" v-close-popup />
               <q-btn color="primary" label="Guardar" type="submit" />
@@ -168,7 +169,7 @@ export default {
     },
     qrPrint(row){
       // console.log(row)
-      QRCode.toDataURL(process.env.API_FRONT+'registro/'+row.codigo)
+      QRCode.toDataURL(process.env.API_FRONT+'evento/'+row.codigo)
         .then(url => {
           this.$q.dialog({
             title: 'Código QR',
