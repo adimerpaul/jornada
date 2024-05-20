@@ -12,12 +12,12 @@ class EventoCupoController extends Controller
         //return $request;
         $res= EventoCupo::where('evento_id',$request->id)->where('ci',$request->ci)->count();
         if($res<1)
-            return response()->json(['message' => 'NO Esta Registrado el Estudiante'], 404); 
+            return response()->json(['message' => 'NO Esta Registrado el Estudiante'], 404);
 
-        $res= EventoCupo::where('evento_id',$request->id)->where('ci',$request->ci)->first();   
+        $res= EventoCupo::where('evento_id',$request->id)->where('ci',$request->ci)->first();
         //return $res;
         if($res->fecha_registro!=null)
-            return response()->json(['message' => 'Estudiante Ya recibio'], 404); 
+            return response()->json(['message' => 'Estudiante Ya recibio'], 404);
         else
         {
             $res->estado='REGISTRADO';
@@ -27,4 +27,5 @@ class EventoCupoController extends Controller
             return $res;
         }
     }
+
 }

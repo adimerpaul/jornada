@@ -22,6 +22,6 @@ class Evento extends Model
         'updated_at'
     ];
     public function cupo(){
-        return $this->hasMany(EventoCupo::class)->with(['user','cupo']);
+        return $this->hasMany(EventoCupo::class)->with(['user','cupoRegistro']);
     }
 }

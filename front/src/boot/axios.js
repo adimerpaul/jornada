@@ -19,6 +19,7 @@ export default boot(({ app ,router}) => {
   //       so you won't necessarily have to import axios in each vue file
   // app.config.globalProperties.$Oauth = Oauth
   app.config.globalProperties.$api = api
+  app.config.globalProperties.$store = useCounterStore()
   const token = localStorage.getItem('tokenJor')
 
   if (token) {

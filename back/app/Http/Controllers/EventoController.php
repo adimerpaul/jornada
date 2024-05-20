@@ -7,6 +7,7 @@ use App\Models\Evento;
 use App\Models\EventoCupo;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller{
     public function index(){
@@ -28,6 +29,7 @@ class EventoController extends Controller{
     public function show($id){
         $evento= Evento::with('cupo')->findOrFail($id);
         $evento->libres = $evento->cupos - $evento->cupo->count();
+        $evento->registrados = $evento->cupo->where('estado', 'REGISTRADO')->count();
         return $evento;
     }
     public function update(Request $request, $id){
@@ -92,43 +94,59 @@ class EventoController extends Controller{
     }
 
     function EventoCupoRegister($ci,$codigo){
-        $evento= Evento::where('codigo', $codigo)->where('estado', 'ACTIVO')->first();
-        if (!$evento) {
-            return response()->json(['message' => 'Evento no encontrado'], 404);
-        }
-        $fecha_inicio = strtotime($evento->fecha_inicio);
-        $fecha_fin = strtotime($evento->fecha_fin);
-        if (time() < $fecha_inicio || time() > $fecha_fin) {
-            return response()->json(['message' => 'Evento fuera de rango de fecha'], 404);
-        }
+        DB::beginTransaction();
+        try {
 
-        //veriifcar cantidad de cupos
-        $libres = $evento->cupos - $evento->cupo->count();
-        if ($libres <= 0) {
-            return response()->json(['message' => 'Evento sin cupos'], 404);
-        }
-//        $verificadmos si esta en evntocupo
-        $cupo = $evento->cupo->where('ci', $ci)->first();
-        if (!$cupo) {
-            $student = Student::where('ci', $ci)->first();
-            if (!$student) {
-                return response()->json(['message' => 'Estudiante no encontrado'], 404);
+            $evento= Evento::where('codigo', $codigo)->where('estado', 'ACTIVO')->first();
+            if (!$evento) {
+                return response()->json(['message' => 'Evento no encontrado'], 404);
             }
-            $newCupo = new Cupo();
-            $newCupo->ci = $ci;
-            $newCupo->nombres = $student->nombre;
-            $newCupo->direccion = $student->direccion;
-            $newCupo->save();
+            $fecha_inicio = strtotime($evento->fecha_inicio);
+            $fecha_fin = strtotime($evento->fecha_fin);
+            if (time() < $fecha_inicio || time() > $fecha_fin) {
+                return response()->json(['message' => 'Evento fuera de rango de fecha'], 404);
+            }
 
-            $eventoCupo = new EventoCupo();
-            $eventoCupo->evento_id = $evento->id;
-            $eventoCupo->cupos_id = $newCupo->id;
-            $eventoCupo->estado = 'PENDIENTE';
-            $eventoCupo->ci = $ci;
-            $eventoCupo->save();
+            //veriifcar cantidad de cupos
+            $libres = $evento->cupos - $evento->cupo->count();
+            if ($libres <= 0) {
+                return response()->json(['message' => 'Evento sin cupos'], 404);
+            }
+//        $verificadmos si esta en evntocupo
+            $cupo = $evento->cupo->where('ci', $ci)->first();
+            if (!$cupo) {
+                $student = Student::where('ci', $ci)->first();
+                if (!$student) {
+                    return response()->json(['message' => 'Estudiante no encontrado'], 404);
+                }
+                $newCupo = new Cupo();
+                $newCupo->ci = $ci;
+                $newCupo->nombres = $student->nombres;
+                $newCupo->carrera = $student->carrera;
+                $newCupo->save();
 
-        }else{
-            return response()->json(['message' => 'Estudiante ya registrado'], 404);
+                $eventoCupo = new EventoCupo();
+                $eventoCupo->evento_id = $evento->id;
+                $eventoCupo->cupos_id = $newCupo->id;
+                $eventoCupo->estado = 'PENDIENTE';
+                $eventoCupo->ci = $ci;
+                $eventoCupo->save();
+                DB::commit();
+            }else{
+                return response()->json(['message' => 'Estudiante ya registrado'], 404);
+            }
+        }catch (\Exception $e){
+            DB::rollBack();
+            return response()->json(['message' => 'Error al registrar'], 500);
         }
+    }
+
+    public function registroEvento(Request $request, $id){
+        $evento = EventoCupo::findOrFail($id);
+        $evento->estado = $request->estado;
+        $evento->fecha_registro = date('y-m-d H:i:s');
+        $evento->user_id = $request->user()->id;
+        $evento->save();
+        return $evento;
     }
 }

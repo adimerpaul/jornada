@@ -32,4 +32,7 @@ class EventoCupo extends Model
     public function student(){
         return $this->belongsTo(Student::class);
     }
+    public function cupoRegistro(){
+        return $this->belongsTo(Cupo::class, 'cupos_id');
+    }
 }

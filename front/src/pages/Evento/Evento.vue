@@ -32,6 +32,9 @@
           <q-btn flat round dense icon="edit" @click="editClickEvent(props.row)" />
           <q-btn flat round dense icon="how_to_vote" @click="eventoChange(props.row)" />
         </template>
+        <template v-if="store.user.role=='REFRIGERIO'">
+          <q-btn flat round dense icon="how_to_vote" @click="eventoChange(props.row)" />
+        </template>
       </q-td>
     </template>
     <template v-slot:body-cell-foto="props">
