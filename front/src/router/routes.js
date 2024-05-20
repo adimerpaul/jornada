@@ -34,7 +34,7 @@ const routes = [
     component: Login
   },
   { path: '/registro/:id', component: Registro},
-  { path: '/evento/:id', component: RegistroEvento,meta: {requiresAuth: true}},
+  { path: '/evento/:id', component: RegistroEvento},
   // Always leave this as last one,
   // but you can also remove it
   {
