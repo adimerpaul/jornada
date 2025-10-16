@@ -62,4 +62,7 @@ Route::get('eventoSearch/{codigo}', [\App\Http\Controllers\EventoController::cla
 Route::get('searchStudent/{ci}/{codigo}', [\App\Http\Controllers\EventoController::class, 'searchStudent']);
     Route::post('buscarEventoEst', [\App\Http\Controllers\EventoCupoController::class, 'buscarEventoEst']);
 //    registroEvento
-    
+
+Route::get('/',function(){
+    return response()->json(['message'=>'API de Gestion de Eventos y Cupos'],200);
+});
