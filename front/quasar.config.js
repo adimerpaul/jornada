@@ -153,18 +153,23 @@ module.exports = configure(function (ctx) {
 
     // https://v2.quasar.dev/quasar-cli-webpack/developing-pwa/configuring-pwa
     pwa: {
-      workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
-      workboxOptions: {}, // only for GenerateSW
+      workboxPluginMode: 'GenerateSW',
+      workboxOptions: {
+        // si usas history, esto ya apunta a tu index
+        navigateFallback: '/index.html',
+        // MUY IMPORTANTE: no aplicar app-shell a /api/*
+        navigateFallbackDenylist: [/^\/api\//],
 
-      // for the custom service worker ONLY (/src-pwa/custom-service-worker.[js|ts])
-      // if using workbox in InjectManifest mode
-
-      chainWebpackCustomSW (chain) {
-        chain.plugin('eslint-webpack-plugin')
-          .use(ESLintPlugin, [{ extensions: [ 'js' ] }])
+        // Y además, nunca cachear /api (ir directo a red)
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith('/api/'),
+            handler: 'NetworkOnly',
+          }
+        ]
       },
 
-
+      // (lo demás como ya lo tienes)
       manifest: {
         name: `jornadas`,
         short_name: `jornadas`,
@@ -174,31 +179,11 @@ module.exports = configure(function (ctx) {
         background_color: '#ffffff',
         theme_color: '#2A4F66',
         icons: [
-          {
-            src: 'logo.png',
-            sizes: '128x128',
-            type: 'image/png'
-          },
-          {
-            src: 'logo.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'logo.png',
-            sizes: '256x256',
-            type: 'image/png'
-          },
-          {
-            src: 'logo.png',
-            sizes: '384x384',
-            type: 'image/png'
-          },
-          {
-            src: 'logo.png',
-            sizes: '512x512',
-            type: 'image/png'
-          }
+          { src: 'logo.png', sizes: '128x128', type: 'image/png' },
+          { src: 'logo.png', sizes: '192x192', type: 'image/png' },
+          { src: 'logo.png', sizes: '256x256', type: 'image/png' },
+          { src: 'logo.png', sizes: '384x384', type: 'image/png' },
+          { src: 'logo.png', sizes: '512x512', type: 'image/png' }
         ]
       }
     },
