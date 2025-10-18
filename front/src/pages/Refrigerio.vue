@@ -78,7 +78,7 @@ export default {
       tarde:0,
       fechaprint: date.formatDate(new Date(), 'YYYY-MM-DD'),
       entrega:[
-        {fecha:'2022-11-13',turno:'MAÑANA',refrig:"Mini Pizzitas (cada racion de 2 piezas) + refresco de 300ml"},
+        {fecha:'2025-10-18',turno:'MAÑANA',refrig:"Mini Pizzitas (cada racion de 2 piezas) + refresco de 300ml"},
         {fecha:'2022-11-13',turno:'TARDE',refrig:"Postre de Oreo (cada racion de 2 piezas, tamaño mediano) + Vaso de Café"},
         {fecha:'2022-11-14',turno:'MAÑANA',refrig:"Mini Pizzitas (cada racion de 2 piezas) + refresco de 300ml"},
         {fecha:'2022-11-14',turno:'TARDE',refrig:"Postre de Oreo (cada racion de 2 piezas, tamaño mediano) + Vaso de Café"},
