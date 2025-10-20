@@ -29,6 +29,7 @@ class CupoController extends Controller
     public function updateRegistro(UpdateCupoRequest $request, Cupo $cupo){
         $request->validate([
             'ci' => 'required|unique:cupos,ci,'.$cupo->id,
+            'paquete_id' => 'required',
 //            'email' => 'required|unique:cupos,email,'.$cupo->id,
         ]);
         $query=Cupo::where('ci', $request->ci)->get();

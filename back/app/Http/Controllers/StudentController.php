@@ -19,6 +19,17 @@ class StudentController extends Controller{
         return Student::where('ci',$ci)->first();
     }
 
+    public function listCarrera(){
+        // array carreras
+        $res= DB::SELECT("SELECT DISTINCT(carrera) FROM students;");
+        $list=[];
+        foreach($res as $r){
+            $list[]=$r->carrera;
+        }
+        return $list;
+
+    }
+
     public function store(StoreStudentRequest $request){
         $student= new Student;
         $student->ci=$request->ci;

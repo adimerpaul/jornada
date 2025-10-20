@@ -137,10 +137,10 @@ class MaterialController extends Controller
             $material->user_id=$request->user()->id;
             $material->save();
             $material = new Material();
-            $material->nombre = "BARBIJO";
+            $material->nombre = "SOUVENIR";
             $material->fecha=date('Y-m-d');
             $material->hora=date('H:i:s');
-            $material->estado=$request->barbijo;
+            $material->estado=$request->souvenir;
             $material->cupo_id=$request->id;
             $material->user_id=$request->user()->id;
             $material->save();
@@ -183,8 +183,8 @@ class MaterialController extends Controller
             $material->user_id=$request->user()->id;
             $material->save();
             }
-            $material= Material::whereCupo_id($request->id)->whereNombre("BARBIJO")->first();
-            if ($material->estado==0 && $request->barbijo) {
+            $material= Material::whereCupo_id($request->id)->whereNombre("SOUVENIR")->first();
+            if ($material->estado==0 && $request->souvenir) {
             $material->fecha=date('Y-m-d');
             $material->estado=true;
             $material->user_id=$request->user()->id;

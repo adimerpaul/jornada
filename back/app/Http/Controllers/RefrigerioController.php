@@ -71,13 +71,15 @@ class RefrigerioController extends Controller
     {
         //
         $cupo=Cupo::where('ci',$request->ci)->first();
-        $refrigerio=Refrigerio::with('cupo')->with('user')->where('cupo_id',$cupo->id)->where('turno',$request->turno)->where('fecha',$request->fecha)->get();
+        if($cupo==null){
+            return response()->json(['message' => 'El CI no se encuentra registrado'], 500);
+        }
+        $refrigerio=Refrigerio::with('cupo')->with('user')->where('cupo_id',$cupo->id)->where('turno',$request->turno)->where('fecha',date('Y-m-d'))->get();
         if(sizeof($refrigerio)>0){
             return $refrigerio[0];
         }
         else{
             return response()->json(['message' => 'No se encuentra registrado'], 500);
-
         }
     }
 

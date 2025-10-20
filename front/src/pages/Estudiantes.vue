@@ -37,7 +37,11 @@
           >
           <q-input dense outlined v-model="estudiante.ci" label="Cedula de Identidad" autofocus @update:model-value="validar(estudiante.ci)" required/>
           <q-input dense outlined v-model="estudiante.nombres" label="Nombre Completo" required/>
-          <q-select dense outlined v-model="estudiante.carrera" label="Carrera" :options="carreras" required/>
+          <q-input dense outlined v-model="estudiante.carrera" label="Universidad" required list="carreras" id="carrera">
+            <datalist id="carreras">
+                <option :value="c" v-for="c in carreras" :key="c">{{c}}</option>
+            </datalist>
+          </q-input>
           <q-input dense outlined v-model="estudiante.celular" label="Celular" />
           <q-input dense outlined v-model="estudiante.direccion" label="Direccion" />
           <div v-if="val">{{mensaje}}</div>
@@ -62,7 +66,11 @@
           >
           <q-input dense outlined v-model="estudiante2.ci" label="Cedula de Identidad" required readonly/>
           <q-input dense outlined v-model="estudiante2.nombres" label="Nombre Completo" required/>
-          <q-select dense outlined v-model="estudiante2.carrera" label="Carrera" :options="carreras" required/>
+          <q-input dense outlined v-model="estudiante2.carrera" label="Universidad" required list="carreras" id="carrera">
+            <datalist id="carreras">
+                <option :value="c" v-for="c in carreras" :key="c">{{c}}</option>
+            </datalist>
+          </q-input>
           <q-input dense outlined v-model="estudiante2.celular" label="Celular" />
           <q-input dense outlined v-model="estudiante2.direccion" label="Direccion" />
           <div>
@@ -103,7 +111,7 @@
             {name:'ci', label:'C.I.', field:'ci', align:'left', sortable:true},
             {name:'id', label:'ID', field:'id', align:'left', sortable:true},
             {name:'nombre', label:'Nombre', field:'nombres', align:'left', sortable:true},
-            {name:'carrera', label:'Carrera', field:'carrera', align:'left', sortable:true},
+            {name:'carrera', label:'Universidad', field:'carrera', align:'left', sortable:true},
             {name:'celular', label:'Celular', field:'celular', align:'left', sortable:true},
             {name:'direccion', label:'direccion', field:'direccion', align:'left', sortable:true},
           ],
@@ -133,11 +141,17 @@
       created() {
         // if (this.store.cupos.length === 0) {
           this.cupoGet();
+          this.getCarreras();
         // }
       },
       computed: {
       },
       methods: {
+        getCarreras(){
+          this.$api.get(`listCarrera`).then((res) => {
+              this.carreras=res.data
+          })
+        },
         delteEst(est){
           this.$q.dialog({
             title: 'Eliminar Estudiante',

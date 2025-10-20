@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cupo>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Workshop>
  */
-class CupoFactory extends Factory
+class WorkshopFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,7 @@ class CupoFactory extends Factory
     public function definition()
     {
         return [
-            'codigo' => $this->faker->bothify('#?#?'),
-            'paquete_id'=>null
+            //
         ];
     }
 }

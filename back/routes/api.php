@@ -32,6 +32,9 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
 
     Route::apiResource('user', \App\Http\Controllers\UserController::class);
     Route::apiResource('refrigerio', \App\Http\Controllers\RefrigerioController::class);
+    Route::apiResource('paquete', \App\Http\Controllers\PaqueteController::class);
+    Route::apiResource('sala', \App\Http\Controllers\SalaController::class);
+    
     Route::post('totalreg', [\App\Http\Controllers\RefrigerioController::class, 'totalreg']);
     Route::post('printRefri', [\App\Http\Controllers\RefrigerioController::class, 'printRefri']);
 
@@ -56,6 +59,8 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::put('registroEvento/{evento}', [\App\Http\Controllers\EventoController::class, 'registroEvento']);
 
 });
+ 
+    Route::get('listCarrera', [\App\Http\Controllers\StudentController::class, 'listCarrera']);
 Route::get('eventoCupoRegister/{ci}/{codigo}', [\App\Http\Controllers\EventoController::class, 'eventoCupoRegister']);
 Route::get('eventoSearch/{codigo}', [\App\Http\Controllers\EventoController::class, 'eventoSearch']);
 

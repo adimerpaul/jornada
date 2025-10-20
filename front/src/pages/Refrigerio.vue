@@ -4,11 +4,11 @@
     <q-card>
       <q-card-section>
         <div class="row">
-            <div class="col-6">
+            <div class="col-4">
               <small class="text-bold text-subtitle1">Fecha actual:</small> {{ fechaActual }}
-              <q-input square outlined v-model="fechaprint" label="fecha"  type="date"/>
+              <!--<q-input square outlined v-model="fechaprint" label="fecha"  type="date"/>-->
             </div>
-          <div class="col-6">
+          <div class="col-4">
             <q-toggle
               :label="turno"
               color="primary"
@@ -17,6 +17,13 @@
               v-model="turno"
             />
           </div>
+          <div class="col-4">
+                <q-option-group
+                  :options="salas"
+                  type="radio"
+                  v-model="sala"
+                />
+          </div>          
           <div class="col-12 q-px-lg">
             <q-form >
               <q-input label="Colocar el lector"   v-model="ci" outlined />
@@ -71,6 +78,8 @@ export default {
   data() {
     return {
       ci: '',
+      salas:[],
+      sala:{},
       turno: 'MAÑANA',
       fechaActual: date.formatDate(new Date(), 'DD/MM/YYYY'),
       total:0,
@@ -95,8 +104,23 @@ export default {
   },
   created() {
   this.totalreg()
+  this.getSalas()
   },
   methods: {
+    getSalas() {
+      this.$api.get('sala')
+        .then(response => {
+          console.log(response.data)
+          response.data.forEach(element => {
+              element.label= element.nombre
+              element.value= element.id
+          });
+          this.salas = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     totalreg(){
       this.$api.post('totalreg',{
         fecha: date.formatDate(new Date(), 'YYYY-MM-DD'),
@@ -226,7 +250,7 @@ export default {
       this.$api.post('printRefri/',{
         ci: this.ci,
         turno: this.turno,
-        fecha: this.fechaprint,
+        fecha: this.fechaActual,
       })
         .then((response) => {
           console.log(response.data)

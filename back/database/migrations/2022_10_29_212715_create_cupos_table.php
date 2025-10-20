@@ -27,7 +27,10 @@ return new class extends Migration
             $table->boolean('folder')->nullable()->default(false);
             $table->boolean('barbijo')->nullable()->default(false);
             $table->boolean('certificado')->nullable()->default(false);
+            $table->boolean('cd')->nullable()->default(false);
             $table->string('tipo')->default('PARTICIPANTE');
+            $table->unsignedBigInteger('paquete_id')->nullable();
+            $table->foreign('paquete_id')->references('id')->on('paquetes'); 
             $table->timestamps();
         });
     }

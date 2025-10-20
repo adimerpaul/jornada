@@ -77,6 +77,13 @@
                   class="q-mb-md"
                 />
               </div>
+              <div class="col-12 col-sm-12 q-px-xs" >
+                <q-select square outlined v-model="paquete" :options="paquetes" label="Paquete *" />
+              </div>
+              <div class="col-12 col-sm-12 q-px-xs" v-if="paquete">
+                <div v-for="tema in paquete.conferencias" :key="tema">{{tema.codigo}} - {{tema.tema}}</div>
+              </div>
+
               <div v-if="reg" class="q-pa-xs text-bold text-red">{{mensaje}}</div>
               <div class="col-12 col-sm-12 q-px-xs flex flex-center q-pb-xs">
                 <q-uploader
@@ -143,6 +150,8 @@ export default {
         'OTROS'
       ],
       cupoBool: true,
+      paquetes: [],
+      paquete: {label:''},
       cupo: {
         ci: "",
         nombres: "",
@@ -177,8 +186,18 @@ export default {
     }).finally(() => {
       this.$q.loading.hide()
     })
+    this.getPaquetes()
+
   },
   methods: {
+    getPaquetes() {
+      this.$api.get(`paquete`).then((response) => {
+        response.data.forEach(element => {
+            element.label= element.nombre +' - ' + element.descripcion
+        });
+        this.paquetes = response.data
+      })
+    },
     validar(ci){
       this.$api.post('validaCupon/'+ci).then(response => {
         console.log(response.data)
@@ -200,12 +219,12 @@ export default {
           doc.addImage(img, 'jpg', 1, 0.5, 19, 2)
           doc.setFont(undefined,'bold')
           doc.setFontSize(12);
-          doc.text(5, 3, 'II JORNADAS DE TECNOLGIAS DE COMUNICACION 2022')
+          doc.text(5, 3, 'CCBOL 2025')
           doc.text(8, 3.5, 'FORMULARIO DE INSCRIPCION')
           doc.text(8, 4.5, 'DATOS DEL PARTICIPANTE')
           doc.text(3, 5, 'CI')
           doc.text(3, 5.5, 'NOMBRE')
-          doc.text(3, 6, 'CARRERA')
+          doc.text(3, 6, 'UNIVERSIDAD')
           doc.text(3, 6.5, 'CELULAR')
           doc.text(3, 7, 'CORREO')
           doc.setFont(undefined,'normal')
@@ -288,6 +307,15 @@ export default {
         })
         return false
       }
+      if(this.paquete.id==undefined){
+        this.$q.notify({
+          message: 'Tienes que seleccionar un paquete',
+          type: 'negative',
+          icon: 'warning',
+          position: 'top'
+        })
+        return false
+      }
       this.$q.dialog({
         title: 'Confirmación',
         message: '¿Estas seguro de registrar este cupo?',
@@ -296,6 +324,7 @@ export default {
       }).onOk(() => {
         this.$q.loading.show()
         this.cupo.foto=this.foto
+        this.cupo.paquete_id=this.paquete.id
         this.cupo.nombres= this.cupo.nombres.toUpperCase()
         this.$api.put(`updateRegistro/${this.cupo.id}`, this.cupo).then((response) => {
           console.log(this.cupo)

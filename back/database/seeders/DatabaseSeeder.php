@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             CupoSeeder::class,
+            IntermedioSeeder::class,
+            PaqueteSeeder::class,
+            SalaSeeder::class
         ]);
     }
 }

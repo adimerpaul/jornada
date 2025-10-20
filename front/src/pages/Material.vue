@@ -19,7 +19,7 @@
             <q-checkbox v-model="boligrafo" label="Boligrafo" />
           </div>
           <div class="col-xs-12 col-sm-2 ">
-            <q-checkbox v-model="barbijo" label="Barbijo" />
+            <q-checkbox v-model="souvenir" label="Souvenir" />
           </div>
           <div class="col-xs-12 col-sm-2 ">
             <q-checkbox v-model="certificado" label="Certificado" />
@@ -63,10 +63,10 @@
       <div class="col-12 col-sm-4 q-pa-md">
         <q-card class="bg-blue">
           <q-card-section>
-            <div class="text-h6 text-white">Barbijo <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
+            <div class="text-h6 text-white">Souvenir <q-btn flat dense @click="totalreg" icon="refresh" /> </div>
           </q-card-section>
           <q-card-section>
-            <div class="text-h2 text-white">{{nbarbijo}}</div>
+            <div class="text-h2 text-white">{{nsouvenir}}</div>
           </q-card-section>
         </q-card>
       </div>
@@ -131,13 +131,13 @@ export default {
     return {
       credencial: false,
       folder: false,
-      barbijo: false,
+      souvenir: false,
       certificado: false,
       cd: false,
       boligrafo: false,
       ncred: 0,
       nfolder: 0,
-      nbarbijo: 0,
+      nsouvenir: 0,
       ncert: 0,
       ncd: 0,
       nbol: 0,
@@ -212,7 +212,7 @@ export default {
         console.log(res.data)
         this.ncred=res.data[0].cantcred
         this.nfolder=res.data[0].cantfolder
-        this.nbarbijo=res.data[0].cantbar
+        this.nsouvenir=res.data[0].cantbar
         this.ncert=res.data[0].cantcert
         this.ncd=res.data[0].cantcd
         this.nbol=res.data[0].cantbol
@@ -223,7 +223,7 @@ export default {
       this.cupo={}
       this.credencial=false
         this.folder=false
-        this.barbijo=false
+        this.souvenir=false
         this.certificado=false
         this.cd=false
         this.boligrafo=false
@@ -232,14 +232,14 @@ export default {
         this.cupo=response.data
         // this.certificado=false
         // this.folder=false
-        // this.barbijo=false
+        // this.souvenir=false
         // this.certificado=false
         // this.cd=false
         this.cupo.materials.forEach(r => {
 
             if(r.nombre=='CREDENCIAL Y PORTA CREDENCIAL') this.credencial=r.estado==1?true:false
             if(r.nombre=='FOLDER') this.folder=r.estado==1?true:false
-            if(r.nombre=='BARBIJO') this.barbijo=r.estado==1?true:false
+            if(r.nombre=='SOUVENIR') this.souvenir=r.estado==1?true:false
             if(r.nombre=='CERTIFICADO') this.certificado=r.estado==1?true:false
             if(r.nombre=='CD') this.cd=r.estado==1?true:false
             if(r.nombre=='BOLIGRAFO') this.boligrafo=r.estado==1?true:false
@@ -266,7 +266,7 @@ export default {
         return false
       }
       //if (this.cupo.materials) {
-        if (!this.credencial && !this.folder && !this.barbijo && !this.certificado && !this.cd && ! this.boligrafo) {
+        if (!this.credencial && !this.folder && !this.souvenir && !this.certificado && !this.cd && ! this.boligrafo) {
             this.$q.notify({
               message: 'No se puede entregar material sin seleccionar',
               color: 'negative',
@@ -365,7 +365,7 @@ export default {
             })
         return false
       }
-      if (!this.credencial && !this.folder && !this.barbijo && !this.certificado && !this.cd && ! this.boligrafo) {
+      if (!this.credencial && !this.folder && !this.souvenir && !this.certificado && !this.cd && ! this.boligrafo) {
             this.$q.notify({
               message: 'No se puede entregar material sin seleccionar',
               color: 'negative',
@@ -379,7 +379,7 @@ export default {
       this.$api.post('material', {id:this.cupo.id,
         credencial: this.credencial,
         folder: this.folder,
-        barbijo: this.barbijo,
+        souvenir: this.souvenir,
         certificado: this.certificado,
         cd: this.cd,
         boligrafo: this.boligrafo,
@@ -470,12 +470,12 @@ export default {
             e.print( document.getElementById('myelement') )*/
           // this.credencial = false
           // this.folder = false
-          // this.barbijo = false
+          // this.souvenir = false
           // this.certificado = false
           this.cupo = {}
           this.credencial=false
           this.folder=false
-          this.barbijo=false
+          this.souvenir=false
           this.certificado=false
           this.cd=false
           this.boligrafo=false

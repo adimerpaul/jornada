@@ -23,6 +23,9 @@ class Cupo extends Model
         'barbijo',
         'certificado',
         'tipo',
+        'cd',
+        'paquete_id',
+
     ];
 
     public function materials()
