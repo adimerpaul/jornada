@@ -14,6 +14,8 @@ class Refrigerio extends Model
     'turno',
     'cupo_id',
     'user_id',
+    'sala_id',
+    'intermedio_id'
     ];
 
     public function cupo()
@@ -24,6 +26,16 @@ class Refrigerio extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function sala()
+    {
+        return $this->belongsTo(Sala::class);
+    }
+
+    public function intermedio()
+    {
+        return $this->belongsTo(Intermedio::class);
     }
 
 }

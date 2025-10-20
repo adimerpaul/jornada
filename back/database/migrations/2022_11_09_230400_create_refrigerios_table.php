@@ -19,7 +19,11 @@ return new class extends Migration
             $table->time('hora');
             $table->string('turno');
             $table->unsignedBigInteger('cupo_id');
-            $table->foreign('cupo_id')->references('id')->on('cupos');      
+            $table->foreign('cupo_id')->references('id')->on('cupos');  
+            $table->unsignedBigInteger('sala_id');
+            $table->foreign('sala_id')->references('id')->on('salas');      
+            $table->unsignedBigInteger('intermedio_id');
+            $table->foreign('intermedio_id')->references('id')->on('intermedios'); 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');     
             $table->timestamps();

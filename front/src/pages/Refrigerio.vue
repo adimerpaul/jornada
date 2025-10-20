@@ -23,9 +23,9 @@
                   type="radio"
                   v-model="sala"
                 />
-          </div>          
+          </div>       
           <div class="col-12 q-px-lg">
-            <q-form >
+            <q-form @submit.prevent="refrigerioInsert">
               <q-input label="Colocar el lector"   v-model="ci" outlined />
             </q-form>
             <q-btn color="accent" icon="print" label="Re Impresion" @click="refrigerioPrint" />
@@ -79,7 +79,7 @@ export default {
     return {
       ci: '',
       salas:[],
-      sala:{},
+      sala:'',
       turno: 'MAÑANA',
       fechaActual: date.formatDate(new Date(), 'DD/MM/YYYY'),
       total:0,
@@ -136,18 +136,29 @@ export default {
         })
     },
     refrigerioInsert() {
+      if(this.ci==''){
+        this.$q.notify({message: 'Ingrese un CI', color: 'red-4', textColor: 'white', icon: 'done', position: 'top',})
+        return false;}
+      if(this.sala==''){
+        this.$q.notify({message: 'Seleccione una sala', color: 'red-4', textColor: 'white', icon: 'done', position: 'top',})
+        return false;
+      }
       this.$q.loading.show()
       this.$api.post('refrigerio/',{
         ci: this.ci,
         turno: this.turno,
+        sala_id : this.sala,
         fecha: date.formatDate(new Date(), 'YYYY-MM-DD'),
         hora: date.formatDate(new Date(), 'HH:mm:ss')
       })
         .then((response) => {
+          console.log(response.data)
           let idRefrigerio = response.data.id
           this.totalreg()
           let student = response.data.cupo
           let user = response.data.user
+          let sala = response.data.sala
+          let inter = response.data.intermedio
           this.$q.loading.hide()
           this.$q.notify({
             message: 'Se ha entregado el refrigerio',
@@ -159,36 +170,31 @@ export default {
           const d = new Printd()
           let fecha = date.formatDate(new Date(), 'DD/MM/YYYY HH:mm:ss')
           let re=''
-          this.entrega.forEach(r => {
-            if(r.fecha==date.formatDate(new Date(), 'YYYY-MM-DD') && r.turno==this.turno){
-              re=r.refrig
-            }
-          });
 
           document.getElementById('myelement').innerHTML = `
-<style>
-.center {
-  text-align: center;
-}
-.left {
-  text-align: left;
-}
-.right {
-  text-align: right;
-}
-.bold {
-  text-weight: bold;
-}
-</style>
+              <style>
+              .center {
+                text-align: center;
+              }
+              .left {
+                text-align: left;
+              }
+              .right {
+                text-align: right;
+              }
+              .bold {
+                text-weight: bold;
+              }
+              </style>
           <div class="right bold"> <b>${idRefrigerio}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>TICKET REFRIGERIO</b></div>
+          <div class="center bold"> <b>TICKET REFRIGERIO ${sala.nombre}</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
-          <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          <div class="left "> <b>Refrigerio: </b> ${inter.refrig}</div>
           <div class="left "> <b>User: </b> ${user.name}</div>
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
@@ -197,28 +203,29 @@ export default {
 
           const e = new Printd()
           document.getElementById('myelement').innerHTML = `
-<style>
-.center {
-  text-align: center;
-}
-.left {
-  text-align: left;
-}
-.right {
-  text-align: right;
-}
-.bold {
-  text-weight: bold;
-}
-</style>
+            <style>
+            .center {
+              text-align: center;
+            }
+            .left {
+              text-align: left;
+            }
+            .right {
+              text-align: right;
+            }
+            .bold {
+              text-weight: bold;
+            }
+            </style>
           <div class="right bold"> <b>${idRefrigerio}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>TICKET REFRIGERIO</b></div>
+          <div class="center bold"> <b>TICKET REFRIGERIO ${sala.nombre}</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${this.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
+          <div class="left "> <b>Refrigerio: </b> ${inter.refrig}</div>
           <div class="left "> <b>User: </b> ${user.name}</div>
 `
           e.print( document.getElementById('myelement') )
@@ -246,11 +253,14 @@ export default {
     refrigerioPrint() {
       if(this.ci==undefined || this.ci=='')
       return false
+      if(this.sala==undefined || this.sala=='')
+      return false
       this.$q.loading.show()
       this.$api.post('printRefri/',{
         ci: this.ci,
         turno: this.turno,
         fecha: this.fechaActual,
+        sala_id : this.sala
       })
         .then((response) => {
           console.log(response.data)
@@ -258,14 +268,12 @@ export default {
           let student = response.data.cupo
           let refrigerio=response.data
           let user=response.data.user
+          let sala = response.data.sala
+          let inter = response.data.intermedio
+          this.sala=''
           this.$q.loading.hide()
           const d = new Printd()
           let re=''
-          this.entrega.forEach(r => {
-            if(r.fecha==refrigerio.fecha && r.turno==refrigerio.turno){
-              re=r.refrig
-            }
-          });
 
           document.getElementById('myelement').innerHTML = `
               <style>
@@ -285,12 +293,12 @@ export default {
               <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>TICKET REFRIGERIO </b></div>
+          <div class="center bold"> <b>TICKET REFRIGERIO ${sala.nombre}</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} ${refrigerio.hora}</div>
-          <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          <div class="left "> <b>Refrigerio: </b> ${inter.refrig}</div>
           <div class="left "> <b>User: </b> ${user.name}</div>
 
           <div style="border-top: 2px dotted #1a202c;margin-top: 50px" class="center">FIRMA</div>
@@ -316,12 +324,12 @@ export default {
           <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>CONTROL REFRIGERIO </b></div>
+          <div class="center bold"> <b>CONTROL REFRIGERIO ${sala.nombre} </b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} </div>
-          <div class="left "> <b>Refrigerio: </b> ${re}</div>
+          <div class="left "> <b>Refrigerio: </b> ${inter.refrig}</div>
           <div class="left "> <b>User: </b> ${user.name}</div>
           <div class="left "> <b>Nota: </b> Este boucher le da derecho a recoger su refrigerio</div>
 `
@@ -336,6 +344,7 @@ export default {
 
       })
         .catch((error) => {
+          console.log(error)
           this.$q.loading.hide()
           this.$q.notify({
             message: error.response.data.message,

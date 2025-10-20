@@ -6,6 +6,7 @@ use App\Models\Cupo;
 use App\Models\Refrigerio;
 use App\Http\Requests\StoreRefrigerioRequest;
 use App\Http\Requests\UpdateRefrigerioRequest;
+use App\Models\Intermedio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -49,16 +50,30 @@ class RefrigerioController extends Controller
     {
         //
         $cupo=Cupo::where('ci',$request->ci)->first();
-        $refrigerio=Refrigerio::where('cupo_id',$cupo->id)->where('turno',$request->turno)->where('fecha',$request->fecha)->get();
+        if($cupo==null){
+            return response()->json(['message' => 'El CI no se encuentra registrado'], 500);
+        }
+        $inter= Intermedio::where('fecha',date('Y-m-d'))->where('turno',$request->turno)->firstOrFail();
+        if(!$inter){
+            return response()->json(['message' => 'No se encuentra registrado el turno'], 500);
+        }
+
+        $refrigerio=Refrigerio::where('cupo_id',$cupo->id)
+        ->where('turno',$request->turno)
+        ->where('sala_id',$request->sala_id)
+        ->where('fecha',date('Y-m-d'))->get();
+
         if(sizeof($refrigerio)==0){
             $refri=new Refrigerio;
             $refri->fecha=$request->fecha;
             $refri->hora=$request->hora;
             $refri->turno=$request->turno;
             $refri->cupo_id=$cupo->id;
+            $refri->sala_id=$request->sala_id;
             $refri->user_id=$request->user()->id;
+            $refri->intermedio_id=$inter->id;
             $refri->save();
-            $refu=Refrigerio::where('id',$refri->id)->with('cupo')->with('user')->first();
+            $refu=Refrigerio::where('id',$refri->id)->with('cupo','sala','intermedio')->with('user')->first();
             return $refu;
         }
         else{
@@ -74,7 +89,12 @@ class RefrigerioController extends Controller
         if($cupo==null){
             return response()->json(['message' => 'El CI no se encuentra registrado'], 500);
         }
-        $refrigerio=Refrigerio::with('cupo')->with('user')->where('cupo_id',$cupo->id)->where('turno',$request->turno)->where('fecha',date('Y-m-d'))->get();
+
+        $refrigerio=Refrigerio::with('cupo','sala','intermedio')->with('user')
+        ->where('cupo_id',$cupo->id)
+        ->where('turno',$request->turno)
+        ->where('fecha',date('Y-m-d'))->get();
+
         if(sizeof($refrigerio)>0){
             return $refrigerio[0];
         }
