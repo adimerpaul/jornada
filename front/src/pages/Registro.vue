@@ -219,7 +219,7 @@ export default {
           doc.addImage(img, 'jpg', 1, 0.5, 19, 2)
           doc.setFont(undefined,'bold')
           doc.setFontSize(12);
-          doc.text(5, 3, 'CCBOL 2025')
+          doc.text(5, 3, 'CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025')
           doc.text(8, 3.5, 'FORMULARIO DE INSCRIPCION')
           doc.text(8, 4.5, 'DATOS DEL PARTICIPANTE')
           doc.text(3, 5, 'CI')

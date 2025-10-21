@@ -22,6 +22,7 @@
                   :options="salas"
                   type="radio"
                   v-model="sala"
+                  @update:model-value="totalreg"
                 />
           </div>       
           <div class="col-12 q-px-lg">
@@ -79,7 +80,7 @@ export default {
     return {
       ci: '',
       salas:[],
-      sala:'',
+      sala:0,
       turno: 'MAÑANA',
       fechaActual: date.formatDate(new Date(), 'DD/MM/YYYY'),
       total:0,
@@ -124,6 +125,7 @@ export default {
     totalreg(){
       this.$api.post('totalreg',{
         fecha: date.formatDate(new Date(), 'YYYY-MM-DD'),
+        sala_id : this.sala
       })
         .then(response => {
           console.log(response.data)
@@ -189,6 +191,7 @@ export default {
           <div class="right bold"> <b>${idRefrigerio}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>          
           <div class="center bold"> <b>TICKET REFRIGERIO ${sala.nombre}</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
@@ -220,6 +223,7 @@ export default {
           <div class="right bold"> <b>${idRefrigerio}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>          
           <div class="center bold"> <b>TICKET REFRIGERIO ${sala.nombre}</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
@@ -293,9 +297,10 @@ export default {
               <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>          
           <div class="center bold"> <b>TICKET REFRIGERIO ${sala.nombre}</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
-          <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
+          <div class="left "> <b>Universidad: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} ${refrigerio.hora}</div>
           <div class="left "> <b>Refrigerio: </b> ${inter.refrig}</div>
@@ -324,9 +329,10 @@ export default {
           <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
+          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>          
           <div class="center bold"> <b>CONTROL REFRIGERIO ${sala.nombre} </b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
-          <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
+          <div class="left "> <b>Universidad: </b> ${student.carrera}</div>
           <div class="left "> <b>Turno: </b> ${refrigerio.turno}</div>
           <div class="left "> <b>Fecha hora: </b> ${refrigerio.fecha} </div>
           <div class="left "> <b>Refrigerio: </b> ${inter.refrig}</div>

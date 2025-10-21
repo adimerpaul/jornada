@@ -311,7 +311,7 @@ export default {
           <div class="right bold"> <b>${student.ci}-${student.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022</b></div>
+          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>
@@ -427,7 +427,7 @@ export default {
           <div class="right bold"> <b>${student.ci}-${student.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>II JORNADAS DE TECNOLOGIAS DE COMUNICACIÓN 2022</b></div>
+          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
           <div class="left "> <b>Fecha hora: </b> ${fecha}</div>

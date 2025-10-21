@@ -41,9 +41,16 @@ class RefrigerioController extends Controller
      */
     public function totalreg(Request $request){
 //        return DB::select("SELECT turno,count(*) total FROM `refrigerios` WHERE fecha='$request->fecha' GROUP BY turno;");
+        if($request->sala_id==0){
         return DB::SELECT("SELECT (select count(*) from cupos where ci is not null) total,
          (select COUNT(*) from refrigerios where turno='MAÑANA' and date(fecha)='$request->fecha' AND user_id=".$request->user()->id.") manana,
         (select COUNT(*) from refrigerios where turno='TARDE' and date(fecha)='$request->fecha' AND user_id=".$request->user()->id.") tarde");
+    }
+        else{
+            return DB::SELECT("SELECT (select count(*) from cupos where ci is not null) total,
+         (select COUNT(*) from refrigerios where turno='MAÑANA' and date(fecha)='$request->fecha' AND user_id=".$request->user()->id." AND sala_id=".$request->sala_id.") manana,
+        (select COUNT(*) from refrigerios where turno='TARDE' and date(fecha)='$request->fecha' AND user_id=".$request->user()->id." AND sala_id=".$request->sala_id.") tarde");
+        }
 
     }
     public function store(StoreRefrigerioRequest $request)
