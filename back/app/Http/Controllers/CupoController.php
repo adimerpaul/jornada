@@ -23,6 +23,7 @@ class CupoController extends Controller
         return Cupo::where('codigo', $codigo)->first();
     }
     public function update(UpdateCupoRequest $request, Cupo $cupo){
+        return $cupo;
         $cupo->update($request->all());
         return $cupo;
     }
