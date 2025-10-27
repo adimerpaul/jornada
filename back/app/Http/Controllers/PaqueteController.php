@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paquete;
+use App\Models\Cupo;
 use App\Http\Requests\StorePaqueteRequest;
 use App\Http\Requests\UpdatePaqueteRequest;
 
@@ -15,8 +16,16 @@ class PaqueteController extends Controller
      */
     public function index()
     {
-        //
-        return Paquete::with('conferencias')->get();
+        // verificar si existe limite cantidad cupo y recuperar solo si no supera limit
+        $res = Paquete::with('conferencias')->get();
+        foreach ($res as $paquete) {
+            $cupos = Cupo::where('paquete_id', $paquete->id)->get();
+            if (sizeof($cupos) >= $paquete->limite) {
+                $res->remove($paquete);
+            }
+        }
+        return $res;
+        //return Paquete::with('conferencias')->get();
     }
 
     /**
