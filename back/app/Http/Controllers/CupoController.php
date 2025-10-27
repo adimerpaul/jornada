@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cupo;
+use App\Models\Paquete;
 use App\Http\Requests\StoreCupoRequest;
 use App\Http\Requests\UpdateCupoRequest;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -22,8 +24,32 @@ class CupoController extends Controller
     public function show($codigo){
         return Cupo::where('codigo', $codigo)->first();
     }
+    public function totalPaquete(){
+        // total de por paquete ver el nombre  y este registrafo cedula no nulo
+        return DB::select("SELECT 
+    p.id AS paquete_id,
+    p.nombre,
+    p.descripcion,
+    p.limite - COALESCE(COUNT(c.id), 0)   AS total
+FROM paquetes p
+LEFT JOIN cupos c 
+    ON c.paquete_id = p.id
+    AND c.ci IS NOT NULL
+    AND c.paquete_id IS NOT NULL
+GROUP BY 
+    p.id, p.nombre, p.descripcion, p.limite
+ORDER BY 
+    p.id ASC;");        
+    }
+    
     public function update(UpdateCupoRequest $request, Cupo $cupo){
 //        return $cupo;
+        // verificar por paquete_id solo exista 300 cupos
+        $cupos = Cupo::where('paquete_id', $request->paquete_id)->get();
+        $paquete = Paquete::find($request->paquete_id);
+        if (sizeof($cupos) >= $paquete->limite) {
+            return response()->json(['message' => 'El paquete ya se encuentra lleno'], 500);
+        }
         $cupo->update($request->all());
         return $cupo;
     }

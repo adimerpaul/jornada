@@ -26,6 +26,8 @@ Route::apiResource('cupo', \App\Http\Controllers\CupoController::class);
 Route::apiResource('student', \App\Http\Controllers\StudentController::class);
 Route::put('updateRegistro/{cupo}', [\App\Http\Controllers\CupoController::class, 'updateRegistro']);
 Route::get('paquete',[\App\Http\Controllers\PaqueteController::class, 'index']);
+Route::get('totalPaquete',[\App\Http\Controllers\CupoController::class, 'totalPaquete']);
+
 Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::post('me', [\App\Http\Controllers\UserController::class, 'me']);
     Route::post('logout', [\App\Http\Controllers\UserController::class, 'logout']);

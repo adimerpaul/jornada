@@ -14,6 +14,7 @@
             Este cupo ya fue registrado
           </div>
           <q-form class="q-pa-lg" v-else @submit.prevent="cupoUpdate">
+            <div v-for="r in informacion" :key="r"><b>{{r.nombre}} : </b> {{ r.descripcion }} <b>CUPO DISPONIBLE : </b>{{ r.total }}</div>
             <div class="row">
               <div class="col-12 col-sm-6 q-px-xs"  >
                 <q-input
@@ -129,6 +130,7 @@ export default {
   name: `Registro`,
   data() {
     return {
+      informacion:[],
       carreas:[
     'INGENIERIA CIVIL (MENCION ESTRUCTURAS)',
     'INGENIERIA CIVIL (MENCION HIDRAULICA)',
@@ -187,9 +189,16 @@ export default {
       this.$q.loading.hide()
     })
     this.getPaquetes()
+    this.getCupoPaquete()
 
   },
   methods: {
+    getCupoPaquete() {
+        this.$api.get('totalPaquete').then((response) => {
+          console.log(response.data)
+            this.informacion = response.data
+        })
+    },
     getPaquetes() {
       this.$api.get(`paquete`).then((response) => {
         response.data.forEach(element => {

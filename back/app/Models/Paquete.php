@@ -14,6 +14,7 @@ class Paquete extends Model implements Auditable
     protected $fillable = [
         'nombre',
         'descripcion',
+        'limite',
     ];
 
     public function conferencias()
