@@ -30,7 +30,8 @@ class CupoController extends Controller
     p.id AS paquete_id,
     p.nombre,
     p.descripcion,
-    p.limite - COALESCE(COUNT(c.id), 0)   AS total
+    p.limite - COALESCE(COUNT(c.id), 0)   AS total,
+    p.limite
 FROM paquetes p
 LEFT JOIN cupos c 
     ON c.paquete_id = p.id

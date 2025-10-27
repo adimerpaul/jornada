@@ -27,7 +27,7 @@
             <div class="text-h6 text-white">{{r.nombre}} <q-btn flat dense @click="getCupoPaquete" icon="refresh" /> </div>
           </q-card-section>
           <q-card-section>
-            <div class="text-h2 text-white">{{r.total}}</div>
+            <div class="text-h2 text-white">{{r.total}}/{{r.limite}}</div>
           </q-card-section>
         </q-card>
       </div>
