@@ -22,12 +22,12 @@
 <img src="credencial.png" style="  position: absolute;top: 0px;left: 0px;width: 6.8cm;height: 10cm" >
 
 @endif
-<img src="imagenes/{{$credencial['foto']}}" style="position: absolute;top: 105px;left: 95px;width: 80px;height: 80px;border-radius: 40px" >
-<div style="position: absolute;top: 215px;left: 30px;font-size: 10px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['nombres']}}</div>
-<div style="position: absolute;top: 253px;left: 30px;font-size: 12px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['tipo']}}</div>
-<div style="position: absolute;top: 285px;left: 30px;font-size: 10px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['carrera']}}</div>
+<img src="imagenes/{{$credencial['foto']}}" style="position: absolute;top: 140px;left: 80px;width: 90px;height: 90px;border-radius: 50px" >
+<div style="position: absolute;top: 248px;left: 30px;font-size: 10px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['nombres']}}</div>
+<div style="position: absolute;top: 275px;left: 30px;font-size: 12px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['tipo']}}</div>
+<div style="position: absolute;top: 305px;left: 30px;font-size: 10px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['carrera']}}</div>
 {{--<div style="text-align: center;position: absolute;top: 320px;left: 58px;font-size: 15px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: red;text-align: center">{{$credencial['ci']}}</div>--}}
-<img src="data:image/png;base64, {!! $credencial['qr'] !!}" style="background : white ; border:2px solid white;position: absolute;top: 318px;left: 40px;width: 170px;height: 35px">
+<img src="data:image/png;base64, {!! $credencial['qr'] !!}" style="background : white ; border:2px solid white;position: absolute;top: 325px;left: 40px;width: 170px;height: 35px">
 {{--<div style="color: #a0aec0;position: absolute;top: 350px;left: 915px;width: 10px;height: 10px">{{$credencial['id']}}</div>--}}
 <div class="page_break"></div>
 @endforeach

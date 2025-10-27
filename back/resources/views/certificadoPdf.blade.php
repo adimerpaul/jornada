@@ -20,7 +20,7 @@
 <body>
 @foreach($certificados as $certificado)
     @if($certificado['fondo']=='SI')
-        <img src="WhatsApp Image 2023-07-31 at 21.05.44.jpeg" style=" position: absolute;top: 0px;left: 0px;width: 1056px;height: 816px" >
+        <img src="cp.png" style=" position: absolute;top: 0px;left: 0px;width: 1056px;height: 816px" >
     @endif
     <div style="border: 0px solid red;position: absolute;top: 255px;left: 110px;text-align: center;font-size: 2.8em; font-weight: bold;width: 870px;height: 35px;font-family: 'Nunito', sans-serif;color: #343c47">{{$certificado['titulo']}}</div>
     <div style="border: 0px solid red;position: absolute;top: 325px;left: 90px;text-align: center;font-size: 1.8em; font-weight: bold;width: 900px;height: 35px;font-family: 'Nunito', sans-serif;color: #343c47">A: {{$certificado['nombres']}}</div>
