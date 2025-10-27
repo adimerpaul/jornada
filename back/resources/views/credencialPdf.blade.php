@@ -19,7 +19,7 @@
 <body>
 @foreach($credencials as $credencial)
 @if($credencial['fondo']=='SI')
-<img src="credencial2025.png" style="  position: absolute;top: 0px;left: 0px;width: 6.8cm;height: 10cm" >
+<img src="credencial.png" style="  position: absolute;top: 0px;left: 0px;width: 6.8cm;height: 10cm" >
 
 @endif
 <img src="imagenes/{{$credencial['foto']}}" style="position: absolute;top: 105px;left: 95px;width: 80px;height: 80px;border-radius: 40px" >
