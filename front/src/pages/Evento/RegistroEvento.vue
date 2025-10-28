@@ -154,11 +154,11 @@ export default {
           var doc = new jsPDF('P','cm','letter')
           doc.setFont("courier");
           var img = new Image()
-          img.src = 'baner.jpg'
+          img.src = 'banner.jpg'
           doc.addImage(img, 'jpg', 1, 0.5, 19, 2)
           doc.setFont(undefined,'bold')
           doc.setFontSize(12);
-          doc.text(5, 3, 'II JORNADAS DE TECNOLGIAS DE COMUNICACION 2022')
+          doc.text(5, 3, 'CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION CCBOL 2025')
           doc.text(8, 3.5, 'FORMULARIO DE INSCRIPCION')
           doc.text(8, 4.5, 'DATOS DEL PARTICIPANTE')
           doc.text(3, 5, 'CI')
