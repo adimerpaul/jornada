@@ -14,7 +14,7 @@
             Este cupo ya fue registrado
           </div>
           <q-form class="q-pa-lg" v-else @submit.prevent="cupoUpdate">
-            <div v-for="r in informacion" :key="r"><b>{{r.nombre}} : </b> {{ r.descripcion }} <b>CUPO DISPONIBLE : </b>{{ r.total }}</div>
+            <div v-for="r in informacion" :key="r"><b>{{r.nombre}} : </b> {{ r.descripcion }} </div>
             <div class="row">
               <div class="col-12 col-sm-6 q-px-xs"  >
                 <q-input
