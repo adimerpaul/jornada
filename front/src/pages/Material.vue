@@ -212,7 +212,7 @@ export default {
         console.log(res.data)
         this.ncred=res.data[0].cantcred
         this.nfolder=res.data[0].cantfolder
-        this.nsouvenir=res.data[0].cantbar
+        this.nsouvenir=res.data[0].cantsouv
         this.ncert=res.data[0].cantcert
         this.ncd=res.data[0].cantcd
         this.nbol=res.data[0].cantbol

@@ -47,7 +47,7 @@ class MaterialController extends Controller
             (select count(*) from materials where nombre='CREDENCIAL Y PORTA CREDENCIAL' and estado=true) cantcred,
             (select count(*) from materials where nombre='FOLDER' and estado=true) cantfolder,
             (select count(*) from materials where nombre='BOLIGRAFO' and estado=true) cantbol,
-            (select count(*) from materials where nombre='BARBIJO' and estado=true) cantbar,
+            (select count(*) from materials where nombre='SOUVENIR' and estado=true) cantsouv,
             (select count(*) from materials where nombre='CERTIFICADO' and estado=true) cantcert,
             (select count(*) from materials where nombre='CD' and estado=true) cantcd");
         } else {
@@ -55,7 +55,7 @@ class MaterialController extends Controller
             (select count(*) from materials where nombre='CREDENCIAL Y PORTA CREDENCIAL' and estado=true and user_id=" . $request->user()->id . " ) cantcred,
             (select count(*) from materials where nombre='FOLDER' and estado=true and user_id=" . $request->user()->id . " ) cantfolder,
             (select count(*) from materials where nombre='BOLIGRAFO' and estado=true and user_id=" . $request->user()->id . " ) cantbol,
-            (select count(*) from materials where nombre='BARBIJO' and estado=true and user_id=" . $request->user()->id . " ) cantbar,
+            (select count(*) from materials where nombre='SOUVENIR' and estado=true and user_id=" . $request->user()->id . " ) cantsouv,
             (select count(*) from materials where nombre='CERTIFICADO' and estado=true and user_id=" . $request->user()->id . " ) cantcert,
             (select count(*) from materials where nombre='CD' and estado=true and user_id=" . $request->user()->id . " ) cantcd");
         }
