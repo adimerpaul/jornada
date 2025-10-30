@@ -60,7 +60,7 @@ class RefrigerioController extends Controller
         if($cupo==null){
             return response()->json(['message' => 'El CI no se encuentra registrado'], 500);
         }
-        $inter= Intermedio::where('fecha',date('Y-m-d'))->where('turno',$request->turno)->firstOrFail();
+        $inter= Intermedio::where('fecha',date('Y-m-d'))->where('turno',$request->turno)->first();
         if(!$inter){
             return response()->json(['message' => 'No se encuentra registrado el turno'], 500);
         }
