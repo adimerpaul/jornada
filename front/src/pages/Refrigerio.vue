@@ -24,7 +24,7 @@
                   v-model="sala"
                   @update:model-value="totalreg"
                 />
-          </div>       
+          </div>
           <div class="col-12 q-px-lg">
             <q-form @submit.prevent="refrigerioInsert">
               <q-input label="Colocar el lector"   v-model="ci" outlined />
@@ -80,6 +80,7 @@ export default {
     return {
       ci: '',
       salas:[],
+
       sala:0,
       turno: 'MAÑANA',
       fechaActual: date.formatDate(new Date(), 'DD/MM/YYYY'),
@@ -191,7 +192,7 @@ export default {
           <div class="right bold"> <b>${idRefrigerio}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>          
+          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>
           <div class="center bold"> <b>TICKET REFRIGERIO ${sala.nombre}</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
@@ -223,7 +224,7 @@ export default {
           <div class="right bold"> <b>${idRefrigerio}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>          
+          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>
           <div class="center bold"> <b>TICKET REFRIGERIO ${sala.nombre}</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Carrera: </b> ${student.carrera}</div>
@@ -297,7 +298,7 @@ export default {
               <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>          
+          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>
           <div class="center bold"> <b>TICKET REFRIGERIO ${sala.nombre}</b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Universidad: </b> ${student.carrera}</div>
@@ -329,7 +330,7 @@ export default {
           <div class="right bold"> <b>${refrigerio.id}</b></div>
           <div class="center bold"> <b>Universidad Técnica de Oruro</b></div>
           <div class="center bold"> <b>Facultad Nacional de Ingeniería</b></div>
-          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>          
+          <div class="center bold"> <b>CONGRESO NACIONAL DE CIENCIAS DE LA COMPUTACION - CCBOL2025</b></div>
           <div class="center bold"> <b>CONTROL REFRIGERIO ${sala.nombre} </b></div>
           <div class="left "> <b>Nombre: </b> ${student.nombres}</div>
           <div class="left "> <b>Universidad: </b> ${student.carrera}</div>
