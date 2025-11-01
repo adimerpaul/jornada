@@ -84,7 +84,7 @@ module.exports = configure(function (ctx) {
           ? 'http://localhost:8000/api/'
           : 'https://backjornadas2025.sistemas.edu.bo/api/',
         API_FRONT: ctx.dev
-          ? 'http://localhost:8080/#/'
+          ? 'http://localhost:8080/'
           : 'https://jornadas2025.sistemas.edu.bo/',
       }
 

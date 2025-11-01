@@ -18,13 +18,16 @@ class PaqueteController extends Controller
     {
         // verificar si existe limite cantidad cupo y recuperar solo si no supera limit
         $res = Paquete::with('conferencias')->get();
+        $resPaquetes = [];
         foreach ($res as $paquete) {
             $cupos = Cupo::where('paquete_id', $paquete->id)->get();
             if (sizeof($cupos) >= $paquete->limite) {
-                $res->remove($paquete);
+//                $res->remove($paquete);
+            }else{
+                $resPaquetes[] = $paquete;
             }
         }
-        return $res;
+        return $resPaquetes;
         //return Paquete::with('conferencias')->get();
     }
 
