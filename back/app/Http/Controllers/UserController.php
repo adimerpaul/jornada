@@ -84,7 +84,10 @@ class UserController extends Controller
         $user->save();
         // si no esta activo se borra el token
         if(!$user->activo){
-            $user->currentAccessToken()->delete();
+            $token = $user->currentAccessToken();
+            if ($token) {
+                $token->delete();
+            }
         }
         return $user;
     }
