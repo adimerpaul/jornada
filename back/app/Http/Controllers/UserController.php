@@ -73,8 +73,10 @@ class UserController extends Controller
         return(User::create($request->all()));
     }
     public function cambiarEstado(Request $request){
-        $user=User::where('id',$request->id)->first();
-
+        $user=User::find($request->id);
+        if(!$user){
+            return response()->json(['res'=>'No se encontro el usuario'],404);
+        }
         if($user->activo)
             $user->activo=false;
         else
