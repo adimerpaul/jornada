@@ -19,6 +19,11 @@
         <q-btn flat dense v-if="props.row.id!=1" icon="o_key" @click="updatePassword(props.row)" />
       </q-td>
     </template>
+    <template v-slot:body-cell-activo="props">
+      <q-td :props="props" auto-width >
+          <q-badge :color="props.row.activo?'green':'red'" :label="props.row.activo?'Activo':'Inactivo'" @click="cambioEstado" />
+      </q-td>
+    </template>
   </q-table>
   <q-dialog v-model="showAddUserDialog" >
     <q-card style="width: 700px;max-width: 85vw">
@@ -75,6 +80,7 @@ export default {
       userColums:[
         {name: 'option', field: 'option', label: 'Opciones', align: 'left', sortable: true},
         {name: 'role', field: 'role', label: 'Rol', align: 'left', sortable: true},
+        {name: 'activo', field: 'activo', label: 'Estado', align: 'left', sortable: true},
         {name: 'id', label: 'ID', field: 'id', align: 'left', sortable: true},
         {name: 'name', label: 'Nombre', field: 'name', align: 'left', sortable: true},
         {name: 'email', label: 'Email', field: 'email', align: 'left', sortable: true},
@@ -82,6 +88,19 @@ export default {
     }
   },
   methods:{
+    cambioEstado(info){
+        this.loading = true
+        this.$api.post(`cambioEstado`,info).then(response => {
+          this.loading = false
+          this.$q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'check_circle',
+            message: 'Estado actualizado'
+          })
+          this.usersGet()
+        })
+    },
     userUpdate(){
       this.loading = true
       this.$api.put(`user/${this.user.id}`,this.user)

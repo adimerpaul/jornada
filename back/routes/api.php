@@ -61,6 +61,7 @@ Route::group(['middleware'=>'auth:sanctum'],function (){
     Route::delete('evento/{evento}', [\App\Http\Controllers\EventoController::class, 'destroy']);
     Route::put('registroEvento/{evento}', [\App\Http\Controllers\EventoController::class, 'registroEvento']);
 
+    Route::post('cambiarEstado', [\App\Http\Controllers\UserController::class, 'cambiarEstado']);
 });
  
     Route::get('listCarrera', [\App\Http\Controllers\StudentController::class, 'listCarrera']);

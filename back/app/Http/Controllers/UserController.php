@@ -72,7 +72,22 @@ class UserController extends Controller
         $request['password']=Hash::make($request['password']);
         return(User::create($request->all()));
     }
-
+    public function cambiarEstado(Request $request){
+        $user=User::where('id',$request->id)->first();
+        if(!$user){
+            return response()->json(['res'=>'No se encontro el usuario'],404);
+        }
+        if($user->activo)
+            $user->activo=false;
+        else
+            $user->activo=true;
+        $user->save();
+        // si no esta activo se borra el token
+        if(!$user->activo){
+            $user->currentAccessToken()->delete();
+        }
+        return $user;
+    }
     /**
      * Display the specified resource.
      *
