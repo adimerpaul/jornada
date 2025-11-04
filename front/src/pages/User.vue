@@ -90,6 +90,7 @@ export default {
   methods:{
     cambioEstado(info){
         this.loading = true
+        console.log(info)
         this.$api.post(`cambiarEstado`,info).then(response => {
           this.loading = false
           this.$q.notify({
