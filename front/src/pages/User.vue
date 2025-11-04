@@ -90,7 +90,7 @@ export default {
   methods:{
     cambioEstado(info){
         this.loading = true
-        this.$api.post(`cambioEstado`,info).then(response => {
+        this.$api.post(`cambiarEstado`,info).then(response => {
           this.loading = false
           this.$q.notify({
             color: 'green-4',
