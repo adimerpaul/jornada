@@ -21,7 +21,7 @@
     </template>
     <template v-slot:body-cell-activo="props">
       <q-td :props="props" auto-width >
-          <q-badge :color="props.row.activo?'green':'red'" :label="props.row.activo?'Activo':'Inactivo'" @click="cambioEstado" />
+          <q-badge :color="props.row.activo?'green':'red'" :label="props.row.activo?'Activo':'Inactivo'" @click="cambioEstado(props.row)" />
       </q-td>
     </template>
   </q-table>
