@@ -47,10 +47,13 @@ ORDER BY
 //        return $cupo;
         // verificar por paquete_id solo exista 300 cupos
         $cupos = Cupo::where('paquete_id', $request->paquete_id)->get();
+
+        if($request->paquete_id != null){
         $paquete = Paquete::find($request->paquete_id);
+
         if (sizeof($cupos) >= $paquete->limite) {
             return response()->json(['message' => 'El paquete ya se encuentra lleno'], 500);
-        }
+        }}
         $cupo->update($request->all());
         return $cupo;
     }

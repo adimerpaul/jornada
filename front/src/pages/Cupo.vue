@@ -212,6 +212,7 @@ export default {
           folder: false,
           barbijo: false,
           certificado: false,
+          paquete_id: null
         }).then((response) => {
           // console.log(response.data)
           this.$q.notify({
