@@ -15,7 +15,7 @@ class UserController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->where('activo',true)->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
@@ -32,7 +32,7 @@ class UserController extends Controller
         return response()->json(['res'=>'salido exitosamente'],200);
     }
     public function me(Request $request){
-        $user=User::where('id',$request->user()->id)->firstOrFail();
+        $user=User::where('id',$request->user()->id)->where('activo',true)->firstOrFail();
         return $user;
     }
     /**
