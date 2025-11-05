@@ -23,7 +23,7 @@
 
 @endif
 <img src="imagenes/{{$credencial['foto']}}" style="position: absolute;top: 110px;left: 60px;width: 70px;height: 70px;border-radius: 50px" >
-<div style="position: absolute;top: 198px;left: 0px;font-size: 10px; font-weight: bold;width: 190px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['nombres']}}</div>
+<div style="position: absolute;top: 198px;left: 25px;font-size: 8px; font-weight: bold;width: 140px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['nombres']}}</div>
 <div style="position: absolute;top: 220px;left: 0px;font-size: 12px; font-weight: bold;width: 190px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['tipo']}}</div>
 <div style="position: absolute;top: 245px;left: 0px;font-size: 10px; font-weight: bold;width: 190px;height: 40px;font-family: 'Nunito', sans-serif;color: #373e48;text-align: center">{{$credencial['carrera']}}</div>
 {{--<div style="text-align: center;position: absolute;top: 320px;left: 58px;font-size: 15px; font-weight: bold;width: 200px;height: 40px;font-family: 'Nunito', sans-serif;color: red;text-align: center">{{$credencial['ci']}}</div>--}}
