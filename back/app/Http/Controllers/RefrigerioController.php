@@ -67,7 +67,7 @@ class RefrigerioController extends Controller
 
         $refrigerio=Refrigerio::where('cupo_id',$cupo->id)
         ->where('turno',$request->turno)
-        ->where('sala_id',$request->sala_id)
+        //->where('sala_id',$request->sala_id)
         ->where('fecha',date('Y-m-d'))->get();
 
         if(sizeof($refrigerio)==0){
